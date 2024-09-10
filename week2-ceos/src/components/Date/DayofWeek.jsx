@@ -21,10 +21,14 @@ const WeekWrapper = styled.section`
 
 const DayWrapper = styled.span`
   color: ${({ week, theme }) => {
-    return week === 0 ? theme.colors.sunday_red : theme.colors.black;
+    if (week === 0) {
+      return theme.colors.sunday_red;
+    } else if (week === todayWeekDay) {
+      return theme.colors.black;
+    } else {
+      return theme.colors.gray1;
+    }
   }};
 
-  ${({ week, theme }) => {
-    return week === todayWeekDay ? theme.fonts.Body1 : theme.fonts.Body2;
-  }};
+  ${({ theme, week }) => (week === todayWeekDay ? theme.fonts.Body1 : theme.fonts.Body2)};
 `;
