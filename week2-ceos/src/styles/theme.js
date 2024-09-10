@@ -4,6 +4,7 @@ const colors = {
   black: "#000000",
   gray1: "#ADADAD",
   gray2: "#EDEDED",
+  gray3: "#FAFAFA",
   white: "#ffffff",
 
   main_blue: "#279DF4",
@@ -20,13 +21,13 @@ const fonts = {
 
   Body1: css`
     font-family: SUIT;
-    font-size: 1.8rem;
+    font-size: 3rem;
     font-weight: 600;
     line-height: 2.8rem;
   `,
   Body2: css`
     font-family: SUIT;
-    font-size: 1.8rem;
+    font-size: 3rem;
     font-weight: 500;
     line-height: 2.8rem;
   `,
