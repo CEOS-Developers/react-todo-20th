@@ -32,6 +32,7 @@
     "globals": "^15.9.0",
     "postcss-styled-syntax": "^0.6.4",
     "stylelint": "^16.9.0",
+    "stylelint-config-clean-order": "^6.1.0",
     "stylelint-config-standard": "^36.0.1",
     "vite": "^5.4.1"
   }
