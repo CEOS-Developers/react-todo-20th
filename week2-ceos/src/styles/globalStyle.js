@@ -19,47 +19,48 @@ body {
 }
 
 a {
+  cursor: pointer;
   color: inherit;
   text-decoration: none;
-  cursor: pointer;
 }
 
 button {
-  border: none;
-  background: none;
-  font: inherit;
   cursor: pointer;
+  font: inherit;
+  background: none;
+  border: none;
 }
 
 html {
   @font-face {
       font-family: SUIT;
-      font-style: normal;
       font-weight: normal;
+      font-style: normal;
       src: url('https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/static/woff2/SUIT.css') format('woff2');
   }
 }
 
-   //iPhone XR & Galaxy S20 Ultra & A51/71
-   @media (min-width: 410px) and (max-width:450px){ 
+   @media (width >= 410px) and (width <=450px){ 
       font-size: 83%;
     }
-    //iPhone 12 Pro
-    @media (min-width: 386px) and (max-width:409px){ 
+
+    @media (width >= 386px) and (width <=409px){ 
       font-size: 77%;
     }
-    //
-    @media (min-width: 384px) and (max-width:385px){ 
+
+    @media (width >= 384px) and (width <=385px){ 
       font-size: 75%;
     }
-    //iPhone SE
-    @media (min-width: 371px) and (max-width:383px){ 
+
+    @media (width >= 371px) and (width <=383px){ 
       font-size: 73%;
     }
-    @media (min-width:361px) and (max-width: 370px){
+
+    @media (width >=361px) and (width <= 370px){
       font-size: 70%;
     }
-    @media (min-width:331px) and (max-width: 361px){
+
+    @media (width >=331px) and (width <= 361px){
       font-size: 70%;
    
     }
