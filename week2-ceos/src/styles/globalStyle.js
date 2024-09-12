@@ -33,11 +33,11 @@ button {
 
 html {
   @font-face {
-      font-family: SUIT;
-      font-weight: normal;
-      font-style: normal;
-      src: url('https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/static/woff2/SUIT.css') format('woff2');
-  }
+    font-family: SUIT-Regular;
+    font-weight: normal;
+    font-style: normal;
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+}
 }
 
    @media (width >= 410px) and (width <=450px){ 
