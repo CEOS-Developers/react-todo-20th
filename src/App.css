@@ -1,0 +1,56 @@
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* 전체 화면 높이 */
+    background-color: #0000ff8d; /* 빨간색 기본 배경 */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'SUIT-Regular', sans-serif;
+}
+  
+.background-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #ff0000c8; /* 파란색 오버레이 */
+    clip-path: polygon(0 0, 50% 0, 0 120%); 
+    transition: clip-path 0.5s ease; /* clip-path 변화에 대한 전환 효과 */
+    z-index: -1;
+}
+.container {
+    z-index: 1;
+    width: 768px;
+    height: 560px;
+    display: flex;
+    border-radius: 10px;
+    background-color: white;
+    transition: width 0.5s ease; /* width 변화에 대한 전환 효과 */
+
+}
+@media (max-width: 768px) {
+    
+    .background-overlay {
+        clip-path: polygon(0 0, 50% 0, 0 100%);
+    }
+
+    .container {
+        width: 360px;
+        height: 560px;
+        border-radius: 28px;
+    }
+}
+  
