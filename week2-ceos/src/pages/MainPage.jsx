@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Header from "../components/Header/Header";
 import DayofWeek from "../components/Date/DayofWeek";
 import Days from "../components/Date/Days";
+import TodoBtn from "../components/TodoBtn/TodoBtn";
 
 export default function MainPage() {
   return (
@@ -11,11 +12,13 @@ export default function MainPage() {
         <DayofWeek />
         <Days />
       </HeaderAndDayOfWeekWrapper>
+      <TodoBtn />
     </Wrapper>
   );
 }
 
 const Wrapper = styled.main`
+  position: relative;
   width: 100vw;
   height: 100vh;
 `;
