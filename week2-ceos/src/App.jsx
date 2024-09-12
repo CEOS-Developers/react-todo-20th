@@ -1,13 +1,12 @@
 import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
-import "./App.css";
 import { GlobalStyle } from "./styles/globalStyle";
-import TodoPage from "./pages/TodoPage";
+import MainPage from "./pages/MainPage";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <TodoPage />
+      <MainPage />
       <GlobalStyle />
     </ThemeProvider>
   );
