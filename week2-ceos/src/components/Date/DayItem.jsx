@@ -7,8 +7,6 @@ export default function DayItem({ currentDay }) {
   const isTodayBoolean = isToday(currentDay);
   const formattedDay = format(currentDay, "dd");
 
-  console.log(isTodayBoolean);
-
   return <DayWrapper $isTodayBoolean={isTodayBoolean}>{formattedDay}</DayWrapper>;
 }
 
