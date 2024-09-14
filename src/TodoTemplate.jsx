@@ -1,30 +1,31 @@
-import React from "react";
+import React, { useCallback, useRef, useState } from "react";
 import styled from "styled-components";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import TodoInput from "./components/TodoInput";
-import List from "./components/List";
+import TodoBoard from "./components/TodoBoard";
 import Chart from "./components/Chart";
+import Item from "./components/Item";
 
-const MainPage = () => {
+const TodoTemplate = () => {
+  const [todos, setTodos] = useState([]);
+
   return (
-    <>
-      <Wrapper>
-        <Navbar />
-        <Container>
-          <TodoInput />
-          <GridContainer>
-            <List />
-            <Chart />
-          </GridContainer>
-        </Container>
-        <Footer />
-      </Wrapper>
-    </>
+    <Wrapper>
+      <Navbar />
+      <Container>
+        <TodoInput todos={todos} setTodos={setTodos} />
+        <GridContainer>
+          <TodoBoard todos={todos} />
+          <Chart />
+        </GridContainer>
+      </Container>
+      <Footer />
+    </Wrapper>
   );
 };
 
-export default MainPage;
+export default TodoTemplate;
 
 const Wrapper = styled.div`
   width: 37.5rem;

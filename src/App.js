@@ -1,11 +1,11 @@
-import MainPage from "./MainPage";
+import TodoTemplate from "./TodoTemplate";
 import GlobalStyle from "./statics/GlobalStyle";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <MainPage />
+      <TodoTemplate />
     </>
   );
 }
