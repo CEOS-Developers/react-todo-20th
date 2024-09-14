@@ -16,9 +16,15 @@ gap: 0.625rem;
 `;
 
 const TodoList = ({ todos, toggleTodoCompletion, deleteTodo }) => {
+  // todos 배열을 completed 속성에 따라 정렬.
+  const sortedTodos = [...todos].sort((a, b) => {
+    if (a.completed === b.completed) return 0;
+    return a.completed ? 1 : -1; // 완료된 항목을 맨 아래로 보내기
+  });
+
   return (
     <TodoListContainer>
-      {todos.map(todo => (
+      {sortedTodos.map(todo => (
         <TodoItem
           key={todo.text}
           todo={todo}
