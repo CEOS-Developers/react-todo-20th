@@ -32,11 +32,13 @@ function App() {
   }, []);
 
   useEffect(() => {
+    // todos 배열이 비어 있지 않을 때만 로컬 스토리지 업데이트, 새로고침 시 todos 배열이 비어진 상태일 때 로컬 스토리지를 덮어씌우지 않게 하기 위함.
+    // 이미 todo를 다 완료해서 삭제 했다면 상관 없지! 빈 배열로 덮어씌워져도.
     if (todos.length > 0) {
-      localStorage.setItem('todos', JSON.stringify(todos)); // todos가 있을 때만 저장
+      localStorage.setItem('todos', JSON.stringify(todos));
     }
   }, [todos]);
-
+  
   const addTodo = ((newTodo) => {
     if (newTodo.trim() === '') {
       alert('오늘의 할 일을 적어주세요!🍀');
@@ -59,12 +61,22 @@ function App() {
     );
   });
 
-  const deleteTodo = ((todoText) => {
+  const deleteTodo = (todoText) => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
-      setTodos(prevTodos => prevTodos.filter(todo => todo.text !== todoText));
-      alert('todo가 삭제되었습니다.');
+      setTodos(prevTodos => {
+        const updatedTodos = prevTodos.filter(todo => todo.text !== todoText);
+        // todos 상태 업데이트 후 로컬 스토리지 업데이트
+        localStorage.setItem('todos', JSON.stringify(updatedTodos));
+        alert('todo가 삭제되었습니다.');
+        return updatedTodos;
+      });
     }
-  });
+  };
+  
+  // 전체 todo와 완료된 todo의 개수를 계산하는 함수
+  const totalTodos = todos.length;
+  const completedTodos = todos.filter(todo => todo.completed).length;
+
 
   return (
     <AppContainer>
@@ -75,6 +87,8 @@ function App() {
         todos={todos}
         toggleTodoCompletion={toggleTodoCompletion}
         deleteTodo={deleteTodo}
+        totalTodos={totalTodos}
+        completedTodos={completedTodos}
       />
     </AppContainer>
   );

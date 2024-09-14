@@ -7,6 +7,12 @@ display: flex;
 width: 80%;
 flex-direction: column;
 gap: 0.625rem;
+ overflow-y: auto; /* 세로 방향으로만 스크롤 가능 */
+ padding: 0.625rem;
+/* 스크롤바 숨기기 */
+  &::-webkit-scrollbar {
+    width: 0;
+}
 `;
 
 const TodoList = ({ todos, toggleTodoCompletion, deleteTodo }) => {
