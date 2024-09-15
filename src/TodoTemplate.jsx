@@ -14,7 +14,7 @@ const TodoTemplate = () => {
     return savedTodos ? JSON.parse(savedTodos) : [];
   });
 
-  // 배열이 변경될 때마다 로컬스토리지에 업데이트
+  // 배열이 변경될 때마다 localStorage 업데이트
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
@@ -72,19 +72,11 @@ const TodoTemplate = () => {
 
   return (
     <Wrapper>
-      <Navbar isFormOpen={isFormOpen} toggleForm={toggleForm} />
+      <Navbar {...{ isFormOpen, toggleForm }} />
       <Container>
-        <TodoBoard
-          todos={todos}
-          removeItem={removeItem}
-          toggleItem={toggleItem}
-        />
+        <TodoBoard {...{ todos, removeItem, toggleItem }} />
         {isFormOpen && (
-          <TodoInput
-            isFormOpen={isFormOpen}
-            animationClassname={animationClassname}
-            addItem={addItem}
-          />
+          <TodoInput {...{ isFormOpen, animationClassname, addItem }} />
         )}
       </Container>
       <Footer />

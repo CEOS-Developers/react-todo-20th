@@ -2,10 +2,17 @@ import React from "react";
 import styled from "styled-components";
 
 const Footer = () => {
+  // 전체 항목과 한 일 항목의 개수
+  const todosArray = JSON.parse(localStorage.getItem("todos")) || [];
+  const totalCount = todosArray.length;
+  const doneCount = todosArray.reduce((count, todo) => {
+    return todo.checked ? count + 1 : count;
+  }, 0);
+
   return (
     <>
       <Wrapper>
-        <div>푸터</div>
+        {doneCount}/{totalCount}
       </Wrapper>
     </>
   );
@@ -20,5 +27,4 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-self: flex-start;
   margin-top: 0.625rem;
-  background-color: var(--blue);
 `;
