@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { S } from "./Common.style";
 import { useCallback, useState, useRef } from "react";
 
-const TodoInput = ({ todos, setTodos }) => {
+const TodoInput = ({ addItem }) => {
   const [inputValue, setInputValue] = useState(""); // 입력값
 
   const handleChange = useCallback((e) => {
@@ -18,23 +18,8 @@ const TodoInput = ({ todos, setTodos }) => {
     [inputValue]
   );
 
-  const nextId = useRef(1);
-  const addItem = useCallback(
-    (text) => {
-      const item = {
-        id: nextId.current,
-        text,
-        checked: false,
-      };
-      setTodos(todos.concat(item));
-      nextId.current++;
-    },
-    [todos]
-  );
-
   return (
     <Wrapper>
-      <S.Ment>What I have to do</S.Ment>
       <form onSubmit={handleSubmit}>
         <InputBox>
           <input type="text" value={inputValue} onChange={handleChange} />
@@ -50,13 +35,10 @@ export default TodoInput;
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 `;
 
 const InputBox = styled(S.Box)`
-  /* width: 50%; */
+  width: 100%;
   height: 1.875rem;
   display: flex;
   flex-direction: row;
