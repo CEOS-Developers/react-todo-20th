@@ -7,6 +7,8 @@ import Footer from "./components/Footer";
 import TodoInput from "./components/TodoInput";
 import TodoBoard from "./components/TodoBoard";
 
+import Chart from "./components/Chart";
+
 const TodoTemplate = () => {
   // 초기 데이터
   const [todos, setTodos] = useState(() => {
@@ -79,7 +81,7 @@ const TodoTemplate = () => {
           <TodoInput {...{ isFormOpen, animationClassname, addItem }} />
         )}
       </Container>
-      <Footer />
+      <Footer todos={todos} />
     </Wrapper>
   );
 };
