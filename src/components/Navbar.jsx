@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { S } from "./Common.style";
 
-const Navbar = () => {
+const Navbar = ({ isFormOpen, toggleForm }) => {
   // 현재 날짜, 시간 출력
   const [now, setNow] = useState(() => new Date());
 
@@ -29,7 +29,9 @@ const Navbar = () => {
       <TopBox>
         <S.Ment>당신의 할 일을 작성해보세요 ✏️</S.Ment>
         <hr />
-        <S.Ment>입력창 불러오기</S.Ment>
+        <S.Ment onClick={toggleForm} style={{ cursor: "pointer" }}>
+          {isFormOpen ? "입력창 다시닫기" : "입력창 불러오기"}
+        </S.Ment>
       </TopBox>
     </Wrapper>
   );

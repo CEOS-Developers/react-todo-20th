@@ -1,9 +1,19 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { S } from "./Common.style";
-import { useCallback, useState, useRef } from "react";
+import { useCallback, useState, useRef, useEffect } from "react";
 
-const TodoInput = ({ addItem }) => {
+const TodoInput = ({ isFormOpen, animationClassname, addItem }) => {
   const [inputValue, setInputValue] = useState(""); // 입력값
+  const [isVisible, setIsVisible] = useState(isFormOpen);
+
+  useEffect(() => {
+    if (isFormOpen) {
+      setIsVisible(true);
+    } else {
+      const timer = setTimeout(() => setIsVisible(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isFormOpen]);
 
   const handleChange = useCallback((e) => {
     setInputValue(e.target.value);
@@ -19,7 +29,7 @@ const TodoInput = ({ addItem }) => {
   );
 
   return (
-    <Wrapper>
+    <Wrapper className={animationClassname}>
       <form onSubmit={handleSubmit}>
         <InputBox>
           <input type="text" value={inputValue} onChange={handleChange} />
@@ -32,9 +42,39 @@ const TodoInput = ({ addItem }) => {
 
 export default TodoInput;
 
+const slideDownFadeIn = keyframes`
+  from{
+    opacity: 0;
+    transform: translateY(-1.25rem);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0); 
+  }
+`;
+
+const slideUpFadeOut = keyframes`
+  from{
+    opacity: 1;
+    transform: translateY(0); 
+  }
+  to{
+    opacity: 0;
+    transform: translateY(-1.25rem);
+  }
+`;
+
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
+
+  &.fade-in {
+    animation: ${slideDownFadeIn} 0.3s ease-out forwards;
+  }
+
+  &.fade-out {
+    animation: ${slideUpFadeOut} 0.3s ease-out forwards;
+  }
 `;
 
 const InputBox = styled(S.Box)`

@@ -54,16 +54,38 @@ const TodoTemplate = () => {
     [todos]
   );
 
+  // 입력창 열고 닫음
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [animationClassname, setAnimationClassname] = useState(""); // 애니메이션 지정을 위한 클래스명
+
+  const toggleForm = () => {
+    if (isFormOpen) {
+      setAnimationClassname("fade-out");
+      setTimeout(() => {
+        setIsFormOpen(!isFormOpen);
+      }, 300); // 닫힘 시 애니메이션 시간만큼의 지연 필요
+    } else {
+      setAnimationClassname("fade-in");
+      setIsFormOpen(!isFormOpen);
+    }
+  };
+
   return (
     <Wrapper>
-      <Navbar />
+      <Navbar isFormOpen={isFormOpen} toggleForm={toggleForm} />
       <Container>
         <TodoBoard
           todos={todos}
           removeItem={removeItem}
           toggleItem={toggleItem}
         />
-        <TodoInput addItem={addItem} />
+        {isFormOpen && (
+          <TodoInput
+            isFormOpen={isFormOpen}
+            animationClassname={animationClassname}
+            addItem={addItem}
+          />
+        )}
       </Container>
       <Footer />
     </Wrapper>
