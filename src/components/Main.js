@@ -17,6 +17,7 @@ const MainContainer = styled.main`
 `;
 const DateContainer = styled.section`
   display: flex;
+  gap: 0.3125rem;
   flex-direction: column;
   align-items: center;
   color: rgba(84, 170, 84, 0.922);
@@ -33,7 +34,7 @@ const Main = ({ addTodo, todos, toggleTodoCompletion, deleteTodo, totalTodos, co
   return (
     <MainContainer>
       <DateContainer>
-        <h2>{monthAndDay}🍀</h2>
+        <h2>🍀{monthAndDay}🍀</h2>
         <p>{week}</p>
       </DateContainer>
       <TodoCountContainer>

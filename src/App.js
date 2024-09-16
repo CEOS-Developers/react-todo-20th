@@ -7,7 +7,15 @@ const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     box-sizing: border-box;
-  } 
+    font-family: 'Pretendard Variable', sans-serif;
+  }
+  @font-face {
+    font-family: 'Pretendard Variable';
+    font-weight: 45 920;
+    font-style: normal;
+    font-display: swap;
+    src: url('/fonts/PretendardVariable.woff2') format('woff2-variations');
+  }
 `; // 전체 페이지의 기본 여백 제거, 코드의 중복을 줄이고 모든 컴포넌트에 일관된 스타일 적용
 
 const AppContainer = styled.div`
