@@ -47,6 +47,9 @@
     font-weight: bold;
     color: #666;
     margin-bottom: 10px;
+    @media (max-width: 768px) {
+        font-size: 0.8rem;
+    }
     
 }
 
@@ -76,6 +79,9 @@
     color: #333;
     cursor: pointer;
     box-sizing: border-box; /* 테두리 포함 크기 계산 */
+    @media (max-width: 768px) {
+        font-size: 0.8rem;
+    }
 }
 /* 토요일 스타일 */
 .react-calendar__month-view__days__day--weekend:nth-child(7n) {
