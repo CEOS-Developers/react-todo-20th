@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { weekStart } from "@utils/data";
 import { addDays, format, startOfDay, startOfWeek, subDays } from "date-fns";
 import { headerDate } from "../utils/data";
+import { ko } from "date-fns/locale";
 
 const newDate = new Date();
 
@@ -29,4 +30,14 @@ export const useStore = create((set) => ({
         headerDay: `${format(oneWeekAgo, "yyyy")}년 ${format(oneWeekAgo, "MM")}월`,
       };
     }),
+}));
+
+export const useClickedDayStore = create((set) => ({
+  clickedDay: format(new Date(), "MM월 dd일 EEEE", { locale: ko }),
+  setClickedDay: (day) => set({ clickedDay: day }),
+}));
+
+export const useTodoInput = create((set) => ({
+  todoText: "",
+  setTodoText: (todo) => set({ todoText: todo }),
 }));
