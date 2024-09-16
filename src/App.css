@@ -8,7 +8,6 @@
     box-sizing: border-box;
 }
 body {
-    
     margin: 0;
     padding: 0;
     height: 100vh; /* 전체 화면 높이 */
@@ -19,24 +18,12 @@ body {
     align-items: center;
     font-family: 'SUIT-Regular', sans-serif;
 }
-  
-.background-overlay {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: #ff0000c8; /* 파란색 오버레이 */
-    clip-path: polygon(0 0, 50% 0, 0 120%); 
-    transition: clip-path 0.5s ease; /* clip-path 변화에 대한 전환 효과 */
-    z-index: -1;
-}
 .container {
     z-index: 1;
-    width: 768px;
+    width: 560px;
     height: 560px;
     display: flex;
-    border-radius: 10px;
+    border-radius: 28px;
     background-color: white;
     transition: width 0.5s ease; /* width 변화에 대한 전환 효과 */
 
