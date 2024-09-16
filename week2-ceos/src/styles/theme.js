@@ -14,20 +14,20 @@ const colors = {
 const fonts = {
   Headline1: css`
     font-family: SUIT-Regular;
-    font-size: 3.2rem;
+    font-size: 2rem;
     font-weight: 600;
     line-height: 6rem;
   `,
 
   Body1: css`
     font-family: SUIT-Regular;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 600;
     line-height: 2.8rem;
   `,
   Body2: css`
     font-family: SUIT-Regular;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 500;
     line-height: 2.8rem;
   `,
