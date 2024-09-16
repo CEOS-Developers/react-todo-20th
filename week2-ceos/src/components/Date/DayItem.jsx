@@ -3,11 +3,15 @@ import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
 import { format, isToday } from "date-fns";
 
-export default function DayItem({ currentDay }) {
+export default function DayItem({ currentDay, handleClickDay }) {
   const isTodayBoolean = isToday(currentDay);
   const formattedDay = format(currentDay, "dd");
 
-  return <DayWrapper $isTodayBoolean={isTodayBoolean}>{formattedDay}</DayWrapper>;
+  return (
+    <DayWrapper onClick={handleClickDay} $isTodayBoolean={isTodayBoolean}>
+      {formattedDay}
+    </DayWrapper>
+  );
 }
 
 const DayWrapper = styled.span`

@@ -7,12 +7,17 @@ import DayItem from "./DayItem";
 //날짜들 부분
 export default function Days() {
   let days = [];
+  let clickedDate;
   const thisweek = useStore((state) => state.weekStart);
 
   // 현재 주의 날짜들을 생성
   for (let i = 0; i < 7; i++) {
     const currentDay = addDays(thisweek, i);
-    days.push(<DayItem key={currentDay} currentDay={currentDay} />);
+    function handleClickDay() {
+      clickedDate = currentDay;
+      console.log("here", clickedDate);
+    }
+    days.push(<DayItem handleClickDay={handleClickDay} key={currentDay} currentDay={currentDay} />);
   }
   return <WeekWrapper>{[...days]}</WeekWrapper>;
 }
@@ -20,5 +25,4 @@ export default function Days() {
 const WeekWrapper = styled.div`
   ${rowFlex}
   justify-content: space-between;
-  padding: 2rem 0;
 `;
