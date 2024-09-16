@@ -1,42 +1,16 @@
 import styled, { keyframes } from "styled-components";
 import { rowFlex, columnFlex } from "@styles/commonStyle";
+import ModalContent from "./ModalContent";
 
-export default function TodoModal() {
+export default function TodoModal({ handleModal }) {
   return (
     <ModalBackGround>
       <ModalWrapper>
-        <ModalCloseButton>❌</ModalCloseButton>
-        <TodoInput autoFocus type="text" placeholder="할 일" />
-        <clickedDate />
+        <ModalContent handleModal={handleModal} />
       </ModalWrapper>
     </ModalBackGround>
   );
 }
-
-const ModalCloseButton = styled.button`
-  ${rowFlex}
-  ${({ theme }) => theme.fonts.Body6};
-`;
-
-const TodoInput = styled.input`
-  ${rowFlex};
-  width: 100%;
-  height: 3rem;
-
-  ${({ theme }) => theme.fonts.Headline1};
-  border: none;
-  outline: none;
-  caret-color: ${({ theme }) => theme.colors.main_blue};
-
-  &::placeholder {
-    ${({ theme }) => theme.fonts.Headline1};
-    color: ${({ theme }) => theme.colors.gray2};
-  }
-
-  &:focus {
-    caret-color: ${({ theme }) => theme.colors.main_blue};
-  }
-`;
 
 const Slide = keyframes`
  from {
@@ -48,6 +22,7 @@ const Slide = keyframes`
 `;
 
 const ModalWrapper = styled.aside`
+  ${rowFlex}
   position: fixed;
   bottom: 0;
 
