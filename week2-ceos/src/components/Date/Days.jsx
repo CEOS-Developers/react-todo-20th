@@ -4,14 +4,14 @@ import { rowFlex } from "@styles/commonStyle";
 import { useStore } from "@core/store";
 import DayItem from "./DayItem";
 import TodosHeader from "../Todos/TodosHeader";
-import { useState } from "react";
 import { ko } from "date-fns/locale";
+import { useClickedDayStore } from "../../core/store";
 
 //날짜들 부분
 export default function Days() {
   let days = [];
-  const formattedtoday = format(new Date(), "MM월 dd일 EEEE", { locale: ko });
-  const [clickedDate, setClickedDate] = useState(formattedtoday);
+  const clickedDate = useClickedDayStore((state) => state.clickedDay);
+  const setClickedDate = useClickedDayStore((state) => state.setClickedDay);
   const thisweek = useStore((state) => state.weekStart);
 
   // 현재 주의 날짜들을 생성
