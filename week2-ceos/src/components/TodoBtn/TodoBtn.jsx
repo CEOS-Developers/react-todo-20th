@@ -6,7 +6,11 @@ export default function TodoBtn({ openModal, handleModal }) {
     handleModal();
   }
 
-  return <TodoBtnWrapper onClick={handleButtonClick}>+</TodoBtnWrapper>;
+  return (
+    <TodoBtnWrapper $openModal={openModal} onClick={handleButtonClick}>
+      +
+    </TodoBtnWrapper>
+  );
 }
 
 const TodoBtnWrapper = styled.button`
@@ -20,6 +24,7 @@ const TodoBtnWrapper = styled.button`
 
   color: ${({ theme }) => theme.colors.white};
 
+  visibility: ${({ $openModal }) => ($openModal ? "hidden" : "visible")};
   background-color: ${({ theme }) => theme.colors.main_blue};
   border-radius: 50%;
 
