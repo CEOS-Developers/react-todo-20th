@@ -1,22 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
+import { S } from "./Common.style";
 
-import { CircularProgressbar } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
-
-const Footer = ({ todos }) => {
-  // 전체 항목과 한 일 항목의 개수
-  const totalCount = todos.length;
-  const doneCount = todos.reduce((count, todo) => {
-    return todo.checked ? count + 1 : count;
-  }, 0);
-
-  const percent = (doneCount / totalCount) * 100;
-
+const Footer = ({ totalCount, doneCount }) => {
   return (
     <Wrapper>
-      {doneCount}/{totalCount}
-      <CircularProgressbar value={percent} text={`${Math.round(percent)}%`} />
+      <Span>Total: {totalCount}</Span>
+      <Span>
+        Accomplishment: {doneCount}/{totalCount}
+      </Span>
     </Wrapper>
   );
 };
@@ -29,19 +21,11 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-self: flex-start;
-  margin-top: 0.625rem;
+  margin: 0.625rem 0 0 1.25rem;
+`;
 
-  .CircularProgressbar-path {
-    stroke: #5f81ff;
-  }
-
-  .CircularProgressbar-trail {
-    stroke: #dfe8ff;
-  }
-
-  .CircularProgressbar-text {
-    fill: #000;
-    font-weight: 600;
-    //font-family: sans-serif;
-  }
+const Span = styled.span`
+  color: var(--light-blue);
+  font-weight: 300;
+  font-size: 0.938rem;
 `;

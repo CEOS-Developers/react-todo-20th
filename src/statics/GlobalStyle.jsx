@@ -8,10 +8,9 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  html {
+  body {
     font-family: Pretendard;
     height: 100%;
-    position: relative;
     display: flex;
     justify-content: center;
   }

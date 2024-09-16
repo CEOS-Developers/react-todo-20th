@@ -30,7 +30,7 @@ const TodoInput = ({ isFormOpen, animationClassname, addItem }) => {
 
   return (
     <Wrapper className={animationClassname}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{ width: "100%" }}>
         <InputBox>
           <input type="text" value={inputValue} onChange={handleChange} />
           <EnterButton type="submit">작성하기</EnterButton>
@@ -85,6 +85,7 @@ const InputBox = styled(S.Box)`
   align-items: center;
   justify-content: space-between;
   padding: 0 0.625rem;
+  margin: 0.6rem 0;
 `;
 
 const EnterButton = styled.button`

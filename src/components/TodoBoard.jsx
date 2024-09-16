@@ -8,20 +8,24 @@ const TodoBoard = ({ todos, removeItem, toggleItem }) => {
 
   return (
     <Wrapper>
-      <S.Ment>What I have to do</S.Ment>
-      {sortedTodos.map(
-        (todo) =>
-          !todo.checked && (
-            <Item key={todo.id} {...{ todo, removeItem, toggleItem }} />
-          )
-      )}
-      <S.Ment>What I did</S.Ment>
-      {sortedTodos.map(
-        (todo) =>
-          todo.checked && (
-            <Item key={todo.id} {...{ todo, removeItem, toggleItem }} />
-          )
-      )}
+      <ListWrapper>
+        <Title>What I have to do</Title>
+        {sortedTodos.map(
+          (todo) =>
+            !todo.checked && (
+              <Item key={todo.id} {...{ todo, removeItem, toggleItem }} />
+            )
+        )}
+      </ListWrapper>
+      <ListWrapper>
+        <Title>What I did</Title>
+        {sortedTodos.map(
+          (todo) =>
+            todo.checked && (
+              <Item key={todo.id} {...{ todo, removeItem, toggleItem }} />
+            )
+        )}
+      </ListWrapper>
     </Wrapper>
   );
 };
@@ -30,4 +34,16 @@ export default TodoBoard;
 
 const Wrapper = styled.ul`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
+`;
+
+const ListWrapper = styled.div``;
+
+const Title = styled(S.Ment)`
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 `;

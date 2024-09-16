@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 import TodoInput from "./components/TodoInput";
 import TodoBoard from "./components/TodoBoard";
 
-import Chart from "./components/Chart";
+import DonutGraph from "./components/DonutGraph";
 
 const TodoTemplate = () => {
   // 초기 데이터
@@ -72,16 +72,26 @@ const TodoTemplate = () => {
     }
   };
 
+  // 전체, 완료 항목 개수
+  const totalCount = todos.length;
+  const doneCount = todos.reduce((count, todo) => {
+    return todo.checked ? count + 1 : count;
+  }, 0);
+  const percent = (doneCount / totalCount) * 100; // 도넛그래프 성취율
+
   return (
     <Wrapper>
       <Navbar {...{ isFormOpen, toggleForm }} />
       <Container>
         <TodoBoard {...{ todos, removeItem, toggleItem }} />
-        {isFormOpen && (
-          <TodoInput {...{ isFormOpen, animationClassname, addItem }} />
-        )}
+        <InputAndGraph>
+          {isFormOpen && (
+            <TodoInput {...{ isFormOpen, animationClassname, addItem }} />
+          )}
+          <DonutGraph {...{ percent }} />
+        </InputAndGraph>
       </Container>
-      <Footer todos={todos} />
+      <Footer {...{ totalCount, doneCount }} />
     </Wrapper>
   );
 };
@@ -89,21 +99,25 @@ const TodoTemplate = () => {
 export default TodoTemplate;
 
 const Wrapper = styled.div`
-  width: 37.5rem;
+  width: 40rem;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
-  @media screen and (max-width: 62.5rem) {
-    width: 80vw;
-  }
+  align-items: center;
 `;
 
 const Container = styled(S.Box)`
   width: 100%;
+  height: auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 10px;
   padding: 0.625rem 1.25rem;
+`;
+
+const InputAndGraph = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 100%;
 `;

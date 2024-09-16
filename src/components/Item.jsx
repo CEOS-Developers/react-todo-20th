@@ -10,9 +10,9 @@ const Item = ({ todo, removeItem, toggleItem }) => {
 
   return (
     <Wrapper>
-      <CheckBox onClick={() => toggleItem(id)}>
+      <CheckButton onClick={() => toggleItem(id)}>
         {checked ? <FullIcon /> : <EmptyIcon />}
-      </CheckBox>
+      </CheckButton>
       <ItemText>{text}</ItemText>
       <DeleteButton onClick={() => removeItem(id)} />
     </Wrapper>
@@ -24,23 +24,29 @@ export default Item;
 const Wrapper = styled.li`
   display: flex;
   align-items: center;
-  margin-bottom: 0.938rem;
-  box-sizing: border-box;
+  margin: 0 0 0.938rem 0.5rem;
+  z-index: 999;
+`;
 
+const ItemText = styled.span`
   color: var(--blue);
   font-weight: 300;
   font-size: 1rem;
+
+  word-break: break-all;
+  max-width: 100%;
 `;
 
-const ItemText = styled.span``;
-
-const CheckBox = styled.span`
+const CheckButton = styled.span`
   display: block;
   width: 1.25rem;
   height: 1.25rem;
   margin-right: 0.6rem;
+  flex-shrink: 0;
 `;
 
 const DeleteButton = styled(DeleteIcon)`
   width: 0.688rem;
+  margin-left: 0.4rem;
+  flex-shrink: 0;
 `;

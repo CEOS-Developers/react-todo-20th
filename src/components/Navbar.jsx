@@ -40,6 +40,7 @@ const Navbar = ({ isFormOpen, toggleForm }) => {
 export default Navbar;
 
 const Wrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,7 +52,7 @@ const Clock = styled.div`
   color: var(--light-blue);
   font-size: 0.938rem;
   font-weight: 300;
-  margin: 0.67rem 0;
+  margin: 0.67rem 1.25rem;
 `;
 
 const TopBox = styled(S.Box)`
