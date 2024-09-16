@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
-import checkmark from '../assets/checkmark.svg'
+import checkmark from '../assets/checkmark.svg';
 
 const Form = styled.form`
-    display: flex;
-    position: relative;
-    width: 80%;
-    padding: 1.3rem 1.3rem 1.3rem 3.3rem; /* background로 넣은 체크 이미지와 안 겹치도록 왼쪽 패딩 추가*/
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.11), 0 5px 5px rgba(0, 0, 0, 0.178);
-    border-radius: 0.625rem;
-    background-image: url(${checkmark}); 
-    background-size: 1.5rem;
-    background-position: 1rem center; /* background 이미지 위치, 왼쪽으로부터 1rem 떨어진 곳*/
-    background-repeat: no-repeat;
+  display: flex;
+  position: relative;
+  width: 80%;
+  padding: 1.3rem 1.3rem 1.3rem 3.3rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.11), 0 5px 5px rgba(0, 0, 0, 0.178);
+  border-radius: 0.625rem;
+  background-image: url(${checkmark});
+  background-size: 1.5rem;
+  background-position: 1rem center;
+  background-repeat: no-repeat;
 `;
 
 const Input = styled.input`
-  width:calc(100% - 4rem); /* 왼쪽 추가 버튼이 차지한 공간을 제외한 부분*/
+  width: calc(100% - 4rem);
   font-size: 1rem;
   border: none;
   outline: 0;
@@ -41,20 +41,19 @@ const SubmitButton = styled.button`
 `;
 
 function InputForm({ addTodo }) {
-  const [inputValue, setInputValue] = useState(''); // 입력된 값을 저장하는 state
+  const inputRef = useRef(null);
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // submit이지만 새로고침 안 되도록
-    addTodo(inputValue); // setTodo 상태에 저장.
-    setInputValue('');
+    event.preventDefault();
+    addTodo(inputRef.current.value);
+    inputRef.current.value = '';
   };
 
   return (
     <Form onSubmit={handleSubmit}>
       <Input
         type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        ref={inputRef}
         placeholder="할 일을 입력하세요"
       />
       <SubmitButton type="submit">추가</SubmitButton>
@@ -63,3 +62,5 @@ function InputForm({ addTodo }) {
 }
 
 export default InputForm;
+
+
