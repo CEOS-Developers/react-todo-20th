@@ -3,8 +3,18 @@ import Header from "../components/Header/Header";
 import DayofWeek from "../components/Date/DayofWeek";
 import Days from "../components/Date/Days";
 import TodoBtn from "../components/TodoBtn/TodoBtn";
+import { useState } from "react";
+import TodoModal from "../components/Modal/TodoModal";
 
 export default function MainPage() {
+  const [openModal, setOpenModal] = useState(false);
+
+  function handleModal() {
+    {
+      openModal ? setOpenModal(false) : setOpenModal(true);
+    }
+  }
+
   return (
     <Wrapper>
       <Header />
@@ -12,7 +22,8 @@ export default function MainPage() {
         <DayofWeek />
         <Days />
       </HeaderAndDayOfWeekWrapper>
-      <TodoBtn />
+      {openModal && <TodoModal />}
+      <TodoBtn openModal={openModal} handleModal={handleModal} />
     </Wrapper>
   );
 }
@@ -26,7 +37,7 @@ const Wrapper = styled.main`
 const HeaderAndDayOfWeekWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 3rem;
 
   padding: 0 5rem;
 
