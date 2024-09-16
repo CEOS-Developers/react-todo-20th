@@ -22,7 +22,7 @@ const TodoItemContainer = styled.li`
     border: none;
     border-radius: 10px;
     justify-content: space-between;
-    align-items: center; /* 수직 정렬 */
+    align-items: center;
     font-size: 1rem;
     color: rgb(94, 169, 139);
     animation: ${slideDown} 0.3s ease-out;
@@ -32,30 +32,31 @@ const Input = styled.input`
     width: 1.5rem;
     height: 1.5rem;
     cursor: pointer;
-    appearance: none; /* 기본 체크박스 스타일 제거 */
-    border-radius: 50%; /* 둥근 모양 */
-    border: 2px solid rgb(94, 169, 139); /* 체크되지 않았을 때 테두리 */
-    background-color: transparent; /* 기본 배경 투명 */
+    appearance: none;
+    border-radius: 50%;
+    border: 2px solid rgb(94, 169, 139);
+    background-color: transparent;
 
-    &:checked{
-    background-color: rgb(103, 219, 147); /* 체크 시 배경색 */
-    border-color: rgb(103, 219, 147); /* 테두리도 배경색과 동일하게 */
-    position: relative;
+    &:checked {
+        background-color: rgb(103, 219, 147);
+        border-color: rgb(103, 219, 147);
+        position: relative;
     }
 
-    &:checked:before{
-    content: '✓'; /* 체크 표시 */
-    font-size: 1rem;
-    color: white; /* 체크 표시 색상 */
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%); /* 중앙 정렬 */
+    &:checked:before {
+        content: '✓';
+        font-size: 1rem;
+        color: white;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
 `;
+
 const TodoSpan = styled.span`
   text-decoration: ${props => (props.$completed ? 'line-through' : 'none')};
-  width: 70%;
+  width: 80%;
   overflow-wrap: break-word;
 `;
 
@@ -73,7 +74,7 @@ const DeleteButton = styled.button`
   }
 `;
 
-const TodoItem = (({ todo, toggleTodoCompletion, deleteTodo }) => {
+const TodoItem = React.memo(({ todo, toggleTodoCompletion, deleteTodo }) => {
   return (
     <TodoItemContainer>
       <Input
@@ -81,11 +82,11 @@ const TodoItem = (({ todo, toggleTodoCompletion, deleteTodo }) => {
         checked={todo.completed}
         onChange={() => toggleTodoCompletion(todo.text)}
       />
-      {/* completed 속성을 styled-components 내부에서만 사용 */}
-      <TodoSpan $completed={todo.completed ? 1 : 0}>{todo.text}</TodoSpan>
+      <TodoSpan $completed={todo.completed}>{todo.text}</TodoSpan>
       <DeleteButton onClick={() => deleteTodo(todo.text)}>삭제</DeleteButton>
     </TodoItemContainer>
   );
 });
 
-export default TodoItem;
+export default TodoItem; // 여기에 todo checkbox가 있으니 직접적으로 todo의 완료 '상태'를 변경함.
+

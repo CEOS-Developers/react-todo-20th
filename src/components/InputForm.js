@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import checkmark from '../assets/checkmark.svg';
 
@@ -40,14 +40,21 @@ const SubmitButton = styled.button`
   }
 `;
 
-function InputForm({ addTodo }) {
+const InputForm = React.memo(({ addTodo }) => {
   const inputRef = useRef(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = useCallback((event) => {
     event.preventDefault();
-    addTodo(inputRef.current.value);
-    inputRef.current.value = '';
-  };
+    if (inputRef.current) {
+      const inputValue = inputRef.current.value.trim();
+      if (inputValue) {
+        addTodo(inputValue);
+        inputRef.current.value = '';
+      } else {
+        alert('오늘의 할 일은 무엇인가요?🍀');
+      }
+    }
+  }, [addTodo]);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -59,8 +66,10 @@ function InputForm({ addTodo }) {
       <SubmitButton type="submit">추가</SubmitButton>
     </Form>
   );
-}
+});
 
 export default InputForm;
+
+
 
 

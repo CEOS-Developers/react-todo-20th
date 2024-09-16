@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
 import styled, { createGlobalStyle } from 'styled-components';
@@ -47,29 +47,24 @@ function App() {
     }
   }, [todos]);
   
-  const addTodo = ((newTodo) => {
-    if (newTodo.trim() === '') {
-      alert('오늘의 할 일을 적어주세요!🍀');
-      return;
-    }
-
+  const addTodo = useCallback((newTodo) => {
     if (todos.some(todo => todo.text === newTodo)) {
       alert('이미 동일한 투두가 있습니다!👏🏻');
       return;
     }
 
     setTodos(prevTodos => [...prevTodos, { text: newTodo, completed: false }]); // 기존 내용 + 추가
-  });
+  },[todos]);
 
-  const toggleTodoCompletion = ((todoText) => {
+  const toggleTodoCompletion = useCallback((todoText) => {
     setTodos(prevTodos =>
       prevTodos.map(todo =>
         todo.text === todoText ? { ...todo, completed: !todo.completed } : todo
       )
     );
-  });
+  }, []);
 
-  const deleteTodo = (todoText) => {
+  const deleteTodo = useCallback((todoText) => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       setTodos(prevTodos => {
         const updatedTodos = prevTodos.filter(todo => todo.text !== todoText);
@@ -79,7 +74,7 @@ function App() {
         return updatedTodos;
       });
     }
-  };
+  }, []);
   
   // 전체 todo와 완료된 todo의 개수를 계산하는 함수
   const totalTodos = todos.length;

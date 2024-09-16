@@ -15,7 +15,7 @@ gap: 0.625rem;
 }
 `;
 
-const TodoList = ({ todos, toggleTodoCompletion, deleteTodo }) => {
+const TodoList = React.memo(({ todos, toggleTodoCompletion, deleteTodo }) => {
   // todos 배열을 completed 속성에 따라 정렬.
   const sortedTodos = [...todos].sort((a, b) => {
     if (a.completed === b.completed) return 0;
@@ -34,6 +34,6 @@ const TodoList = ({ todos, toggleTodoCompletion, deleteTodo }) => {
       ))}
     </TodoListContainer>
   );
-};
+});
 
 export default TodoList;

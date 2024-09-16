@@ -13,12 +13,12 @@ const HeaderContainer = styled.header`
   text-shadow: 0 5px 5px rgba(0, 0, 0, 0.205);
 `;
 
-function Header() {
+const Header = React.memo(() => {
   return (
     <HeaderContainer>
       <h1>TO-DO✏️</h1>
     </HeaderContainer>
   );
-}
+});
 
 export default Header;
