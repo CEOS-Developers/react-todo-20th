@@ -32,7 +32,6 @@ const ItemText = styled.span`
   color: var(--blue);
   font-weight: 300;
   font-size: 1rem;
-
   word-break: break-all;
   max-width: 100%;
 `;
