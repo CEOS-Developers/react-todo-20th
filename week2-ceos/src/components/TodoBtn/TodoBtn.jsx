@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
 
-export default function TodoBtn() {
-  return <TodoBtnWrapper>+</TodoBtnWrapper>;
+export default function TodoBtn({ openModal, handleModal }) {
+  function handleButtonClick() {
+    handleModal();
+  }
+
+  return <TodoBtnWrapper onClick={handleButtonClick}>+</TodoBtnWrapper>;
 }
 
 const TodoBtnWrapper = styled.button`
