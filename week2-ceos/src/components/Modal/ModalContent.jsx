@@ -1,7 +1,19 @@
 import styled from "styled-components";
 import { rowFlex, columnFlex } from "@styles/commonStyle";
+import { useClickedDayStore, useTodoInput } from "../../core/store";
+import { format, parse } from "date-fns";
+import { ko } from "date-fns/locale";
+import { useState } from "react";
 
 export default function ModalContent({ handleModal }) {
+  const clickedDate = useClickedDayStore((state) => state.clickedDay);
+  const todo = useTodoInput((state) => state.todoText);
+  const setTodo = useTodoInput((state) => state.setTodoText);
+
+  function onChange(event) {
+    setTodo(event.target.value);
+  }
+
   function onClickConfirmButton() {
     handleModal();
   }
@@ -12,8 +24,8 @@ export default function ModalContent({ handleModal }) {
         <Button onClick={handleModal}>❌</Button>
         <Button onClick={onClickConfirmButton}>✔️</Button>
       </ButtonWrapper>
-      <TodoInput autoFocus type="text" placeholder="할 일" />
-      <clickedDate />
+      <TodoInput autoFocus type="text" placeholder="할 일" onChange={onChange} />
+      <ClickedDateText>{clickedDate}</ClickedDateText>
     </Wrapper>
   );
 }
@@ -25,8 +37,8 @@ const Wrapper = styled.div`
 `;
 const Button = styled.button`
   ${({ theme }) => theme.fonts.Body6};
-  padding: 1rem;
   margin: 2rem;
+  padding: 1rem;
 `;
 
 const ButtonWrapper = styled.div`
@@ -53,4 +65,9 @@ const TodoInput = styled.input`
   &:focus {
     caret-color: ${({ theme }) => theme.colors.main_blue};
   }
+`;
+
+const ClickedDateText = styled.span`
+  ${({ theme }) => theme.fonts.Body5};
+  margin: 1rem;
 `;
