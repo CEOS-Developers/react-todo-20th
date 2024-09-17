@@ -6,11 +6,14 @@ export default function OneTodo(props) {
   return (
     <>
       <Wrapper>
-        <CheckBoxLabel>
-          <CheckBox $boxColor={boxColor} type="checkbox" />
-        </CheckBoxLabel>
-        {text}
-        {boxColor}
+        <LabelTextWrapper>
+          <CheckBoxLabel>
+            <CheckBox $boxColor={boxColor} type="checkbox" />
+          </CheckBoxLabel>
+          {text}
+          {boxColor}
+        </LabelTextWrapper>
+        <RemoveTodo>🗑️</RemoveTodo>
       </Wrapper>
     </>
   );
@@ -18,11 +21,15 @@ export default function OneTodo(props) {
 
 const Wrapper = styled.li`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+`;
+
+const LabelTextWrapper = styled.div`
+  display: flex;
   gap: 1rem;
   align-items: center;
-
-  width: 80%;
-  padding: 1rem;
 `;
 
 const CheckBoxLabel = styled.label`
@@ -51,4 +58,8 @@ const CheckBox = styled.input`
     background-size: 100% 100%;
     border-color: transparent;
   }
+`;
+
+const RemoveTodo = styled.button`
+  ${rowFlex}
 `;
