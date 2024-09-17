@@ -43,12 +43,11 @@ export default function ModalContent({ handleModal }) {
 }
 
 const Wrapper = styled.div`
-  width: 85%;
-  height: 80%;
+  width: 80%;
 `;
 const Button = styled.button`
   ${({ theme }) => theme.fonts.Body6};
-  margin: 2rem;
+  margin: 1rem;
   padding: 1rem;
 `;
 
@@ -89,5 +88,5 @@ const BoxWrapper = styled.div`
   gap: 2rem;
   justify-content: center;
 
-  margin-top: 1rem;
+  margin-top: 2rem;
 `;
