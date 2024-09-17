@@ -42,8 +42,8 @@ function Task({ selectedDate, handleCloseModal }) {
     
         // 기존 Map 수정 후 상태 업데이트
         tasks.set(taskId, newTaskObj);
-        updateTasks(tasks);
         setNewTask('');
+        updateTasks(tasks);
     };
 
     const handleDeleteTask = (taskId) => {        
@@ -131,7 +131,7 @@ function Task({ selectedDate, handleCloseModal }) {
                                 placeholder="Add a new task"
                                 required
                                 autoComplete='on'
-                                onKeyDown={(e) => {
+                                onKeyUp={(e) => {
                                     if (e.key === 'Enter') {
                                         e.preventDefault();  // 기본 Enter 키 동작 막기
                                         handleAddTask();

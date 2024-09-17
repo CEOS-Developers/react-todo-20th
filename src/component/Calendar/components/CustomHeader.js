@@ -80,7 +80,7 @@ const Title = styled.div`
     font-size: 1.5rem;
     margin: 0;
     @media (max-width: 768px) {
-      font-size: 1.2rem;
+      font-size: 1.0rem;
     }
   }
   span {
