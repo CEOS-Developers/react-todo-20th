@@ -21,39 +21,30 @@ const TodoTemplate = () => {
   }, [todos]);
 
   // 항목 추가
-  const addItem = useCallback(
-    (text) => {
-      const item = {
-        id: Date.now().toString(),
-        text,
-        checked: false,
-      };
-      setTodos(todos.concat(item));
-    },
-    [todos]
-  );
+  const addItem = useCallback((text) => {
+    const item = {
+      id: Date.now().toString(),
+      text,
+      checked: false,
+    };
+    setTodos((prevTodos) => [...prevTodos, item]);
+  }, []);
 
   // 항목 삭제
-  const removeItem = useCallback(
-    (id) => {
-      setTodos(todos.filter((todo) => todo.id !== id));
-    },
-    [todos]
-  );
+  const removeItem = useCallback((id) => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  }, []);
 
   // 항목 토글
-  const toggleItem = useCallback(
-    (id) => {
-      setTodos(
-        todos.map((todo) =>
-          todo.id === id
-            ? { ...todo, checked: !todo.checked, id: Date.now().toString() }
-            : todo
-        )
-      );
-    },
-    [todos]
-  );
+  const toggleItem = useCallback((id) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id
+          ? { ...todo, checked: !todo.checked, id: Date.now().toString() }
+          : todo
+      )
+    );
+  }, []);
 
   // 입력창 열고 닫음
   const [isFormOpen, setIsFormOpen] = useState(false);
