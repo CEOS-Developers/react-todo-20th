@@ -28,7 +28,6 @@ const ModalWrapper = styled.aside`
 
   width: 100%;
   height: 40rem;
-  padding: 2rem;
 
   background-color: ${({ theme }) => theme.colors.white};
   border-top-left-radius: 10%;
