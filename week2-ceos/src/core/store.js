@@ -38,12 +38,32 @@ export const useClickedDayStore = create((set) => ({
   todoText: "",
   setTodoText: (todo) => set({ todoText: todo }),
   isDone: false,
-  setIsDone: (status) => set({ isDone: status }),
+  setIsDone: () =>
+    set((state) => ({
+      isDone: !state.isDone,
+    })),
   todoList: [],
+  boxColor: "",
+  setBoxColor: (color) => set({ boxColor: color }),
+
+  toogleIsDone: (day, text) =>
+    set((state) => {
+      const updatedTodoList = state.todoList.map((item) => {
+        if (item.day === day) {
+          return {
+            ...item,
+            todos: item.todos.map((todo) => (todo.text === text ? { ...todo, isDone: !todo.isDone } : todo)),
+          };
+        }
+        return item;
+      });
+      return { todoList: updatedTodoList };
+    }),
 
   addTodo: () =>
     set((state) => {
       let newTodo = {
+        boxColor: state.boxColor,
         isDone: state.isDone,
         text: state.todoText,
       };
