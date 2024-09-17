@@ -1,5 +1,11 @@
 import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
+import PropTypes from "prop-types";
+
+TodoBtn.propTypes = {
+  openModal: PropTypes.bool.isRequired,
+  handleModal: PropTypes.func.isRequired,
+};
 
 export default function TodoBtn({ openModal, handleModal }) {
   function handleButtonClick() {

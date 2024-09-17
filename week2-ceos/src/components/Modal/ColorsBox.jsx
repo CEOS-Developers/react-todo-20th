@@ -1,6 +1,13 @@
 import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
 import { useTodoStore } from "../../core/store";
+import PropTypes from "prop-types";
+
+ColorsBox.propTypes = {
+  color: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
 export default function ColorsBox(props) {
   const { color, onClick } = props;
   const choosedColor = useTodoStore((state) => state.boxColor);

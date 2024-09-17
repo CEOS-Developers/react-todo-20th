@@ -1,7 +1,14 @@
 import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
 import { useTodoStore } from "../../core/store";
-import { useState } from "react";
+import PropTypes from "prop-types";
+
+OneTodo.propTypes = {
+  text: PropTypes.string.isRequired,
+  isDone: PropTypes.bool.isRequired,
+  boxColor: PropTypes.string.isRequired,
+  removeTodo: PropTypes.func.isRequired,
+};
 
 export default function OneTodo(props) {
   const { text, isDone, boxColor, removeTodo } = props;

@@ -1,6 +1,11 @@
 import styled, { keyframes } from "styled-components";
-import { rowFlex, columnFlex } from "@styles/commonStyle";
+import { rowFlex } from "@styles/commonStyle";
 import ModalContent from "./ModalContent";
+import PropTypes from "prop-types";
+
+TodoModal.propTypes = {
+  handleModal: PropTypes.func.isRequired,
+};
 
 export default function TodoModal({ handleModal }) {
   return (

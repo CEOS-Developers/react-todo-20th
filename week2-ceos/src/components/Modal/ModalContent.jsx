@@ -4,6 +4,11 @@ import { useTodoStore } from "../../core/store";
 import { colors } from "../../core/colors";
 import ColorsBox from "./ColorsBox";
 import { useState } from "react";
+import PropTypes from "prop-types";
+
+ModalContent.propTypes = {
+  handleModal: PropTypes.func.isRequired,
+};
 
 export default function ModalContent({ handleModal }) {
   const clickedDate = useTodoStore((state) => state.clickedDay);

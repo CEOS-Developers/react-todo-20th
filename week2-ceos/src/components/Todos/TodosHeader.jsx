@@ -1,4 +1,9 @@
 import styled from "styled-components";
+import PropTypes from "prop-types";
+
+TodosHeader.propTypes = {
+  clickedDate: PropTypes.string.isRequired,
+};
 
 export default function TodosHeader({ clickedDate }) {
   return (
