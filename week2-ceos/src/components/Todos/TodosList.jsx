@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export default function TodosList() {
   const choosedDate = useClickedDayStore((state) => state.clickedDay);
   const todosList = useClickedDayStore((state) => state.todoList);
-
+  const removeList = useClickedDayStore((state) => state.removeTodo);
   const [filterTodoList, setFilteredTodoList] = useState([]);
 
   useEffect(() => {
@@ -24,7 +24,15 @@ export default function TodosList() {
       {filterTodoList.length > 0 &&
         filterTodoList.map((content) => {
           const { text, isDone, boxColor } = content;
-          return <OneTodo boxColor={boxColor} text={text} isDone={isDone} key={text.length + Math.random()} />;
+          return (
+            <OneTodo
+              removeTodo={() => removeList(choosedDate, text)}
+              boxColor={boxColor}
+              text={text}
+              isDone={isDone}
+              key={text.length + Math.random()}
+            />
+          );
         })}
     </Wrapper>
   );
