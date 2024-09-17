@@ -43,18 +43,33 @@ export const useClickedDayStore = create((set) => ({
 
   addTodo: () =>
     set((state) => {
-      const newTodo = {
+      let newTodo = {
         isDone: state.isDone,
         text: state.todoText,
       };
 
-      const oneDayTodo = {
-        day: state.clickedDay,
-        todos: [newTodo],
-      };
+      const existingDayIndex = state.todoList.findIndex((item) => item.day === state.clickedDay);
+
+      let updatedTodoList;
+
+      //이미 추가된 날짜라면..? 헷갈려 ㅠㅠ
+      if (existingDayIndex !== -1) {
+        const updateTodos = [...state.todoList[existingDayIndex].todos, newTodo];
+        updatedTodoList = [...state.todoList];
+        updatedTodoList[existingDayIndex] = {
+          ...updatedTodoList[existingDayIndex],
+          todos: updateTodos,
+        };
+      } else {
+        const oneDayTodo = {
+          day: state.clickedDay,
+          todos: [newTodo],
+        };
+        updatedTodoList = [...state.todoList, oneDayTodo];
+      }
 
       return {
-        todoList: [...state.todoList, oneDayTodo],
+        todoList: updatedTodoList,
         todoText: "",
         isDone: false,
       };
