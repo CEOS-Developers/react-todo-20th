@@ -25,7 +25,6 @@ const Wrapper = styled.li`
   display: flex;
   align-items: center;
   margin: 0 0 0.938rem 0.5rem;
-  z-index: 999;
 `;
 
 const ItemText = styled.span`

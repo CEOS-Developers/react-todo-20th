@@ -19,6 +19,5 @@ const Box = styled.div`
 
 export const S = {
   Ment,
-  Bold,
   Box,
 };

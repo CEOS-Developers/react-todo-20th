@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { S } from "./Common.style";
 
-const Footer = ({ totalCount, doneCount }) => {
+const Footer = React.memo(({ totalCount, doneCount }) => {
+  console.log("푸터");
+
   return (
     <Wrapper>
       <Span>Total: {totalCount}</Span>
@@ -11,7 +12,7 @@ const Footer = ({ totalCount, doneCount }) => {
       </Span>
     </Wrapper>
   );
-};
+});
 
 export default Footer;
 

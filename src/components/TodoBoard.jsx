@@ -1,9 +1,11 @@
+import React from "react";
 import styled from "styled-components";
 import { S } from "./Common.style";
 
 import Item from "./Item";
 
-const TodoBoard = ({ todos, removeItem, toggleItem }) => {
+const TodoBoard = React.memo(({ todos, removeItem, toggleItem }) => {
+  console.log("보드");
   const sortedTodos = todos.sort((a, b) => a.id - b.id); // 토글된 항목은 하위에 위치
 
   return (
@@ -28,15 +30,15 @@ const TodoBoard = ({ todos, removeItem, toggleItem }) => {
       </ListWrapper>
     </Wrapper>
   );
-};
+});
 
 export default TodoBoard;
 
 const Wrapper = styled.ul`
-  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 100%;
   padding: 1rem 0;
 `;
 

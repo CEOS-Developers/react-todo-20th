@@ -1,9 +1,12 @@
+import React from "react";
 import styled from "styled-components";
 
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-const DonutGraph = ({ percent }) => {
+const DonutGraph = React.memo(({ percent }) => {
+  console.log("도넛");
+
   if (isNaN(percent)) {
     percent = 0;
   }
@@ -13,16 +16,15 @@ const DonutGraph = ({ percent }) => {
       <CircularProgressbar value={percent} text={`${Math.round(percent)}%`} />
     </Wrapper>
   );
-};
+});
 
 export default DonutGraph;
 
 const Wrapper = styled.div`
-  width: 10rem;
-  flex-grow: 1;
   display: flex;
+  flex-grow: 1;
   align-items: center;
-
+  width: 10rem;
   margin: 0.625rem 1.25rem 1.25rem 0;
 
   .CircularProgressbar-path {
