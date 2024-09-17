@@ -35,9 +35,28 @@ export const useStore = create((set) => ({
 export const useClickedDayStore = create((set) => ({
   clickedDay: format(new Date(), "MM월 dd일 EEEE", { locale: ko }),
   setClickedDay: (day) => set({ clickedDay: day }),
-}));
-
-export const useTodoInput = create((set) => ({
   todoText: "",
   setTodoText: (todo) => set({ todoText: todo }),
+  isDone: false,
+  setIsDone: (status) => set({ isDone: status }),
+  todoList: [],
+
+  addTodo: () =>
+    set((state) => {
+      const newTodo = {
+        isDone: state.isDone,
+        text: state.todoText,
+      };
+
+      const oneDayTodo = {
+        day: state.clickedDay,
+        todos: [newTodo],
+      };
+
+      return {
+        todoList: [...state.todoList, oneDayTodo],
+        todoText: "",
+        isDone: false,
+      };
+    }),
 }));
