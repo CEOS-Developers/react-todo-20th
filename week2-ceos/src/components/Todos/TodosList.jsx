@@ -12,9 +12,12 @@ export default function TodosList() {
 
   useEffect(() => {
     const filtered = todosList.filter((list) => list.day === choosedDate);
-    filtered.length > 0 && setFilteredTodoList(filtered[0].todos);
-    console.log(filterTodoList);
-  }, [filterTodoList, todosList, choosedDate]);
+    if (filtered.length > 0) {
+      setFilteredTodoList(filtered[0].todos);
+    } else {
+      setFilteredTodoList([]);
+    }
+  }, [todosList, choosedDate]);
 
   return (
     <Wrapper>
