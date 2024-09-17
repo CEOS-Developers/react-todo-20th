@@ -9,7 +9,7 @@ const TooltipContainer = styled.div`
   padding: 5px 10px;
   border-radius: 5px;
   font-size: 10px;
-  top: -35px; /* 조정 필요 */
+  top: -30px; /* 조정 필요 */
   left: 50%; /* 조정 필요 */
   transform: translateX(-50%);
   white-space: nowrap;

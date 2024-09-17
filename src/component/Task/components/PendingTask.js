@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from "styled-components";
-import { getTasksFromLocalStorage, saveTasksToLocalStorage } from '../../../utils/LocalStorage';
+import { getTasksFromLocalStorage, saveTasksToLocalStorage } from '../../../utils/LocalStorageUtil';
 
 
 export default function PendingTask({ tasks, setTasks, handleDeleteTask, selectedDate }) {
@@ -14,7 +14,7 @@ export default function PendingTask({ tasks, setTasks, handleDeleteTask, selecte
         loadedTasks.forEach(task => newTaskMap.set(task.id, task));
 
         setTasks(newTaskMap);
-    }, []);
+    }, [selectedDate, setTasks]);
 
     const handleCompleteTask = (taskId) => {
         const formattedDate = selectedDate.toISOString().split('T')[0];
@@ -42,7 +42,7 @@ export default function PendingTask({ tasks, setTasks, handleDeleteTask, selecte
 
   return (
     <TaskItemsContainer>
-        {sortedPendingTasks.length === 0 && <p style={{'margin': 'auto', 'fontSize': '1.2rem', 'color': 'gray'}}>Let`s Add a Tasks</p>}
+        {sortedPendingTasks.length === 0 && <p style={{'margin': 'auto', 'fontSize': '1.2rem', 'color': 'gray'}}>Add something to do</p>}
         {sortedPendingTasks.map((task) => (
             <TaskItem
                 key={task.id}
@@ -68,8 +68,8 @@ const TaskItemsContainer = styled.div`
     padding: 10px;
     display: flex;
     flex-direction: column;
-    height: calc(100%); /* 컨테이너 높이에서 여유 공간을 확보 */
-    overflow-y: auto; /* 항목들에 대한 스크롤 */
+    height: 100%; 
+    overflow-y: auto; 
     /* 스크롤바 숨기기 */
     &::-webkit-scrollbar {
         display: none; /* 크롬, 사파리, 엣지에서 스크롤바 숨기기 */
@@ -89,7 +89,7 @@ const TaskItem = styled.div`
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px; 
-    transition: all 0.5s ease; /* 트랜지션 추가 */
+    transition: all 0.5s ease;
     .task-text {
         margin: 0;
         font-size: 1rem;

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from "styled-components";
-import { getTasksFromLocalStorage, saveTasksToLocalStorage } from '../../../utils/LocalStorage';
+import { getTasksFromLocalStorage, saveTasksToLocalStorage } from '../../../utils/LocalStorageUtil';
 
 
 export default function CompletedTask({ tasks, setTasks, handleDeleteTask, selectedDate }) {
@@ -14,7 +14,8 @@ export default function CompletedTask({ tasks, setTasks, handleDeleteTask, selec
         loadedTasks.forEach(task => newTaskMap.set(task.id, task));
 
         setTasks(newTaskMap);
-    }, []);
+    }, [selectedDate, setTasks]);
+
     const handleCancelTask = (taskId) => {
         const formattedDate = selectedDate.toISOString().split('T')[0];
         if (tasks.has(taskId)) {
@@ -40,7 +41,13 @@ export default function CompletedTask({ tasks, setTasks, handleDeleteTask, selec
 
   return (
         <TaskItemsContainer>
-            {sortedCompletedTasks.length === 0 && <p style={{'margin': 'auto', 'fontSize': '1.2rem', 'color': 'gray'}}>Let`s Complete a Tasks</p>}
+            {/* 작업이 없을 때 메시지 출력 */}
+            {sortedCompletedTasks.length === 0 && (
+                <p style={{'margin': 'auto', 'fontSize': '1.2rem', 'color': 'gray'}}>
+                    Complete your tasks
+                </p>
+                )}
+            {/* 작업 리스트 출력 */}
             {sortedCompletedTasks.map((task) => (
                 <TaskItem
                     key={task.id}
@@ -66,8 +73,8 @@ const TaskItemsContainer = styled.div`
     padding: 10px;
     display: flex;
     flex-direction: column;
-    height: calc(100%); /* 컨테이너 높이에서 여유 공간을 확보 */
-    overflow-y: auto; /* 항목들에 대한 스크롤 */
+    height: 100%; 
+    overflow-y: auto; 
     /* 스크롤바 숨기기 */
     &::-webkit-scrollbar {
         display: none; /* 크롬, 사파리, 엣지에서 스크롤바 숨기기 */
@@ -90,7 +97,7 @@ const TaskItem = styled.div`
     &:hover {
         background-color: #f0f0f0;
     }
-    transition: all 0.5s ease; /* 트랜지션 추가 */
+    transition: all 0.5s ease; 
     .task-text {
         margin: 0;
         font-size: 1rem;

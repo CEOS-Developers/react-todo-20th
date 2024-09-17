@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid'; // 고유 ID 생성을 위해 uuid 사용
 import styled from 'styled-components';
-import { getTasksFromLocalStorage, getTodoProgressForDate, saveTasksToLocalStorage } from '../../utils/LocalStorage';
-import { CalendarDays, CircleX, CopyPlus, Medal, Pencil, Plus, Undo2, X } from 'lucide-react';
+import { getTodoProgressForDate, saveTasksToLocalStorage } from '../../utils/LocalStorageUtil';
+import { CalendarDays, CopyPlus, Medal, Plus, Undo2 } from 'lucide-react';
 import PendingTask from './components/PendingTask';
 import CompletedTask from './components/CompletedTask';
 import TabIndicator from './components/TabIndicator';
 import Tooltip from '../../utils/Tooltip';
 import Swal from 'sweetalert2';
+import { getDayName } from '../../utils/dateUtil';
 
 
 
@@ -18,17 +19,16 @@ function Task({ selectedDate, handleCloseModal }) {
     const [activeIndex, setActiveIndex] = useState(0);
     const [tooltip, setTooltip] = useState(null); // tooltip 상태
     const { completed, total } = getTodoProgressForDate(selectedDate); // 성취도 계산
+    const formattedDate = selectedDate.toISOString().split('T')[0];
 
-
-
-    // 요일 풀네임 가져오기
-    const getDayName = (date) => {
-        return new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(date);
+    const updateTasks = (newTasks) => {
+        setTasks(new Map(newTasks)); // 중복 제거
+        saveTasksToLocalStorage(formattedDate, Array.from(newTasks.values()));
     };
+    
     
     const handleAddTask = () => {
         if (newTask.trim() === '') return;
-        const formattedDate = selectedDate.toISOString().split('T')[0]; 
         const taskId = uuidv4();
         const createdTime = new window.Date().toLocaleTimeString(); 
     
@@ -42,71 +42,47 @@ function Task({ selectedDate, handleCloseModal }) {
     
         // 기존 Map 수정 후 상태 업데이트
         tasks.set(taskId, newTaskObj);
-        setTasks(new Map(tasks)); // 새로운 Map을 생성하지 않고 기존 Map을 수정한 후 상태를 업데이트
-    
-        saveTasksToLocalStorage(formattedDate, Array.from(tasks.values()));
+        updateTasks(tasks);
         setNewTask('');
     };
-    const handleDeleteTask = (taskId) => {
-        const formattedDate = selectedDate.toISOString().split('T')[0];
-        
+
+    const handleDeleteTask = (taskId) => {        
         if (window.confirm('정말로 삭제하시겠습니까?')) { // 삭제 확인
             if (tasks.has(taskId)) {
                 tasks.delete(taskId); // 해당 task 삭제
                 
-                setTasks(new Map(tasks)); // 상태 업데이트
-                saveTasksToLocalStorage(formattedDate, Array.from(tasks.values())); // 로컬 스토리지 업데이트
+                updateTasks(tasks);
             }
         }
     };
+
+    // Alert 창 커스텀 유틸 함수
+    const showAlert = (title, text, icon, confirmButtonText) => {
+        Swal.fire({
+            title,
+            text,
+            icon,
+            confirmButtonText,
+            width: '360px',
+            position: 'center',
+            customClass: {
+                popup: 'custom-popup',
+            },
+            heightAuto: false,
+        });
+    };
+
     const handleTodoCheck = () => {
         if (completed === total && total > 0) {
-            // SweetAlert2로 축하 메시지 알림
-            Swal.fire({
-                title: '축하합니다!',
-                text: '모든 할 일이 완료되었습니다!',
-                icon: 'success',
-                confirmButtonText: '오예!',
-                width: '360px',  // 창 크기 조정
-                position: 'center',  // 화면 중앙에 고정
-                customClass: {
-                    popup: 'custom-popup', // 사용자 정의 클래스 추가
-                },
-                heightAuto: false,  // height 자동 조정 비활성화
-
-
-            });
+            showAlert('축하합니다!', '모든 할 일이 완료되었습니다!', 'success', '오예!');
         } else if (completed !== total && total > 0) {
-            Swal.fire({
-                title: '아쉽습니다!',
-                text: '아직 할 일을 다 완료하지 못하였습니다.',
-                icon: 'warning',
-                confirmButtonText: '그래..',
-                width: '360px',  // 창 크기 조정
-                position: 'center',  // 화면 중앙에 고정
-                customClass: {
-                    popup: 'custom-popup', // 사용자 정의 클래스 추가
-                },
-                heightAuto: false,  // height 자동 조정 비활성화
-
-            });
+            showAlert('아쉽습니다!', '아직 할 일을 다 완료하지 못하였습니다.', 'warning', '그래..');
         } else if (total === 0) {
-            Swal.fire({
-                title: '할 일이 없습니다!',
-                text: '할 일을 추가해보세요.',
-                icon: 'info',
-                confirmButtonText: '넵!',
-                width: '360px',  // 창 크기 조정
-                position: 'center',  // 화면 중앙에 고정
-                customClass: {
-                    popup: 'custom-popup', // 사용자 정의 클래스 추가
-                },
-                heightAuto: false,  // height 자동 조정 비활성화
-
-            });
+            showAlert('할 일이 없습니다!', '할 일을 추가해보세요.', 'info', '넵!');
         }
-        
-    }
+    };
+    
+    // tooltip function
     const showTooltip = (text) => setTooltip(text);
     const hideTooltip = () => setTooltip(null);
     
@@ -179,18 +155,32 @@ function Task({ selectedDate, handleCloseModal }) {
                         </AddTask>
                     : 
                         <BtnSpan>
-                            <span className='calendar' onClick={handleCloseModal}>
+                            <span 
+                                className='calendar' 
+                                onClick={handleCloseModal}
+                                onMouseEnter={() => showTooltip('캘린더이동')}
+                                onMouseLeave={hideTooltip}>
                                 <CalendarDays/>
+                                {tooltip === '캘린더이동' && <Tooltip text="캘린더이동" />}
                             </span>
-                            <span className='acheive' onClick={handleTodoCheck}>
+                            <span 
+                                className='acheive' 
+                                onClick={handleTodoCheck}
+                                onMouseEnter={() => showTooltip('성취도확인')}
+                                onMouseLeave={hideTooltip}>
                                 <Medal/>
-
                                 <p>
                                     {completed} / {total}
                                 </p>
+                                {tooltip === '성취도확인' && <Tooltip text="성취도확인" />}
                             </span>
-                            <span className='add' onClick={() => setAddModal(true)}>
+                            <span 
+                                className='add' 
+                                onClick={() => setAddModal(true)}
+                                onMouseEnter={() => showTooltip('추가하기')}
+                                onMouseLeave={hideTooltip}>
                                 <Plus/>
+                                {tooltip === '추가하기' && <Tooltip text="추가하기" />}
                             </span>
                         </BtnSpan>
                     }
@@ -283,7 +273,6 @@ const AddTask = styled.div`
         &:hover {
             background-color: #f0f0f0;
         }
-        
     }
 `;
 const BtnSpan = styled.div`
@@ -293,6 +282,7 @@ const BtnSpan = styled.div`
     justify-content: space-around;
     gap: 10px;
     span {
+        position: relative;
         width: 40px;
         height: 40px;
         border-radius: 50%;
@@ -306,7 +296,6 @@ const BtnSpan = styled.div`
         &:hover {
             background-color: #f0f0f0;
         }
-        
     }
     .acheive {
             padding: 0 20px;
@@ -325,6 +314,5 @@ const BtnSpan = styled.div`
             }
         }
 `;  
-
 
 export default Task;
