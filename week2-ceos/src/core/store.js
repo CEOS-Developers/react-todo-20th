@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { weekStart } from "@utils/data";
-import { addDays, format, startOfDay, startOfWeek, subDays } from "date-fns";
-import { headerDate } from "../utils/data";
+import { addDays, format, startOfWeek, subDays } from "date-fns";
 import { ko } from "date-fns/locale";
 
 const newDate = new Date();
