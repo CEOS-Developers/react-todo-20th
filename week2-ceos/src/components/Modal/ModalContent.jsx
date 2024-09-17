@@ -1,14 +1,11 @@
 import styled from "styled-components";
-import { rowFlex, columnFlex } from "@styles/commonStyle";
-import { useClickedDayStore, useTodoInput } from "../../core/store";
-import { format, parse } from "date-fns";
-import { ko } from "date-fns/locale";
-import { useState } from "react";
+import { rowFlex } from "@styles/commonStyle";
+import { useClickedDayStore } from "../../core/store";
 
 export default function ModalContent({ handleModal }) {
   const clickedDate = useClickedDayStore((state) => state.clickedDay);
-  const todo = useTodoInput((state) => state.todoText);
-  const setTodo = useTodoInput((state) => state.setTodoText);
+  const setTodo = useClickedDayStore((state) => state.setTodoText);
+  const addNewTodo = useClickedDayStore((state) => state.addTodo);
 
   function onChange(event) {
     setTodo(event.target.value);
@@ -16,6 +13,7 @@ export default function ModalContent({ handleModal }) {
 
   function onClickConfirmButton() {
     handleModal();
+    addNewTodo();
   }
 
   return (
