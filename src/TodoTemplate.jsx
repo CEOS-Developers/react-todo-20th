@@ -1,23 +1,23 @@
-import React, { useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
-import { S } from "./components/Common.style";
+import React, { useCallback, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { S } from './components/Common.style';
 
-import Navbar from "./components/Navbar";
-import TodoBoard from "./components/TodoBoard";
-import TodoInput from "./components/TodoInput";
-import DonutGraph from "./components/DonutGraph";
-import Footer from "./components/Footer";
+import Navbar from './components/Navbar';
+import TodoBoard from './components/TodoBoard';
+import TodoInput from './components/TodoInput';
+import DonutGraph from './components/DonutGraph';
+import Footer from './components/Footer';
 
 const TodoTemplate = () => {
   // 초기 데이터
   const [todos, setTodos] = useState(() => {
-    const savedTodos = localStorage.getItem("todos");
+    const savedTodos = localStorage.getItem('todos');
     return savedTodos ? JSON.parse(savedTodos) : [];
   });
 
   // 배열이 변경될 때마다 localStorage 업데이트
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
+    localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
   // 항목 추가
@@ -41,14 +41,14 @@ const TodoTemplate = () => {
       prevTodos.map((todo) =>
         todo.id === id
           ? { ...todo, checked: !todo.checked, id: Date.now().toString() }
-          : todo
-      )
+          : todo,
+      ),
     );
   }, []);
 
   // 입력창 열고 닫음
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [animationClassname, setAnimationClassname] = useState(""); // 애니메이션 지정을 위한 클래스명
+  const [animationClassname, setAnimationClassname] = useState(''); // 애니메이션 지정을 위한 클래스명
 
   const toggleForm = () => {
     // 닫힘 시 애니메이션 시간만큼의 지연 필요
@@ -58,10 +58,10 @@ const TodoTemplate = () => {
       }, 300);
 
     if (isFormOpen) {
-      setAnimationClassname("fade-out");
+      setAnimationClassname('fade-out');
       timer();
     } else {
-      setAnimationClassname("fade-in");
+      setAnimationClassname('fade-in');
       setIsFormOpen(!isFormOpen);
     }
     return () => clearTimeout(timer);
