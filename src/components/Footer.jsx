@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const Footer = React.memo(({ totalCount, doneCount }) => {
-  console.log("푸터");
-
   return (
     <Wrapper>
       <Span>Total: {totalCount}</Span>

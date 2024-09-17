@@ -4,26 +4,17 @@ import { useCallback, useState, useRef, useEffect } from "react";
 
 const TodoInput = ({ isFormOpen, animationClassname, addItem }) => {
   const [inputValue, setInputValue] = useState(""); // 입력값
-  const [isVisible, setIsVisible] = useState(isFormOpen);
 
-  useEffect(() => {
-    if (isFormOpen) {
-      setIsVisible(true);
-    } else {
-      const timer = setTimeout(() => setIsVisible(false), 300);
-      return () => clearTimeout(timer);
-    }
-  }, [isFormOpen]);
-
-  const handleChange = useCallback((e) => {
+  const handleChange = (e) => {
     setInputValue(e.target.value);
-  }, []);
+  };
 
   const handleSubmit = useCallback(
     (e) => {
+      e.preventDefault();
       addItem(inputValue);
       setInputValue(""); // 입력창 초기화
-      e.preventDefault();
+      console.log(inputValue);
     },
     [inputValue]
   );
@@ -32,7 +23,12 @@ const TodoInput = ({ isFormOpen, animationClassname, addItem }) => {
     <Wrapper className={animationClassname}>
       <form onSubmit={handleSubmit} style={{ width: "100%" }}>
         <InputBox>
-          <input type="text" value={inputValue} onChange={handleChange} />
+          <input
+            type="text"
+            value={inputValue}
+            onChange={handleChange}
+            autoFocus
+          />
           <EnterButton type="submit">작성하기</EnterButton>
         </InputBox>
       </form>

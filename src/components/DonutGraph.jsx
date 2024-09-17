@@ -5,8 +5,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 const DonutGraph = React.memo(({ percent }) => {
-  console.log("도넛");
-
+  // todos 항목이 없는 빈 배열일 경우 0%로 초기화
   if (isNaN(percent)) {
     percent = 0;
   }

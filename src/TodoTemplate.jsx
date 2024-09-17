@@ -51,15 +51,20 @@ const TodoTemplate = () => {
   const [animationClassname, setAnimationClassname] = useState(""); // 애니메이션 지정을 위한 클래스명
 
   const toggleForm = () => {
-    if (isFormOpen) {
-      setAnimationClassname("fade-out");
+    // 닫힘 시 애니메이션 시간만큼의 지연 필요
+    const timer = () =>
       setTimeout(() => {
         setIsFormOpen(!isFormOpen);
-      }, 300); // 닫힘 시 애니메이션 시간만큼의 지연 필요
+      }, 300);
+
+    if (isFormOpen) {
+      setAnimationClassname("fade-out");
+      timer();
     } else {
       setAnimationClassname("fade-in");
       setIsFormOpen(!isFormOpen);
     }
+    return () => clearTimeout(timer);
   };
 
   // 항목 개수

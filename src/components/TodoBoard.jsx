@@ -4,9 +4,8 @@ import { S } from "./Common.style";
 
 import Item from "./Item";
 
-const TodoBoard = React.memo(({ todos, removeItem, toggleItem }) => {
-  console.log("보드");
-  const sortedTodos = todos.sort((a, b) => a.id - b.id); // 토글된 항목은 하위에 위치
+const TodoBoard = ({ todos, removeItem, toggleItem }) => {
+  const sortedTodos = todos.sort((a, b) => a.id - b.id); // 토글된 항목은 하위에 위치하도록 id순 정렬
 
   return (
     <Wrapper>
@@ -30,7 +29,7 @@ const TodoBoard = React.memo(({ todos, removeItem, toggleItem }) => {
       </ListWrapper>
     </Wrapper>
   );
-});
+};
 
 export default TodoBoard;
 
