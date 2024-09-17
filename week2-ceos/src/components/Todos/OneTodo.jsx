@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
-import { useClickedDayStore } from "../../core/store";
+import { useTodoStore } from "../../core/store";
 import { useState } from "react";
 
 export default function OneTodo(props) {
   const { text, isDone, boxColor, removeTodo } = props;
-  const choosedDate = useClickedDayStore((state) => state.clickedDay);
-  const handleIsDone = useClickedDayStore((state) => state.toogleIsDone);
+  const choosedDate = useTodoStore((state) => state.clickedDay);
+  const handleIsDone = useTodoStore((state) => state.toogleIsDone);
 
   function handleCheck() {
     handleIsDone(choosedDate, text);

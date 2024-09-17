@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
-import { useClickedDayStore } from "../../core/store";
+import { useTodoStore } from "../../core/store";
 export default function ColorsBox(props) {
   const { color, onClick } = props;
-  const choosedColor = useClickedDayStore((state) => state.boxColor);
+  const choosedColor = useTodoStore((state) => state.boxColor);
 
   return (
     <Box onClick={onClick} $boxColor={color}>

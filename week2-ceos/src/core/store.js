@@ -32,7 +32,7 @@ export const useStore = create((set) => ({
     }),
 }));
 
-export const useClickedDayStore = create((set) => ({
+export const useTodoStore = create((set) => ({
   clickedDay: format(new Date(), "MM월 dd일 EEEE", { locale: ko }),
   setClickedDay: (day) => set({ clickedDay: day }),
   todoText: "",

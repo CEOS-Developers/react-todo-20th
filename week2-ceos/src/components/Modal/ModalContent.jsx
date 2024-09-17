@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
-import { useClickedDayStore } from "../../core/store";
+import { useTodoStore } from "../../core/store";
 import { colors } from "../../core/colors";
 import ColorsBox from "./ColorsBox";
 import { useState } from "react";
 
 export default function ModalContent({ handleModal }) {
-  const clickedDate = useClickedDayStore((state) => state.clickedDay);
-  const setTodo = useClickedDayStore((state) => state.setTodoText);
-  const addNewTodo = useClickedDayStore((state) => state.addTodo);
-  const setChoosedColor = useClickedDayStore((state) => state.setBoxColor);
+  const clickedDate = useTodoStore((state) => state.clickedDay);
+  const setTodo = useTodoStore((state) => state.setTodoText);
+  const addNewTodo = useTodoStore((state) => state.addTodo);
+  const setChoosedColor = useTodoStore((state) => state.setBoxColor);
   const [input, setInput] = useState("");
 
   function onChange(event) {

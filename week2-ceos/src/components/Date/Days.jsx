@@ -5,13 +5,13 @@ import { useStore } from "@core/store";
 import DayItem from "./DayItem";
 import TodosHeader from "../Todos/TodosHeader";
 import { ko } from "date-fns/locale";
-import { useClickedDayStore } from "../../core/store";
+import { useTodoStore } from "../../core/store";
 
 //날짜들 부분
 export default function Days() {
   let days = [];
-  const clickedDate = useClickedDayStore((state) => state.clickedDay);
-  const setClickedDate = useClickedDayStore((state) => state.setClickedDay);
+  const clickedDate = useTodoStore((state) => state.clickedDay);
+  const setClickedDate = useTodoStore((state) => state.setClickedDay);
   const thisweek = useStore((state) => state.weekStart);
 
   // 현재 주의 날짜들을 생성

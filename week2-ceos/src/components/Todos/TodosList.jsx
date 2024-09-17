@@ -1,13 +1,13 @@
-import { useClickedDayStore } from "../../core/store";
+import { useTodoStore } from "../../core/store";
 import styled from "styled-components";
 import { columnFlex } from "@styles/commonStyle";
 import OneTodo from "./OneTodo";
 import { useEffect, useState } from "react";
 
 export default function TodosList() {
-  const choosedDate = useClickedDayStore((state) => state.clickedDay);
-  const todosList = useClickedDayStore((state) => state.todoList);
-  const removeList = useClickedDayStore((state) => state.removeTodo);
+  const choosedDate = useTodoStore((state) => state.clickedDay);
+  const todosList = useTodoStore((state) => state.todoList);
+  const removeList = useTodoStore((state) => state.removeTodo);
   const [filterTodoList, setFilteredTodoList] = useState([]);
 
   useEffect(() => {
