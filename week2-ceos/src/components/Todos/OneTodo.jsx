@@ -1,17 +1,25 @@
 import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
+import { useClickedDayStore } from "../../core/store";
+import { useState } from "react";
 
 export default function OneTodo(props) {
   const { text, isDone, boxColor } = props;
+  const choosedDate = useClickedDayStore((state) => state.clickedDay);
+  const handleIsDone = useClickedDayStore((state) => state.toogleIsDone);
+
+  function handleCheck() {
+    handleIsDone(choosedDate, text);
+  }
+
   return (
     <>
       <Wrapper>
         <LabelTextWrapper>
           <CheckBoxLabel>
-            <CheckBox $boxColor={boxColor} type="checkbox" />
+            <CheckBox checked={isDone} onChange={handleCheck} $boxColor={boxColor} type="checkbox" />
           </CheckBoxLabel>
-          {text}
-          {boxColor}
+          <DoneText $isDone={isDone}>{text}</DoneText>
         </LabelTextWrapper>
         <RemoveTodo>🗑️</RemoveTodo>
       </Wrapper>
@@ -62,4 +70,8 @@ const CheckBox = styled.input`
 
 const RemoveTodo = styled.button`
   ${rowFlex}
+`;
+
+const DoneText = styled.p`
+  text-decoration: ${({ $isDone }) => $isDone && "line-through"};
 `;
