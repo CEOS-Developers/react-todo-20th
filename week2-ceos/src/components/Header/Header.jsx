@@ -9,9 +9,9 @@ export default function Header() {
 
   return (
     <HeaderWrapper>
-      <OtherWeekButton onClick={downDays}>⬅️</OtherWeekButton>
+      <button onClick={downDays}>⬅️</button>
       {headerText}
-      <OtherWeekButton onClick={upDays}>➡️</OtherWeekButton>
+      <button onClick={upDays}>➡️</button>
     </HeaderWrapper>
   );
 }
@@ -22,5 +22,3 @@ const HeaderWrapper = styled.header`
   ${({ theme }) => theme.fonts.Headline1};
   color: ${({ theme }) => theme.colors.black};
 `;
-
-const OtherWeekButton = styled.button``;
