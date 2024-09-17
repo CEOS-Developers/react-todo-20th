@@ -4,7 +4,7 @@ import { useClickedDayStore } from "../../core/store";
 import { useState } from "react";
 
 export default function OneTodo(props) {
-  const { text, isDone, boxColor } = props;
+  const { text, isDone, boxColor, removeTodo } = props;
   const choosedDate = useClickedDayStore((state) => state.clickedDay);
   const handleIsDone = useClickedDayStore((state) => state.toogleIsDone);
 
@@ -21,7 +21,7 @@ export default function OneTodo(props) {
           </CheckBoxLabel>
           <DoneText $isDone={isDone}>{text}</DoneText>
         </LabelTextWrapper>
-        <RemoveTodo>🗑️</RemoveTodo>
+        <RemoveTodo onClick={removeTodo}>🗑️</RemoveTodo>
       </Wrapper>
     </>
   );
