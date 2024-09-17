@@ -1,9 +1,9 @@
-import styled, { css, keyframes } from "styled-components";
-import { S } from "./Common.style";
-import { useCallback, useState } from "react";
+import styled, { keyframes } from 'styled-components';
+import { S } from './Common.style';
+import { useCallback, useState } from 'react';
 
 const TodoInput = ({ animationClassname, addItem }) => {
-  const [inputValue, setInputValue] = useState(""); // 입력값
+  const [inputValue, setInputValue] = useState(''); // 입력값
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -13,15 +13,14 @@ const TodoInput = ({ animationClassname, addItem }) => {
     (e) => {
       e.preventDefault();
       addItem(inputValue);
-      setInputValue(""); // 입력창 초기화
-      console.log(inputValue);
+      setInputValue(''); // 입력창 초기화
     },
-    [inputValue]
+    [inputValue, addItem],
   );
 
   return (
     <Wrapper className={animationClassname}>
-      <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+      <form onSubmit={handleSubmit} style={{ width: '100%' }}>
         <InputBox>
           <input
             type="text"
