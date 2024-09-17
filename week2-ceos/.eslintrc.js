@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
+  env: { browser: true, es2020: true, node: true },
   parser: "@typescript-eslint/parser",
   plugins: ["@typescript-eslint", "prettier"],
   extends: [
@@ -21,7 +21,7 @@ module.exports = {
     "import/extensions": 0,
     "import/no-unresolved": 0,
     "import/no-extraneous-dependencies": 0, // 테스트 또는 개발환경을 구성하는 파일에서는 devDependency 사용을 허용
-    "react/prop-types": 0,
+    "react/prop-types": "off",
     "react/jsx-filename-extension": [2, { extensions: [".js", ".jsx", ".ts", ".tsx"] }],
     "jsx-a11y/no-noninteractive-element-interactions": 0,
     "eol-last": ["error", "always"], // line의 가장 마지막 줄에는 개행 넣기"
