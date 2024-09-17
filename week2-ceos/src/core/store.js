@@ -43,8 +43,22 @@ export const useClickedDayStore = create((set) => ({
       isDone: !state.isDone,
     })),
   todoList: [],
-  boxColor: "",
+  boxColor: "#3FA9F5",
   setBoxColor: (color) => set({ boxColor: color }),
+
+  removeTodo: (day, text) =>
+    set((state) => {
+      const updatedTodoList = state.todoList.map((item) => {
+        if (item.day === day) {
+          return {
+            ...item,
+            todos: item.todos.filter((todo) => todo.text !== text),
+          };
+        }
+        return item;
+      });
+      return { todoList: updatedTodoList };
+    }),
 
   toogleIsDone: (day, text) =>
     set((state) => {
@@ -92,6 +106,7 @@ export const useClickedDayStore = create((set) => ({
         todoList: updatedTodoList,
         todoText: "",
         isDone: false,
+        boxColor: "#3FA9F5",
       };
     }),
 }));
