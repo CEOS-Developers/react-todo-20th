@@ -10,14 +10,20 @@ export default function ModalContent({ handleModal }) {
   const setTodo = useClickedDayStore((state) => state.setTodoText);
   const addNewTodo = useClickedDayStore((state) => state.addTodo);
   const setChoosedColor = useClickedDayStore((state) => state.setBoxColor);
+  const [input, setInput] = useState("");
 
   function onChange(event) {
     setTodo(event.target.value);
+    setInput(event.target.value);
   }
 
   function onClickConfirmButton() {
-    handleModal();
-    addNewTodo();
+    if (input.length > 0) {
+      handleModal();
+      addNewTodo();
+    } else {
+      alert("할일을 입력해주세요");
+    }
   }
 
   function onClickColorBox(color) {
