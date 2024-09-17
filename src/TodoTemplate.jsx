@@ -80,9 +80,7 @@ const TodoTemplate = () => {
       <Container>
         <TodoBoard {...{ todos, removeItem, toggleItem }} />
         <InputAndGraph>
-          {isFormOpen && (
-            <TodoInput {...{ isFormOpen, animationClassname, addItem }} />
-          )}
+          {isFormOpen && <TodoInput {...{ animationClassname, addItem }} />}
           <DonutGraph {...{ percent }} />
         </InputAndGraph>
       </Container>
@@ -98,6 +96,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 40rem;
+  max-width: 100%;
   height: 100%;
 `;
 

@@ -8,6 +8,12 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  #root{
+    @media (max-width: 50rem) {
+    width: 80%;
+    }
+  }
+
   body {
     font-family: Pretendard;
     height: 100%;

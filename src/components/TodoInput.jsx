@@ -1,8 +1,8 @@
 import styled, { css, keyframes } from "styled-components";
 import { S } from "./Common.style";
-import { useCallback, useState, useRef, useEffect } from "react";
+import { useCallback, useState } from "react";
 
-const TodoInput = ({ isFormOpen, animationClassname, addItem }) => {
+const TodoInput = ({ animationClassname, addItem }) => {
   const [inputValue, setInputValue] = useState(""); // 입력값
 
   const handleChange = (e) => {
@@ -29,7 +29,7 @@ const TodoInput = ({ isFormOpen, animationClassname, addItem }) => {
             onChange={handleChange}
             autoFocus
           />
-          <EnterButton type="submit">작성하기</EnterButton>
+          <SubmitButton type="submit">작성하기</SubmitButton>
         </InputBox>
       </form>
     </Wrapper>
@@ -84,7 +84,7 @@ const InputBox = styled(S.Box)`
   margin: 0.6rem 0;
 `;
 
-const EnterButton = styled.button`
+const SubmitButton = styled.button`
   color: var(--light-blue);
   font-weight: 600;
   font-size: 0.938rem;

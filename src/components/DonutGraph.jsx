@@ -26,6 +26,10 @@ const Wrapper = styled.div`
   width: 10rem;
   margin: 0.625rem 1.25rem 1.25rem 0;
 
+  @media (max-width: 600px) {
+    width: 80%;
+  }
+
   .CircularProgressbar-path {
     stroke: #5f81ff;
   }
