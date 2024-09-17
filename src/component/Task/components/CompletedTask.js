@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-import { getTasksFromLocalStorage, saveTasksToLocalStorage } from '../../../utils/localStorage';
+import { getTasksFromLocalStorage, saveTasksToLocalStorage } from '../../../utils/LocalStorage';
 
 
 export default function CompletedTask({ tasks, setTasks, handleDeleteTask, selectedDate }) {
@@ -40,6 +40,7 @@ export default function CompletedTask({ tasks, setTasks, handleDeleteTask, selec
 
   return (
         <TaskItemsContainer>
+            {sortedCompletedTasks.length === 0 && <p style={{'margin': 'auto', 'fontSize': '1.2rem', 'color': 'gray'}}>Let`s Complete a Tasks</p>}
             {sortedCompletedTasks.map((task) => (
                 <TaskItem
                     key={task.id}
@@ -90,7 +91,6 @@ const TaskItem = styled.div`
         background-color: #f0f0f0;
     }
     transition: all 0.5s ease; /* 트랜지션 추가 */
-    cursor: pointer;
     .task-text {
         margin: 0;
         font-size: 1rem;

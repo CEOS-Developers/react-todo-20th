@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid'; // 고유 ID 생성을 위해 uuid 사용
 import styled from 'styled-components';
-import { getTasksFromLocalStorage, saveTasksToLocalStorage } from '../../utils/localStorage';
-import { CalendarDays, CircleX, CopyPlus, Pencil, Plus, Undo2, X } from 'lucide-react';
+import { getTasksFromLocalStorage, getTodoProgressForDate, saveTasksToLocalStorage } from '../../utils/LocalStorage';
+import { CalendarDays, CircleX, CopyPlus, Medal, Pencil, Plus, Undo2, X } from 'lucide-react';
 import PendingTask from './components/PendingTask';
 import CompletedTask from './components/CompletedTask';
 import TabIndicator from './components/TabIndicator';
+import Tooltip from '../../utils/Tooltip';
+import Swal from 'sweetalert2';
+
 
 
 function Task({ selectedDate, handleCloseModal }) {
@@ -13,6 +16,10 @@ function Task({ selectedDate, handleCloseModal }) {
     const [newTask, setNewTask] = useState('');
     const [addModal, setAddModal] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
+    const [tooltip, setTooltip] = useState(null); // tooltip 상태
+    const { completed, total } = getTodoProgressForDate(selectedDate); // 성취도 계산
+
+
 
     // 요일 풀네임 가져오기
     const getDayName = (date) => {
@@ -40,7 +47,7 @@ function Task({ selectedDate, handleCloseModal }) {
         saveTasksToLocalStorage(formattedDate, Array.from(tasks.values()));
         setNewTask('');
     };
-      const handleDeleteTask = (taskId) => {
+    const handleDeleteTask = (taskId) => {
         const formattedDate = selectedDate.toISOString().split('T')[0];
         
         if (window.confirm('정말로 삭제하시겠습니까?')) { // 삭제 확인
@@ -52,10 +59,57 @@ function Task({ selectedDate, handleCloseModal }) {
             }
         }
     };
+    const handleTodoCheck = () => {
+        if (completed === total && total > 0) {
+            // SweetAlert2로 축하 메시지 알림
+            Swal.fire({
+                title: '축하합니다!',
+                text: '모든 할 일이 완료되었습니다!',
+                icon: 'success',
+                confirmButtonText: '오예!',
+                width: '360px',  // 창 크기 조정
+                position: 'center',  // 화면 중앙에 고정
+                customClass: {
+                    popup: 'custom-popup', // 사용자 정의 클래스 추가
+                },
+                heightAuto: false,  // height 자동 조정 비활성화
+
+
+            });
+        } else if (completed !== total && total > 0) {
+            Swal.fire({
+                title: '아쉽습니다!',
+                text: '아직 할 일을 다 완료하지 못하였습니다.',
+                icon: 'warning',
+                confirmButtonText: '그래..',
+                width: '360px',  // 창 크기 조정
+                position: 'center',  // 화면 중앙에 고정
+                customClass: {
+                    popup: 'custom-popup', // 사용자 정의 클래스 추가
+                },
+                heightAuto: false,  // height 자동 조정 비활성화
+
+            });
+        } else if (total === 0) {
+            Swal.fire({
+                title: '할 일이 없습니다!',
+                text: '할 일을 추가해보세요.',
+                icon: 'info',
+                confirmButtonText: '넵!',
+                width: '360px',  // 창 크기 조정
+                position: 'center',  // 화면 중앙에 고정
+                customClass: {
+                    popup: 'custom-popup', // 사용자 정의 클래스 추가
+                },
+                heightAuto: false,  // height 자동 조정 비활성화
+
+            });
+        }
+        
+    }
+    const showTooltip = (text) => setTooltip(text);
+    const hideTooltip = () => setTooltip(null);
     
-
-
-
     return (
         <>      
             <Wrapper>
@@ -108,22 +162,36 @@ function Task({ selectedDate, handleCloseModal }) {
                                     }
                                 }}
                             />
-                            <span onClick={handleAddTask}>
+                            <span 
+                                onClick={handleAddTask}
+                                onMouseEnter={() => showTooltip('추가하기')}
+                                onMouseLeave={hideTooltip}>
                                 <CopyPlus/>
+                                {tooltip === '추가하기' && <Tooltip text="추가하기" />}
                             </span>
-                            <span onClick={() => setAddModal(false)}>
+                            <span 
+                                onClick={() => setAddModal(false)}
+                                onMouseEnter={() => showTooltip('뒤로가기')}
+                                onMouseLeave={hideTooltip}>
                                 <Undo2/>
+                                {tooltip === '뒤로가기' && <Tooltip text="뒤로가기" />}
                             </span>
                         </AddTask>
                     : 
                         <BtnSpan>
-                            <span id='calendar' onClick={handleCloseModal}>
+                            <span className='calendar' onClick={handleCloseModal}>
                                 <CalendarDays/>
                             </span>
-                            <span id='add' onClick={() => setAddModal(true)}>
+                            <span className='acheive' onClick={handleTodoCheck}>
+                                <Medal/>
+
+                                <p>
+                                    {completed} / {total}
+                                </p>
+                            </span>
+                            <span className='add' onClick={() => setAddModal(true)}>
                                 <Plus/>
                             </span>
-
                         </BtnSpan>
                     }
                 </TaskFooter>
@@ -201,6 +269,7 @@ const AddTask = styled.div`
         }
     }
     span {
+        position: relative;
         width: 40px;
         height: 40px;
         display: flex;
@@ -211,13 +280,17 @@ const AddTask = styled.div`
         border-radius: 50%;
         box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
         cursor: pointer;
+        &:hover {
+            background-color: #f0f0f0;
+        }
+        
     }
 `;
 const BtnSpan = styled.div`
     padding: 20px;
-    width: 50%;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 10px;
     span {
         width: 40px;
@@ -228,13 +301,29 @@ const BtnSpan = styled.div`
         justify-content: center;
         border: 2px solid rgb(62, 76, 247);
         background-color: #fff;
-        /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2); */
         color:  rgb(62, 76, 247);
         cursor: pointer;
         &:hover {
             background-color: #f0f0f0;
         }
+        
     }
+    .acheive {
+            padding: 0 20px;
+            width: auto;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 2px solid rgb(62, 76, 247);
+            color: rgb(62, 76, 247);
+            border-radius: 28px;
+            cursor: pointer;
+            &:hover {
+                background-color: #f0f0f0;
+            }
+        }
 `;  
 
 

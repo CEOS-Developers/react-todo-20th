@@ -50,7 +50,7 @@ const TabLabel = styled.label`
   text-align: center;
   position: relative;
   z-index: 1;
-  transition: color 0.5s ease;
+  transition: color 0.3s ease;
 
   &:hover {
     background-color: rgba(1, 0, 0, 0.01);

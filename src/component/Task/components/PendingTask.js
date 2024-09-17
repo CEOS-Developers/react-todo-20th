@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-import { getTasksFromLocalStorage, saveTasksToLocalStorage } from '../../../utils/localStorage';
+import { getTasksFromLocalStorage, saveTasksToLocalStorage } from '../../../utils/LocalStorage';
 
 
 export default function PendingTask({ tasks, setTasks, handleDeleteTask, selectedDate }) {
@@ -42,6 +42,7 @@ export default function PendingTask({ tasks, setTasks, handleDeleteTask, selecte
 
   return (
     <TaskItemsContainer>
+        {sortedPendingTasks.length === 0 && <p style={{'margin': 'auto', 'fontSize': '1.2rem', 'color': 'gray'}}>Let`s Add a Tasks</p>}
         {sortedPendingTasks.map((task) => (
             <TaskItem
                 key={task.id}
@@ -89,7 +90,6 @@ const TaskItem = styled.div`
     padding: 10px;
     margin-bottom: 10px; 
     transition: all 0.5s ease; /* 트랜지션 추가 */
-    cursor: pointer;
     .task-text {
         margin: 0;
         font-size: 1rem;
