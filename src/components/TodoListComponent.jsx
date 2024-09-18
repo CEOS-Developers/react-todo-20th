@@ -3,13 +3,14 @@ import styled from "styled-components";
 import toYesterday from "../assets/toYesterday.svg";
 import toTomorrow from "../assets/toTomorrow.svg";
 import TodoItem from "./TodoItem";
+import { formatDate, formatDay } from "../utils/Utils";
 
-const TodoListComponent = () => {
+const TodoListComponent = ({ currentDate }) => {
     return (
         <Main>
             <LeftNum></LeftNum>
-            <DateText></DateText>
-            <DayText></DayText>
+            <DateText>{formatDate(currentDate)}</DateText>
+            <DayText>{formatDay(currentDate)}</DayText>
 
             <TodoInputForm>
                 <TodoInput
