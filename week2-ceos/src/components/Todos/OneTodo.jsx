@@ -13,7 +13,7 @@ OneTodo.propTypes = {
 export default function OneTodo(props) {
   const { text, isDone, boxColor, removeTodo } = props;
   const choosedDate = useTodoStore((state) => state.clickedDay);
-  const handleIsDone = useTodoStore((state) => state.toogleIsDone);
+  const handleIsDone = useTodoStore((state) => state.toggleIsDone);
 
   function handleCheck() {
     handleIsDone(choosedDate, text);
