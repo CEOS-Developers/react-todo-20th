@@ -32,7 +32,6 @@ const TodoCountContainer = styled.section`
 `;
 
 const Main = React.memo(({ addTodo, todos, toggleTodoCompletion, deleteTodo, totalTodos, completedTodos }) => {
-  
   const DateDisplay = React.memo(() => {
     const today = new Date();
     const monthAndDay = today.toLocaleDateString("ko-KR",  { month: "long", day: "numeric" });

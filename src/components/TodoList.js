@@ -26,7 +26,7 @@ const TodoList = React.memo(({ todos, toggleTodoCompletion, deleteTodo }) => {
     <TodoListContainer>
       {sortedTodos.map(todo => (
         <TodoItem
-          key={todo.text}
+          key={todo.timestamp}
           todo={todo}
           toggleTodoCompletion={toggleTodoCompletion}
           deleteTodo={deleteTodo}

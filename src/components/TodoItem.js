@@ -29,7 +29,7 @@ const TodoItemContainer = styled.li`
 `;
 
 const Input = styled.input`
-    width: 1.5rem;
+    min-width: 1.5rem;
     height: 1.5rem;
     cursor: pointer;
     appearance: none;
@@ -61,6 +61,8 @@ const TodoSpan = styled.span`
 `;
 
 const DeleteButton = styled.button`
+    display: flex;
+    min-width: 46px;
     color: rgba(209, 46, 46, 0.664);
     padding: 5px 10px;
     border-radius: 10px;
@@ -80,10 +82,10 @@ const TodoItem = React.memo(({ todo, toggleTodoCompletion, deleteTodo }) => {
       <Input
         type="checkbox"
         checked={todo.completed}
-        onChange={() => toggleTodoCompletion(todo.text)}
+        onChange={() => toggleTodoCompletion(todo.timestamp)}
       />
       <TodoSpan $completed={todo.completed}>{todo.text}</TodoSpan>
-      <DeleteButton onClick={() => deleteTodo(todo.text)}>삭제</DeleteButton>
+      <DeleteButton onClick={() => deleteTodo(todo.timestamp)}>삭제</DeleteButton>
     </TodoItemContainer>
   );
 });

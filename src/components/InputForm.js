@@ -40,19 +40,15 @@ const SubmitButton = styled.button`
   }
 `;
 
-const InputForm = React.memo(({ addTodo }) => {
+const InputForm = ({ addTodo }) => {
   const inputRef = useRef(null);
 
   const handleSubmit = useCallback((event) => {
     event.preventDefault();
     if (inputRef.current) {
       const inputValue = inputRef.current.value.trim();
-      if (inputValue) {
-        addTodo(inputValue);
-        inputRef.current.value = '';
-      } else {
-        alert('오늘의 할 일은 무엇인가요?🍀');
-      }
+      addTodo(inputValue); // 빈 문자열인 경우도 addTodo로 전달
+      inputRef.current.value = ''; // 입력 필드 초기화
     }
   }, [addTodo]);
 
@@ -66,7 +62,7 @@ const InputForm = React.memo(({ addTodo }) => {
       <SubmitButton type="submit">추가</SubmitButton>
     </Form>
   );
-});
+};
 
 export default InputForm;
 
