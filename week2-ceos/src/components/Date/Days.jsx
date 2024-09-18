@@ -10,7 +10,6 @@ import { useTodoStore } from "../../core/store";
 //날짜들 부분
 export default function Days() {
   let days = [];
-  const clickedDate = useTodoStore((state) => state.clickedDay);
   const setClickedDate = useTodoStore((state) => state.setClickedDay);
   const thisweek = useStore((state) => state.weekStart);
 
@@ -28,7 +27,6 @@ export default function Days() {
   return (
     <>
       <WeekWrapper>{[...days]}</WeekWrapper>
-      <TodosHeader clickedDate={clickedDate} />
     </>
   );
 }

@@ -38,13 +38,16 @@ const Wrapper = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 80%;
+  width: 95%;
 `;
 
 const LabelTextWrapper = styled.div`
   display: flex;
   gap: 1rem;
   align-items: center;
+  justify-content: space-between;
+
+  margin-left: 1rem;
 `;
 
 const CheckBoxLabel = styled.label`

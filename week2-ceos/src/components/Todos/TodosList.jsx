@@ -2,22 +2,16 @@ import { useTodoStore } from "../../core/store";
 import styled from "styled-components";
 import { columnFlex } from "@styles/commonStyle";
 import OneTodo from "./OneTodo";
-import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
-export default function TodosList() {
-  const choosedDate = useTodoStore((state) => state.clickedDay);
-  const todosList = useTodoStore((state) => state.todoList);
+TodosList.propTypes = {
+  choosedDate: PropTypes.string.isRequired,
+  filterTodoList: PropTypes.array.isRequired,
+};
+
+export default function TodosList(props) {
+  const { choosedDate, filterTodoList } = props;
   const removeList = useTodoStore((state) => state.removeTodo);
-  const [filterTodoList, setFilteredTodoList] = useState([]);
-
-  useEffect(() => {
-    const filtered = todosList.filter((list) => list.day === choosedDate);
-    if (filtered.length > 0) {
-      setFilteredTodoList(filtered[0].todos);
-    } else {
-      setFilteredTodoList([]);
-    }
-  }, [todosList, choosedDate]);
 
   return (
     <Wrapper>
@@ -41,5 +35,6 @@ export default function TodosList() {
 const Wrapper = styled.ul`
   ${columnFlex}
   ${({ theme }) => theme.fonts.Body5};
+  width: 80%;
   margin: 2rem;
 `;

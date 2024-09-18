@@ -1,13 +1,8 @@
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import { useTodoStore } from "../../core/store";
 import { useEffect, useState } from "react";
 
-TodosHeader.propTypes = {
-  clickedDate: PropTypes.string.isRequired,
-};
-
-export default function TodosHeader({ clickedDate }) {
+export default function TodosHeader() {
   const todosList = useTodoStore((state) => state.todoList);
   const choosedDate = useTodoStore((state) => state.clickedDay);
   const [filterTodoList, setFilteredTodoList] = useState([]);
@@ -28,8 +23,8 @@ export default function TodosHeader({ clickedDate }) {
   }, [filterTodoList, todosList, choosedDate]);
 
   return (
-    <>
-      <HeaderText>{clickedDate}</HeaderText>
+    <Wrapper>
+      <HeaderText>{choosedDate}</HeaderText>
 
       {filterTodoList.length > 0 && (
         <span>
@@ -38,16 +33,24 @@ export default function TodosHeader({ clickedDate }) {
       )}
 
       <DividedLine />
-    </>
+    </Wrapper>
   );
 }
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+
+  width: 70%;
+`;
+
 const HeaderText = styled.p`
   ${({ theme }) => theme.fonts.Body1};
-  margin-bottom: -2rem;
+  margin-top: -3rem;
 `;
 
 const DividedLine = styled.hr`
-  margin-top: -2rem;
   background-color: ${({ theme }) => theme.colors.gray3};
 `;

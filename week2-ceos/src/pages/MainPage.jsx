@@ -5,7 +5,7 @@ import Days from "../components/Date/Days";
 import TodoBtn from "../components/TodoBtn/TodoBtn";
 import { useState } from "react";
 import TodoModal from "../components/Modal/TodoModal";
-import TodosList from "../components/Todos/TodosList";
+import Todo from "../components/Todos/Todo";
 
 export default function MainPage() {
   const [openModal, setOpenModal] = useState(false);
@@ -23,7 +23,9 @@ export default function MainPage() {
         <DayofWeek />
         <Days />
       </HeaderAndDayOfWeekWrapper>
-      <TodosList />
+      <TodoContainer>
+        <Todo />
+      </TodoContainer>
       {openModal && <TodoModal handleModal={handleModal} />}
       <TodoBtn openModal={openModal} handleModal={handleModal} />
     </Wrapper>
@@ -36,11 +38,18 @@ const Wrapper = styled.main`
   height: 100vh;
 `;
 
+const TodoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
 const HeaderAndDayOfWeekWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3rem;
 
+  height: 20%;
   padding: 0 5rem;
 
   background-color: ${({ $isOpen, theme }) => {
