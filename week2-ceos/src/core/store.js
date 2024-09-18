@@ -6,6 +6,7 @@ import { persist } from "zustand/middleware";
 
 const newDate = new Date();
 
+//년,월과 관련된 store 입니다.
 export const useStore = create((set) => ({
   weekStart: startOfWeek(newDate),
   startDay: format(weekStart, "d"),
