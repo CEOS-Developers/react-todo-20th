@@ -32,7 +32,7 @@ const TodoList = React.memo(({ todos, toggleTodoCompletion, deleteTodo }) => {
           deleteTodo={deleteTodo}
         />
       ))}
-    </TodoListContainer>
+    </TodoListContainer> // sortedTodos 배열의 각 요소를 TodoItem 컴포넌트로 변환하여 나열(렌더링)
   );
 });
 

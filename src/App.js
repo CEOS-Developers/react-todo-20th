@@ -29,7 +29,7 @@ const AppContainer = styled.div`
 function App() {
   const [todos, setTodos] = useState([]);
   const [isAllCompleted, setIsAllCompleted] = useState(false); // 모든 todo가 완료되었는지 여부를 추적
-  const [modalText, setModalText] = useState('');
+  const [modalText, setModalText] = useState(''); // 기능마다 모달 text를 다르게 하기 위함
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [todoToDelete, setTodoToDelete] = useState(null); // 삭제할 todo
@@ -53,26 +53,32 @@ function App() {
     if (storedIsAllCompleted) {
       setIsAllCompleted(JSON.parse(storedIsAllCompleted));
     }
-  }, []);
+  }, []); // 새로고침 시 이전 데이터를 불러오기. localStorage로부터 todo 배열을 todo state에 저장하고 모든 todo 완료 상태를 저장
 
   useEffect(() => {
-    // todos 배열이 비어 있지 않을 때만 로컬 스토리지 업데이트, 새로고침 시 todos 배열이 비어진 상태일 때 로컬 스토리지를 덮어씌우지 않게 하기 위함.
+    // todos 배열이 비어 있지 않을 때만 로컬 스토리지 업데이트, 새로고침 시 todos 배열이 비어진 상태일 때 비동기로 인해 로컬 스토리지를 덮어씌우지 않게 하기 위함.
     // 이미 todo를 다 완료해서 삭제 했다면 상관 없지! 빈 배열로 덮어씌워져도.
     if (todos.length > 0) {
       localStorage.setItem('todos', JSON.stringify(todos));
     }
   }, [todos]);
 
-  // 전체 todo가 완료되었을 때만 alert을 띄움
+
   useEffect(() => {
-    if (totalTodos > 0 && totalTodos === completedTodos && !isAllCompleted) {
-      setModalText('축하합니다!🩷 모든 todo를 완료했습니다.👍🏻');
-      setIsModalOpen(true); // 모달을 엶
-      setIsAllCompleted(true); // 한 번 alert이 뜨면 다시 뜨지 않도록 설정
-      localStorage.setItem('isAllCompleted', JSON.stringify(true)); // 완료 상태를 저장
-    } else if (completedTodos !== totalTodos) {
-      setIsAllCompleted(false); // 다시 완료되지 않은 상태로 돌아가면 초기화
-      localStorage.setItem('isAllCompleted', JSON.stringify(false)); // 완료 상태를 저장
+    if (totalTodos > 0 && totalTodos === completedTodos) {
+      if (!isAllCompleted) {
+        // 모든 TODO가 완료되고 isAllCompleted가 false일 때만 모달 표시 및 상태 업데이트
+        setModalText('축하합니다!🩷 모든 todo를 완료했습니다.👍🏻');
+        setIsModalOpen(true);
+        setIsAllCompleted(true);
+        localStorage.setItem('isAllCompleted', JSON.stringify(true));
+      }
+    } else {
+      if (isAllCompleted) {
+        // 모든 TODO가 완료되지 않았고 isAllCompleted가 true일 때만 상태 업데이트
+        setIsAllCompleted(false);
+        localStorage.setItem('isAllCompleted', JSON.stringify(false));
+      }
     }
   }, [totalTodos, completedTodos, isAllCompleted]);
   
@@ -80,8 +86,8 @@ function App() {
     // 입력된 할 일이 빈 문자열이거나 공백만 있을 경우 처리
   if (newTodo.trim() === '') {
     setModalText('오늘의 할 일을 입력해 주세요!🍀'); // 모달에 띄울 텍스트 설정
-    setIsModalOpen(true); // 모달을 열기
-    return; // 함수 종료
+    setIsModalOpen(true);
+    return; 
   }
     
   setTodos(prevTodos => [
@@ -92,7 +98,7 @@ function App() {
       timestamp: Date.now() // 고유한 timestamp 추가
     }
   ]);
-  },[setTodos]);
+  },[]); // useCallback으로 함수 재생성을 방지, todo 상태가 변화해도 재생성 x
 
   const toggleTodoCompletion = useCallback((todoTimeStamp) => {
     setTodos(prevTodos =>

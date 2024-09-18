@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import checkmark from '../assets/checkmark.svg';
 
@@ -43,14 +43,14 @@ const SubmitButton = styled.button`
 const InputForm = ({ addTodo }) => {
   const inputRef = useRef(null);
 
-  const handleSubmit = useCallback((event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (inputRef.current) {
       const inputValue = inputRef.current.value.trim();
-      addTodo(inputValue); // 빈 문자열인 경우도 addTodo로 전달
+      addTodo(inputValue); // 빈 문자열인 경우도 addTodo로 전달 후 addTodo에서 함수 종료
       inputRef.current.value = ''; // 입력 필드 초기화
     }
-  }, [addTodo]);
+  };
 
   return (
     <Form onSubmit={handleSubmit}>
