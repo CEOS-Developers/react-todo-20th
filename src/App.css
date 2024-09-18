@@ -1,0 +1,47 @@
+nav {
+  display: flex;
+  padding: 0.5rem 1rem;
+  background-color: rgb(12, 9, 45);
+}
+
+main {
+  width: 50vw;
+  margin: 0 auto;
+  text-align: center;
+}
+
+form {
+  border: 16px;
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  min-height: 48px;
+  min-width: 320px;
+  padding: 0.5rem 1rem;
+  gap: 8px;
+  border-radius: 12px;
+  color: rgb(150, 130, 224);
+  background-color: rgb(37, 37, 37);
+
+  input {
+    flex-grow: 1;
+    color: white;
+    margin-right: auto;
+    background-color: rgb(37, 37, 37);
+    border: none;
+    outline: none;
+    font-size: 16px;
+  }
+  input::placeholder {
+    color: rgb(150, 130, 224);
+  }
+}
+
+ul {
+  /* background-color: aliceblue; */
+  display: flex;
+  flex-direction: column-reverse;
+  list-style-type: none;
+  padding-inline-start: 0;
+}

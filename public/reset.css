@@ -107,6 +107,8 @@ section {
 }
 body {
   line-height: 1;
+  background-color: rgb(41, 42, 52);
+  color: whitesmoke;
 }
 ol,
 ul {
@@ -126,4 +128,7 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+button {
+  all: unset;
 }
