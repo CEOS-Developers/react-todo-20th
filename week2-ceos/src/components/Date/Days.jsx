@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
 import { useStore } from "@core/store";
 import DayItem from "./DayItem";
-import TodosHeader from "../Todos/TodosHeader";
 import { ko } from "date-fns/locale";
 import { useTodoStore } from "../../core/store";
 
