@@ -5,6 +5,7 @@ import { colors } from "../../core/colors";
 import ColorsBox from "./ColorsBox";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import TodoInput from "./TodoInput";
 
 ModalContent.propTypes = {
   handleModal: PropTypes.func.isRequired,
@@ -12,14 +13,12 @@ ModalContent.propTypes = {
 
 export default function ModalContent({ handleModal }) {
   const clickedDate = useTodoStore((state) => state.clickedDay);
-  const setTodo = useTodoStore((state) => state.setTodoText);
   const addNewTodo = useTodoStore((state) => state.addTodo);
   const setChoosedColor = useTodoStore((state) => state.setBoxColor);
   const [input, setInput] = useState("");
 
-  function onChange(event) {
-    setTodo(event.target.value);
-    setInput(event.target.value);
+  function handleInput(data) {
+    setInput(data);
   }
 
   function onClickConfirmButton() {
@@ -41,7 +40,7 @@ export default function ModalContent({ handleModal }) {
         <Button onClick={handleModal}>❌</Button>
         <Button onClick={onClickConfirmButton}>✔️</Button>
       </ButtonWrapper>
-      <TodoInput autoFocus type="text" placeholder="할 일" onChange={onChange} />
+      <TodoInput handleInput={handleInput} />
       <ClickedDateText>{clickedDate}</ClickedDateText>
       <BoxWrapper>
         {colors.map((item) => {
@@ -65,27 +64,6 @@ const Button = styled.button`
 const ButtonWrapper = styled.div`
   ${rowFlex}
   justify-content: space-between;
-`;
-
-const TodoInput = styled.input`
-  ${rowFlex};
-  width: 90%;
-  height: 3rem;
-  margin: 1rem;
-
-  ${({ theme }) => theme.fonts.Headline1};
-  border: none;
-  outline: none;
-  caret-color: ${({ theme }) => theme.colors.main_blue};
-
-  &::placeholder {
-    ${({ theme }) => theme.fonts.Headline1};
-    color: ${({ theme }) => theme.colors.gray2};
-  }
-
-  &:focus {
-    caret-color: ${({ theme }) => theme.colors.main_blue};
-  }
 `;
 
 const ClickedDateText = styled.span`
