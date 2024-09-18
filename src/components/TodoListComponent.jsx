@@ -9,6 +9,7 @@ const TodoListComponent = ({ currentDate }) => {
     const [todoList, setTodoList] = useState([]);
     const [newTodo, setNewTodo] = useState("");
 
+    // 투두 렌더링
     useEffect(() => {
         loadTodoList(currentDate);
     }, [currentDate]);
@@ -18,6 +19,13 @@ const TodoListComponent = ({ currentDate }) => {
         setTodoList(todos);
     };
 
+    // 남은 할 일 개수
+    const updateLeftNum = () => {
+        const leftNum = todoList.filter((todo) => !todo.completed).length;
+        return `할 일 ${leftNum}개`;
+    };
+
+    // 투두 추가
     const addTodoItem = (e) => {
         e.preventDefault();
         if (!newTodo.trim())
@@ -28,21 +36,23 @@ const TodoListComponent = ({ currentDate }) => {
         setNewTodo("");
     };
 
-    // 투두 변경 또는 삭제 처리
-    const handleTodoChange = (date, changedTodo, isDelete = false) => {
+    // 투두 삭제 or 완료 토글 처리
+    const handleTodoChange = (date, changedTodo, isDelete) => {
         const updatedTodoList = isDelete
-        ? todoList.filter((todo) => todo !== changedTodo) // 삭제 처리
+        // 삭제 처리
+        ? todoList.filter((todo) => todo !== changedTodo)
+        // 완료 토글 처리
         : todoList.map((todo) =>
             todo === changedTodo ? { ...todo, completed: !todo.completed } : todo
-            ); // 완료 토글 처리
+        );
 
         setTodoList(updatedTodoList);
-        saveTodoList(date, updatedTodoList); // 로컬 스토리지에 저장
+        saveTodoList(date, updatedTodoList);
     };
 
     return (
         <Main>
-            <LeftNum></LeftNum>
+            <LeftNum>{updateLeftNum()}</LeftNum>
             <DateText>{formatDate(currentDate)}</DateText>
             <DayText>{formatDay(currentDate)}</DayText>
 

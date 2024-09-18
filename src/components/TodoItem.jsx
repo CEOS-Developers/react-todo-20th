@@ -5,10 +5,13 @@ import unchecked from "../assets/unchecked.svg";
 import deleteBtn from "../assets/deleteBtn.svg";
 
 const TodoItem = ({ todo, date, onTodoChange }) => {
+
+  // 투두 완료 토글
   const toggleTodoComplete = () => {
     onTodoChange(date, todo, false);
   };
 
+  // 투두 삭제
   const deleteTodo = () => {
     onTodoChange(date, todo, true);
   };
