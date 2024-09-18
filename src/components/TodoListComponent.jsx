@@ -5,7 +5,7 @@ import toTomorrow from "../assets/toTomorrow.svg";
 import TodoItem from "./TodoItem";
 import { formatDate, formatDay, getTodoList, saveTodoList } from "../utils/Utils";
 
-const TodoListComponent = ({ currentDate }) => {
+const TodoListComponent = ({ currentDate, setCurrentDate }) => {
     const [todoList, setTodoList] = useState([]);
     const [newTodo, setNewTodo] = useState("");
 
@@ -50,6 +50,13 @@ const TodoListComponent = ({ currentDate }) => {
         saveTodoList(date, updatedTodoList);
     };
 
+    // 날짜 한 칸 씩 이동
+    const moveDate = (days) => {
+        const newDate = new Date(currentDate);
+        newDate.setDate(newDate.getDate() + days);
+        setCurrentDate(newDate);
+    };
+
     return (
         <Main>
             <LeftNum>{updateLeftNum()}</LeftNum>
@@ -75,8 +82,8 @@ const TodoListComponent = ({ currentDate }) => {
                     />
                 ))}
             </TodoList>
-            <Img src={toYesterday} />
-            <Img src={toTomorrow} />
+            <Img src={toYesterday} onClick={() => moveDate(-1)} />
+            <Img src={toTomorrow} onClick={() => moveDate(1)} />
         </Main>
     );
 };

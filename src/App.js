@@ -6,14 +6,10 @@ import TodoListComponent from './components/TodoListComponent';
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  const handleDateChange = (date) => {
-    setCurrentDate(date);
-  ;}
-
   return (
     <Container>
-      <Calendar currentDate={currentDate} onDateChange={handleDateChange}/>
-      <TodoListComponent currentDate={currentDate}/>
+      <Calendar currentDate={currentDate} setCurrentDate={setCurrentDate}/>
+      <TodoListComponent currentDate={currentDate} setCurrentDate={setCurrentDate}/>
     </Container>
   );
 }
