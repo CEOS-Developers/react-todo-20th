@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import toYesterday from "../assets/toYesterday.svg";
 import toTomorrow from "../assets/toTomorrow.svg";
 import TodoItem from "./TodoItem";
-import { formatDate, formatDay } from "../utils/Utils";
+import { formatDate, formatDay, getTodoList } from "../utils/Utils";
 
 const TodoListComponent = ({ currentDate }) => {
+    const [todoList, setTodoList] = useState([]);
+    const [newTodo, setNewTodo] = useState("");
+
+    useEffect(() => {
+        loadTodoList(currentDate);
+    }, [currentDate]);
+
+    const loadTodoList = (date) => {
+        const todos = getTodoList(date);
+        setTodoList(todos);
+    };
+
     return (
         <Main>
             <LeftNum></LeftNum>
@@ -20,7 +32,9 @@ const TodoListComponent = ({ currentDate }) => {
             </TodoInputForm>
 
             <TodoList>
-                <TodoItem />
+                {todoList.map((todo, index) => (
+                    <TodoItem />
+                ))}
             </TodoList>
             <Img src={toYesterday} />
             <Img src={toTomorrow} />
