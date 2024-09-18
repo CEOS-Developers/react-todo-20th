@@ -3,7 +3,7 @@ import styled from "styled-components";
 import toYesterday from "../assets/toYesterday.svg";
 import toTomorrow from "../assets/toTomorrow.svg";
 import TodoItem from "./TodoItem";
-import { formatDate, formatDay, getTodoList } from "../utils/Utils";
+import { formatDate, formatDay, getTodoList, saveTodoList } from "../utils/Utils";
 
 const TodoListComponent = ({ currentDate }) => {
     const [todoList, setTodoList] = useState([]);
@@ -18,22 +18,51 @@ const TodoListComponent = ({ currentDate }) => {
         setTodoList(todos);
     };
 
+    const addTodoItem = (e) => {
+        e.preventDefault();
+        if (!newTodo.trim())
+            return;
+        const newTodoList = [...todoList, { text: newTodo, completed: false}];
+        setTodoList(newTodoList);
+        saveTodoList(currentDate, newTodoList);
+        setNewTodo("");
+    };
+
+    // 투두 변경 또는 삭제 처리
+    const handleTodoChange = (date, changedTodo, isDelete = false) => {
+        const updatedTodoList = isDelete
+        ? todoList.filter((todo) => todo !== changedTodo) // 삭제 처리
+        : todoList.map((todo) =>
+            todo === changedTodo ? { ...todo, completed: !todo.completed } : todo
+            ); // 완료 토글 처리
+
+        setTodoList(updatedTodoList);
+        saveTodoList(date, updatedTodoList); // 로컬 스토리지에 저장
+    };
+
     return (
         <Main>
             <LeftNum></LeftNum>
             <DateText>{formatDate(currentDate)}</DateText>
             <DayText>{formatDay(currentDate)}</DayText>
 
-            <TodoInputForm>
+            <TodoInputForm onSubmit={addTodoItem}>
                 <TodoInput
                     type="text"
+                    value={newTodo}
+                    onChange={(e) => setNewTodo(e.target.value)}
                     placeholder="To Do 입력 후 Enter"
                 />
             </TodoInputForm>
 
             <TodoList>
                 {todoList.map((todo, index) => (
-                    <TodoItem />
+                    <TodoItem 
+                        key={index} 
+                        todo={todo} 
+                        date={currentDate}
+                        onTodoChange={handleTodoChange}
+                    />
                 ))}
             </TodoList>
             <Img src={toYesterday} />
