@@ -1,8 +1,12 @@
+import TodoTemplate from "./TodoTemplate";
+import GlobalStyle from "./statics/GlobalStyle";
+
 function App() {
   return (
-    <div className="App">
-      <h1>🐶CEOS 20기 프론트엔드 최고🐶</h1>
-    </div>
+    <>
+      <GlobalStyle />
+      <TodoTemplate />
+    </>
   );
 }
 
