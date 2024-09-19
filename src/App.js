@@ -19,9 +19,8 @@ export default App;
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  width: 50%;
-  min-width: 550px;
-  max-width: 650px;
+  align-items: center;
+  min-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
 `

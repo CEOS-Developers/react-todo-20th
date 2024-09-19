@@ -58,39 +58,51 @@ const TodoListComponent = ({ currentDate, setCurrentDate }) => {
     };
 
     return (
-        <Main>
-            <LeftNum>{updateLeftNum()}</LeftNum>
-            <DateText>{formatDate(currentDate)}</DateText>
-            <DayText>{formatDay(currentDate)}</DayText>
-
-            <TodoInputForm onSubmit={addTodoItem}>
-                <TodoInput
-                    type="text"
-                    value={newTodo}
-                    onChange={(e) => setNewTodo(e.target.value)}
-                    placeholder="To Do 입력 후 Enter"
-                />
-            </TodoInputForm>
-
-            <TodoList>
-                {todoList.map((todo, index) => (
-                    <TodoItem 
-                        key={index} 
-                        todo={todo} 
-                        date={currentDate}
-                        onTodoChange={handleTodoChange}
-                    />
-                ))}
-            </TodoList>
+        <MainContainer>
             <Img src={toYesterday} onClick={() => moveDate(-1)} />
+            <ListContainer>
+                <LeftNum>{updateLeftNum()}</LeftNum>
+                <DateText>{formatDate(currentDate)}</DateText>
+                <DayText>{formatDay(currentDate)}</DayText>
+
+                <TodoInputForm onSubmit={addTodoItem}>
+                    <TodoInput
+                        type="text"
+                        value={newTodo}
+                        onChange={(e) => setNewTodo(e.target.value)}
+                        placeholder="To Do 입력 후 Enter"
+                    />
+                </TodoInputForm>
+
+                <TodoList>
+                    {todoList.map((todo, index) => (
+                        <TodoItem 
+                            key={index} 
+                            todo={todo} 
+                            date={currentDate}
+                            onTodoChange={handleTodoChange}
+                        />
+                    ))}
+                </TodoList>
+            </ListContainer>
             <Img src={toTomorrow} onClick={() => moveDate(1)} />
-        </Main>
+        </MainContainer>
     );
 };
 
 export default TodoListComponent;
 
-const Main = styled.div`
+const MainContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    min-width: 530px;
+    margin-top: 20%;
+`;
+
+const ListContainer = styled.div`
     text-align: left;
     background: white;
     padding: 7% 15%;
@@ -98,6 +110,7 @@ const Main = styled.div`
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     flex-grow: 1;
     margin: 0 20px;
+    height: 600px;
 `;
 
 const LeftNum = styled.p`
