@@ -3,16 +3,15 @@ import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
 
 export default function TodoInput(props) {
-  const { handleInput, setTodoText } = props;
+  const { handleInput, inputRef } = props;
 
   function onChange(event) {
-    setTodoText(event.target.value);
     handleInput(event.target.value);
   }
 
   return (
     <>
-      <Input onChange={onChange} autoFocus type="text" placeholder="할 일" />
+      <Input ref={inputRef} onChange={onChange} autoFocus type="text" placeholder="할 일" />
     </>
   );
 }

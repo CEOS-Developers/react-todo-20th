@@ -3,19 +3,19 @@ import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
 import { colors } from "../../core/colors";
 import ColorsBox from "./ColorsBox";
-import { useState } from "react";
+import { useRef } from "react";
 import TodoInput from "./TodoInput";
 
 export default function ModalContent(props) {
   const { clickedDay, addTodo, setBoxColor, handleModal, setTodoText, boxColor } = props;
-  const [input, setInput] = useState("");
+  const inputRef = useRef();
 
   function handleInput(data) {
-    setInput(data);
+    setTodoText(data);
   }
 
   function onClickConfirmButton() {
-    if (input.length > 0) {
+    if (inputRef.current.value.length > 0) {
       handleModal();
       addTodo();
     } else {
@@ -33,7 +33,7 @@ export default function ModalContent(props) {
         <Button onClick={handleModal}>❌</Button>
         <Button onClick={onClickConfirmButton}>✔️</Button>
       </ButtonWrapper>
-      <TodoInput setTodoText={setTodoText} handleInput={handleInput} />
+      <TodoInput inputRef={inputRef} setTodoText={setTodoText} handleInput={handleInput} />
       <ClickedDateText>{clickedDay}</ClickedDateText>
       <BoxWrapper>
         {colors.map((item) => {
