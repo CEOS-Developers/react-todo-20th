@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
-import { todayWeekDay } from "../../utils/data";
+
+const newDate = new Date();
+const todayWeekDay = newDate.getDay();
 
 //요일 부분
 export default function DayofWeek() {
