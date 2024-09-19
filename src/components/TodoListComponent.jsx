@@ -141,8 +141,14 @@ const TodoInput = styled.input`
 
 const TodoList = styled.ul`
     list-style: none;
-    padding: 0;
     margin-top: 20px;
+    max-height: 370px;
+    overflow-y: auto;
+    padding-right: 20px;
+    
+    // 스크롤바 스타일링
+    scrollbar-width: thin;
+    scrollbar-color: #91d1ff71 transparent;
 `;
 
 const Img = styled.img`
