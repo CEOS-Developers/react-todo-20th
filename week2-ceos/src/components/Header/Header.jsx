@@ -1,17 +1,15 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
-import { useStore } from "@core/store.js";
 
-export default function Header() {
-  const upDays = useStore((state) => state.increaseWeek);
-  const downDays = useStore((state) => state.decreaseWeek);
-  const headerText = useStore((state) => state.headerDay);
+export default function Header(props) {
+  const { headerDay, increaseWeek, decreaseWeek } = props;
 
   return (
     <HeaderWrapper>
-      <button onClick={downDays}>⬅️</button>
-      {headerText}
-      <button onClick={upDays}>➡️</button>
+      <button onClick={decreaseWeek}>⬅️</button>
+      {headerDay}
+      <button onClick={increaseWeek}>➡️</button>
     </HeaderWrapper>
   );
 }

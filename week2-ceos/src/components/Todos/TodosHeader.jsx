@@ -1,30 +1,34 @@
 import styled from "styled-components";
-import { useTodoStore } from "../../core/store";
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
-export default function TodosHeader() {
-  const todosList = useTodoStore((state) => state.todoList);
-  const choosedDate = useTodoStore((state) => state.clickedDay);
+TodosHeader.propTypes = {
+  clickedDay: PropTypes.string.isRequired,
+  todoList: PropTypes.array.isRequired,
+};
+
+export default function TodosHeader(props) {
+  const { todoList, clickedDay } = props;
   const [filterTodoList, setFilteredTodoList] = useState([]);
   const [isDoneList, setIsDoneList] = useState([]);
 
   useEffect(() => {
-    const filtered = todosList.filter((list) => list.day === choosedDate);
+    const filtered = todoList.filter((list) => list.day === clickedDay);
     if (filtered.length > 0) {
       setFilteredTodoList(filtered[0].todos);
     } else {
       setFilteredTodoList([]);
     }
-  }, [todosList, choosedDate]);
+  }, [todoList, clickedDay]);
 
   useEffect(() => {
     const isDone = filterTodoList.filter((item) => item.isDone === true);
     setIsDoneList(isDone.length);
-  }, [filterTodoList, todosList, choosedDate]);
+  }, [filterTodoList, todoList, clickedDay]);
 
   return (
     <Wrapper>
-      <HeaderText>{choosedDate}</HeaderText>
+      <HeaderText>{clickedDay}</HeaderText>
 
       {filterTodoList.length > 0 && (
         <span>

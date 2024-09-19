@@ -1,17 +1,12 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
-import { useTodoStore } from "../../core/store";
-import PropTypes from "prop-types";
 
-TodoInput.propTypes = {
-  handleInput: PropTypes.func.isRequired,
-};
-
-export default function TodoInput({ handleInput }) {
-  const setTodo = useTodoStore((state) => state.setTodoText);
+export default function TodoInput(props) {
+  const { handleInput, setTodoText } = props;
 
   function onChange(event) {
-    setTodo(event.target.value);
+    setTodoText(event.target.value);
     handleInput(event.target.value);
   }
 

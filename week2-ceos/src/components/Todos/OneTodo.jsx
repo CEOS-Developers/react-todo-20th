@@ -1,22 +1,12 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
-import { useTodoStore } from "../../core/store";
-import PropTypes from "prop-types";
-
-OneTodo.propTypes = {
-  text: PropTypes.string.isRequired,
-  isDone: PropTypes.bool.isRequired,
-  boxColor: PropTypes.string.isRequired,
-  removeTodo: PropTypes.func.isRequired,
-};
 
 export default function OneTodo(props) {
-  const { text, isDone, boxColor, removeTodo } = props;
-  const choosedDate = useTodoStore((state) => state.clickedDay);
-  const handleIsDone = useTodoStore((state) => state.toggleIsDone);
+  const { clickedDay, toggleIsDone, text, isDone, boxColor, removeTodo } = props;
 
   function handleCheck() {
-    handleIsDone(choosedDate, text);
+    toggleIsDone(clickedDay, text);
   }
 
   return (

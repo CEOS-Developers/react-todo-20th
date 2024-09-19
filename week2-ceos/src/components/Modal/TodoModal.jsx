@@ -1,17 +1,21 @@
+/* eslint-disable react/prop-types */
 import styled, { keyframes } from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
 import ModalContent from "./ModalContent";
-import PropTypes from "prop-types";
 
-TodoModal.propTypes = {
-  handleModal: PropTypes.func.isRequired,
-};
-
-export default function TodoModal({ handleModal }) {
+export default function TodoModal(props) {
+  const { handleModal, clickedDay, setBoxColor, setTodoText, addTodo, boxColor } = props;
   return (
     <ModalBackGround>
       <ModalWrapper>
-        <ModalContent handleModal={handleModal} />
+        <ModalContent
+          clickedDay={clickedDay}
+          setBoxColor={setBoxColor}
+          setTodoText={setTodoText}
+          addTodo={addTodo}
+          handleModal={handleModal}
+          boxColor={boxColor}
+        />
       </ModalWrapper>
     </ModalBackGround>
   );

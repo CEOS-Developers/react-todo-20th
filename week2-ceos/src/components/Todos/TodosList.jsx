@@ -1,17 +1,10 @@
-import { useTodoStore } from "../../core/store";
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { columnFlex } from "@styles/commonStyle";
 import OneTodo from "./OneTodo";
-import PropTypes from "prop-types";
-
-TodosList.propTypes = {
-  choosedDate: PropTypes.string.isRequired,
-  filterTodoList: PropTypes.array.isRequired,
-};
 
 export default function TodosList(props) {
-  const { choosedDate, filterTodoList } = props;
-  const removeList = useTodoStore((state) => state.removeTodo);
+  const { filterTodoList, removeList, toggleIsDone, clickedDay } = props;
 
   return (
     <Wrapper>
@@ -20,11 +13,13 @@ export default function TodosList(props) {
           const { text, isDone, boxColor } = content;
           return (
             <OneTodo
-              removeTodo={() => removeList(choosedDate, text)}
+              removeTodo={() => removeList(clickedDay, text)}
               boxColor={boxColor}
               text={text}
               isDone={isDone}
               key={text.length + Math.random()}
+              toggleIsDone={toggleIsDone}
+              clickedDay={clickedDay}
             />
           );
         })}

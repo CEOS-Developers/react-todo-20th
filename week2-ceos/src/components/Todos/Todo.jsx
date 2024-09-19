@@ -1,27 +1,31 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import TodosList from "./TodosList";
-import { useTodoStore } from "../../core/store";
 import TodosHeader from "./TodosHeader";
 import styled from "styled-components";
 
-export default function Todo() {
-  const clickedDate = useTodoStore((state) => state.clickedDay);
-  const todosList = useTodoStore((state) => state.todoList);
+export default function Todo(props) {
+  const { clickedDay, todoList, removeList, toggleIsDone } = props;
   const [filterTodoList, setFilteredTodoList] = useState([]);
 
   useEffect(() => {
-    const filtered = todosList.filter((list) => list.day === clickedDate);
+    const filtered = todoList.filter((list) => list.day === clickedDay);
     if (filtered.length > 0) {
       setFilteredTodoList(filtered[0].todos);
     } else {
       setFilteredTodoList([]);
     }
-  }, [todosList, clickedDate]);
+  }, [todoList, clickedDay]);
 
   return (
     <Wrapper>
-      <TodosHeader />
-      <TodosList choosedDate={clickedDate} filterTodoList={filterTodoList} />
+      <TodosHeader clickedDay={clickedDay} todoList={todoList} />
+      <TodosList
+        toggleIsDone={toggleIsDone}
+        removeList={removeList}
+        clickedDay={clickedDay}
+        filterTodoList={filterTodoList}
+      />
     </Wrapper>
   );
 }

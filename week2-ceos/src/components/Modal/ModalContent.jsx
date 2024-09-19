@@ -1,20 +1,13 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { rowFlex } from "@styles/commonStyle";
-import { useTodoStore } from "../../core/store";
 import { colors } from "../../core/colors";
 import ColorsBox from "./ColorsBox";
 import { useState } from "react";
-import PropTypes from "prop-types";
 import TodoInput from "./TodoInput";
 
-ModalContent.propTypes = {
-  handleModal: PropTypes.func.isRequired,
-};
-
-export default function ModalContent({ handleModal }) {
-  const clickedDate = useTodoStore((state) => state.clickedDay);
-  const addNewTodo = useTodoStore((state) => state.addTodo);
-  const setChoosedColor = useTodoStore((state) => state.setBoxColor);
+export default function ModalContent(props) {
+  const { clickedDay, addTodo, setBoxColor, handleModal, setTodoText, boxColor } = props;
   const [input, setInput] = useState("");
 
   function handleInput(data) {
@@ -24,14 +17,14 @@ export default function ModalContent({ handleModal }) {
   function onClickConfirmButton() {
     if (input.length > 0) {
       handleModal();
-      addNewTodo();
+      addTodo();
     } else {
       alert("할일을 입력해주세요");
     }
   }
 
   function onClickColorBox(color) {
-    setChoosedColor(color);
+    setBoxColor(color);
   }
 
   return (
@@ -40,12 +33,12 @@ export default function ModalContent({ handleModal }) {
         <Button onClick={handleModal}>❌</Button>
         <Button onClick={onClickConfirmButton}>✔️</Button>
       </ButtonWrapper>
-      <TodoInput handleInput={handleInput} />
-      <ClickedDateText>{clickedDate}</ClickedDateText>
+      <TodoInput setTodoText={setTodoText} handleInput={handleInput} />
+      <ClickedDateText>{clickedDay}</ClickedDateText>
       <BoxWrapper>
         {colors.map((item) => {
           const { color } = item;
-          return <ColorsBox onClick={() => onClickColorBox(color)} key={color} color={color} />;
+          return <ColorsBox boxColor={boxColor} onClick={() => onClickColorBox(color)} key={color} color={color} />;
         })}
       </BoxWrapper>
     </Wrapper>
