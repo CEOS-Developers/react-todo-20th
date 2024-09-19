@@ -1,13 +1,20 @@
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function useTodoContext() {
   const [clickedDay, setClickedDay] = useState(format(new Date(), "MM월 dd일 EEEE", { locale: ko }));
   const [todoText, setTodoText] = useState("");
   const [isDone, setIsDone] = useState(false);
   const [boxColor, setBoxColor] = useState("#3FA9F5");
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(() => {
+    const savedList = localStorage.getItem("todoList");
+    return savedList ? JSON.parse(savedList) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+  }, [todoList]);
 
   const removeTodo = (day, text) => {
     const updatedTodoList = todoList.map((item) => {
