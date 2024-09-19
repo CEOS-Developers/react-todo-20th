@@ -1,7 +1,18 @@
+import Clock from './components/Clock';
+import Todo from './components/todo/Todo';
+
+import './App.css';
+
 function App() {
   return (
     <div className="App">
-      <h1>🐶CEOS 20기 프론트엔드 최고🐶</h1>
+      <nav>
+        todo
+        <Clock />
+      </nav>
+      <main>
+        <Todo />
+      </main>
     </div>
   );
 }
