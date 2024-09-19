@@ -9,7 +9,7 @@ export default function DayofWeek() {
   const DAY_OF_WEEK = ["일", "월", "화", "수", "목", "금", "토"];
 
   const weeksList = DAY_OF_WEEK.map((week, index) => (
-    <DayWrapper week={index} key={week}>
+    <DayWrapper $week={index} key={week}>
       {week}
     </DayWrapper>
   ));
@@ -22,15 +22,15 @@ const WeekWrapper = styled.section`
 `;
 
 const DayWrapper = styled.span`
-  color: ${({ week, theme }) => {
-    if (week === 0) {
+  color: ${({ $week, theme }) => {
+    if ($week === 0) {
       return theme.colors.sunday_red;
-    } else if (week === todayWeekDay) {
+    } else if ($week === todayWeekDay) {
       return theme.colors.black;
     } else {
       return theme.colors.gray1;
     }
   }};
 
-  ${({ theme, week }) => (week === todayWeekDay ? theme.fonts.Body1 : theme.fonts.Body2)};
+  ${({ theme, $week }) => ($week === todayWeekDay ? theme.fonts.Body1 : theme.fonts.Body2)};
 `;
