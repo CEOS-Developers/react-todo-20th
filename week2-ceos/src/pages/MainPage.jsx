@@ -6,9 +6,14 @@ import TodoBtn from "../components/TodoBtn/TodoBtn";
 import { useState } from "react";
 import TodoModal from "../components/Modal/TodoModal";
 import Todo from "../components/Todos/Todo";
+import { useDayContext } from "../hooks/useDayContext";
+import useTodoContext from "../hooks/useTodoContext";
 
 export default function MainPage() {
   const [openModal, setOpenModal] = useState(false);
+  const { weekStart, headerDay, increaseWeek, decreaseWeek } = useDayContext();
+  const { clickedDay, setClickedDay, setTodoText, boxColor, setBoxColor, todoList, addTodo, removeTodo, toggleIsDone } =
+    useTodoContext();
 
   function handleModal() {
     {
@@ -18,15 +23,25 @@ export default function MainPage() {
 
   return (
     <Wrapper $isOpen={openModal}>
-      <Header />
+      <Header headerDay={headerDay} increaseWeek={increaseWeek} decreaseWeek={decreaseWeek} />
       <HeaderAndDayOfWeekWrapper $isOpen={openModal}>
         <DayofWeek />
-        <Days />
+        <Days setClickedDay={setClickedDay} weekStart={weekStart} />
       </HeaderAndDayOfWeekWrapper>
       <TodoContainer>
-        <Todo />
+        <Todo toggleIsDone={toggleIsDone} removeList={removeTodo} clickedDay={clickedDay} todoList={todoList} />
       </TodoContainer>
-      {openModal && <TodoModal handleModal={handleModal} />}
+
+      {openModal && (
+        <TodoModal
+          clickedDay={clickedDay}
+          setBoxColor={setBoxColor}
+          setTodoText={setTodoText}
+          addTodo={addTodo}
+          handleModal={handleModal}
+          boxColor={boxColor}
+        />
+      )}
       <TodoBtn openModal={openModal} handleModal={handleModal} />
     </Wrapper>
   );
