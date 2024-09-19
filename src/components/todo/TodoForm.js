@@ -13,7 +13,7 @@ export default function TodoForm({ setTodos }) {
         {
           id: Date.now(), // 유니크한 ID 생성
           value: inputValue,
-          completed: false,
+          isCompleted: false,
         },
       ]);
       setInputValue(''); // 입력 필드 초기화
@@ -30,9 +30,10 @@ export default function TodoForm({ setTodos }) {
       />
       <Button
         type="submit"
-        value="추가"
         onClick={handleSubmit}
-      />
+      >
+        추가
+      </Button>
     </form>
   );
 }
