@@ -30,7 +30,7 @@ const MainContainer = styled.div`
     justify-content: center;
     align-items: center;
     width: 40%;
-    margin-top: 20%;
+    margin-top: 12%;
     margin-right: 5%;
 
     .react-calendar {

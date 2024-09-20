@@ -99,7 +99,7 @@ const MainContainer = styled.div`
     align-items: center;
     width: 60%;
     min-width: 530px;
-    margin-top: 20%;
+    margin-top: 12%;
 `;
 
 const ListContainer = styled.div`
