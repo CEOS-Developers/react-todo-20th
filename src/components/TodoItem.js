@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 const slideDown = keyframes`
   0% {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-1.25rem);
   }
   100% {
     opacity: 1;
@@ -15,12 +15,12 @@ const slideDown = keyframes`
 const TodoItemContainer = styled.li`
     display: flex;
     width: 100%;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.11), 0 5px 5px rgba(0, 0, 0, 0.178);
+    box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.11), 0 0.3125rem 0.3125rem rgba(0, 0, 0, 0.178);
     padding: 1rem 1.3rem 1rem 1rem;
     font-size: 1rem;
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     justify-content: space-between;
     align-items: center;
     font-size: 1rem;
@@ -34,7 +34,7 @@ const Input = styled.input`
     cursor: pointer;
     appearance: none;
     border-radius: 50%;
-    border: 2px solid rgb(94, 169, 139);
+    border: 0.125rem solid rgb(94, 169, 139);
     background-color: transparent;
 
     &:checked {
@@ -62,13 +62,13 @@ const TodoSpan = styled.span`
 
 const DeleteButton = styled.button`
     display: flex;
-    min-width: 46px;
+    min-width: 2.875rem;
     color: rgba(209, 46, 46, 0.664);
-    padding: 5px 10px;
-    border-radius: 10px;
+    padding: 0.3125rem 0.625rem;
+    border-radius: 0.625rem;
     cursor: pointer;
     background-color: transparent;
-    border: 1.5px solid rgba(193, 49, 49, 0.664);
+    border: 0.0938rem solid rgba(193, 49, 49, 0.664);
 
   &:hover {
     background-color: #b5b6b779;

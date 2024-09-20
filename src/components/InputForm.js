@@ -7,7 +7,7 @@ const Form = styled.form`
   position: relative;
   width: 80%;
   padding: 1.3rem 1.3rem 1.3rem 3.3rem;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.11), 0 5px 5px rgba(0, 0, 0, 0.178);
+  box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.11), 0 0.3125rem 0.3125rem rgba(0, 0, 0, 0.178);
   border-radius: 0.625rem;
   background-image: url(${checkmark});
   background-size: 1.5rem;
@@ -29,8 +29,8 @@ const SubmitButton = styled.button`
   transform: translateY(-50%);
   background-color: transparent;
   color: rgb(94, 169, 139);
-  padding: 5px 10px;
-  border: 1.5px solid rgb(94, 169, 139);
+  padding: 0.3125rem 0.625rem;
+  border: 0.0938rem solid rgb(94, 169, 139);
   border-radius: 0.625rem;
   cursor: pointer;
 

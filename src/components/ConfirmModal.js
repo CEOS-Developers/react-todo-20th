@@ -1,33 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-
-const ModalBackground = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ModalContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5625rem;
-  background: white;
-  padding: 2rem;
-  border-radius: 0.9375rem;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-`;
+import { ModalBackground } from './Modal';
+import { ModalContainer } from './Modal';
 
 const ButtonGroup = styled.div`
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 0.9375rem;
 `;
 
 const ModalButton = styled.button`

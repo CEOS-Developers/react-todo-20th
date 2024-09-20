@@ -13,8 +13,8 @@ const MainContainer = styled.main`
   gap: 0.625rem;
   flex-direction: column;
   align-items: center;
-  border-radius: 30px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  border-radius: 1.875rem;
+  box-shadow: 0 0.625rem 1.25rem rgba(0,0,0,0.19), 0 0.375rem 0.375rem rgba(0,0,0,0.23);
 `;
 
 const DateContainer = styled.section`

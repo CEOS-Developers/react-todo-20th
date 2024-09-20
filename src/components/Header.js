@@ -10,7 +10,7 @@ const HeaderContainer = styled.header`
   font-weight: bold;
   align-items: center;
   justify-content: center;
-  text-shadow: 0 5px 5px rgba(0, 0, 0, 0.205);
+  text-shadow: 0 0.3125rem 0.3125rem rgba(0, 0, 0, 0.205);
 `;
 
 const Header = React.memo(() => {
