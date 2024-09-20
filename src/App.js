@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Calendar from './components/Calendar';
 import TodoListComponent from './components/TodoListComponent';
+import '../src/style.css';
 
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
