@@ -105,7 +105,7 @@ const MainContainer = styled.div`
 const ListContainer = styled.div`
     text-align: left;
     background: white;
-    padding: 7% 15%;
+    padding: 7% 10%;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     flex-grow: 1;

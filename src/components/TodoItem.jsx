@@ -51,5 +51,5 @@ const TodoText = styled.span`
   margin-left: 5%;
   width: 80%;
   color: ${(props) => (props.completed ? "#C0C0C0" : "#000000")};
-  overflow-wrap: break-word;
+  word-break: break-all;;
 `;
