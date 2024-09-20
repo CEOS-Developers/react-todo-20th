@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const slideDown = keyframes`
+export const slideDown = keyframes`
   0% {
     opacity: 0;
     transform: translateY(-1.25rem);

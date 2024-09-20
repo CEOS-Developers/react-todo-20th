@@ -27,7 +27,7 @@ const ConfirmModal = ({ isOpen, onConfirm,  onCancel }) => {
 
   return (
     <ModalBackground onClick={onCancel}>
-      <ModalContainer onClick={(e) => e.stopPropagation()}>
+      <ModalContainer  $isOpen={isOpen} onClick={(e) => e.stopPropagation()}>
         <h3>정말 삭제하시겠습니까?</h3>
         <ButtonGroup>
           <ModalButton $cancel onClick={onCancel}>취소</ModalButton>

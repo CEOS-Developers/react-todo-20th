@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { slideDown } from './TodoItem';
 
 export const ModalBackground = styled.div`
   position: fixed;
@@ -23,6 +24,12 @@ export const ModalContainer = styled.div`
   border-radius: 0.625rem;
   text-align: center;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+
+  ${({ $isOpen }) =>
+    $isOpen &&
+    css`
+      animation: ${slideDown} 0.3s ease-out forwards;
+    `}
 `;
 
 const Modal = ({ ModalText, isOpen, onClose }) => {
@@ -30,7 +37,7 @@ const Modal = ({ ModalText, isOpen, onClose }) => {
 
   return (
     <ModalBackground onClick={onClose}>
-      <ModalContainer onClick={(e) => e.stopPropagation()}> {/* 이벤트 버블링으로 인한 클릭 이벤트의 전파로 모달을 클릭했을 때 모달이 종료되는 것을 방지*/}
+      <ModalContainer $isOpen={isOpen} onClick={(e) => e.stopPropagation()}>
         <p>{ModalText}</p>
       </ModalContainer>
     </ModalBackground>
@@ -38,3 +45,4 @@ const Modal = ({ ModalText, isOpen, onClose }) => {
 };
 
 export default Modal;
+
