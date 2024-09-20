@@ -19,33 +19,28 @@ const MainButton = styled.button`
   border-radius: 3px;
   cursor: pointer;
   background-color: transparent;
-  // text-align: center;
-  color: rgb(150, 130, 224);
-  border: 2px solid rgb(150, 130, 224);
+  color: var(--main-color);
+  border: 2px solid var(--main-color);
   align-items: center;
   text-wrap: nowrap;
 `;
 
-// IconButton : icon 감싸는 버튼
-export const IconButton = styled(MainButton)`
+// DeleteButton : 삭제 버튼
+export const DeleteButton = styled(MainButton)`
   border-radius: 1rem;
-  width: 1rem;
-  height: 1rem;
-`;
-
-// BlueButton : 파란 버튼
-export const BlueButton = styled(MainButton)`
-  border-radius: 1rem;
-  color: rgb(34, 209, 142);
-  border-color: rgb(34, 209, 142);
+  color: var(--main-color);
+  border-color: var(--main-color);
 `;
 
 // IsCompletedButton : 완료 토글 버튼
 export const IsCompletedButton = styled(MainButton)`
-  border-radius: 1rem;
-  width: 0.5em;
-  height: 0.5em;
-  color: ${(props) => (props.$isCompleted === 'true' ? 'green' : 'yellow')};
-  border-color: ${(props) =>
-    props.$isCompleted === 'true' ? 'green' : 'yellow'};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 1.5em;
+  ${(props) =>
+    props.$isCompleted === 'true' &&
+    `padding: 0;
+      `}
 `;
