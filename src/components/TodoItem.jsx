@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 
 const TodoItem = ({ id, isDone, content, date, onUpdate, removeTodo }) => {
-  const [isRemoving, setIsRemoving] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false); // 삭제 애니메이션 상태
 
   const onChangeCheckbox = () => {
     onUpdate(id);
   };
 
   const handleRemove = () => {
-    setIsRemoving(true);
+    setIsRemoving(true); // 삭제 애니메이션 시작
     setTimeout(() => {
-      removeTodo(id);
-    }, 300);
+      removeTodo(id); // 애니메이션 후 삭제
+    }, 200); // 애니메이션이 끝난 후 200ms 대기 후 삭제
   };
 
   return (
@@ -32,7 +32,7 @@ const TodoItem = ({ id, isDone, content, date, onUpdate, removeTodo }) => {
   );
 };
 
-// 할 일 추가 애니메이션
+// 할 일 추가 애니메이션 정의
 const slideDownFadeIn = keyframes`
   from {
     opacity: 0;
@@ -44,7 +44,7 @@ const slideDownFadeIn = keyframes`
   }
 `;
 
-// 할 일 삭제 애니메이션
+// 할 일 삭제 애니메이션 정의
 const fadeOutScaleDown = keyframes`
   from {
     opacity: 1;
@@ -56,11 +56,7 @@ const fadeOutScaleDown = keyframes`
   }
 `;
 
-// prop이 DOM에 전달되지 않도록 함수형 props 필터링 적용
-const TodoItemContainer = styled.div.attrs((props) => ({
-  // 필터링할 props를 제외하고 styled-components에 전달
-  isRemoving: undefined,
-}))`
+const TodoItemContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
