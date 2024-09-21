@@ -1,9 +1,7 @@
-import { IconButton, BlueButton, IsCompletedButton } from '../Button';
+import { DeleteButton, IsCompletedButton } from '../Button';
 import styled from 'styled-components';
 
 import { FaTrash } from 'react-icons/fa';
-import { HiCheck } from 'react-icons/hi';
-import { RiCheckboxBlankCircleFill } from 'react-icons/ri';
 import { IoCheckmarkCircle } from 'react-icons/io5';
 export function TodoItem({
   id,
@@ -32,12 +30,12 @@ export function TodoItem({
       )}
       <div className="todo">{value}</div>
       <div className="button-group">
-        <BlueButton
+        <DeleteButton
           type="button"
           onClick={onDelete}
         >
           <FaTrash />
-        </BlueButton>
+        </DeleteButton>
       </div>
     </StyledItem>
   );
