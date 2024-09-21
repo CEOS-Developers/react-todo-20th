@@ -1,17 +1,9 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
-const TodoDate = ({ setDate }) => {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth() + 1;
-  const day = today.getDate();
+const TodoDate = ({ date }) => {
+  const [year, month, day] = date.split("-");
   const titleDate = `⊹ ⋆ ${year}. ${month}. ${day}. ⋆ ⊹`;
-
-  const textDate = `${year}-${month}-${day}`;
-  useEffect(() => {
-    setDate(textDate);
-  }, [setDate, textDate]);
 
   return <DateWrapper>{titleDate}</DateWrapper>;
 };

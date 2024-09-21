@@ -59,7 +59,7 @@ const ListItem = styled.li`
   input {
     all: unset;
     padding: 5px 0;
-    font-size: 18px;
+    font-size: 17px;
     color: ${({ done }) => (done ? "#a3a3a3" : "white")};
     text-decoration: ${({ done }) => (done ? "line-through" : "none")};
   }

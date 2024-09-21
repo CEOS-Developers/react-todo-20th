@@ -44,9 +44,9 @@ const TodoContent = ({ todos, setTodos, date }) => {
 export default TodoContent;
 
 const Container = styled.div`
-  width: 60%;
+  width: 40%;
+  height: 70%;
   max-width: 550px;
-  height: 60%;
   border: 0.3px solid #ff3898;
   background: #ffffff1a;
   box-shadow: 0 0 70px #691940;
