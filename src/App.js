@@ -9,6 +9,7 @@ import TodoCalendar from "./components/TodoCalendar";
 function App() {
   const [todos, setTodos] = useState([]);
   const [date, setDate] = useState("");
+  const [progress, setProgress] = useState(0);
   const [showCalendar, setShowCalendar] = useState(false);
 
   useEffect(() => {
@@ -26,7 +27,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
+    if (todos.length > 0) {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }
   }, [todos]);
 
   const getTodosForDate = (todos, date) => {
@@ -46,10 +49,9 @@ function App() {
           todos={getTodosForDate(todos, date)}
           setTodos={setTodos}
           date={date}
+          setProgress={setProgress}
         />
-        {showCalendar && (
-          <TodoCalendar setDate={setDate} setShowCalendar={setShowCalendar} />
-        )}
+        {showCalendar && <TodoCalendar setDate={setDate} progress={progress} />}
       </TodoContainer>
       <FloatingButton onClick={toggleCalendar}>📅</FloatingButton>
     </>

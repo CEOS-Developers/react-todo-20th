@@ -3,7 +3,7 @@ import styled from "styled-components";
 import TodoForm from "./TodoForm";
 import TodoItem from "./TodoItem";
 
-const TodoContent = ({ todos, setTodos, date }) => {
+const TodoContent = ({ todos, setTodos, date, setProgress }) => {
   const addTodo = (text) => {
     setTodos((prevTodos) => [
       ...prevTodos,
@@ -13,8 +13,11 @@ const TodoContent = ({ todos, setTodos, date }) => {
 
   const todoCount = useMemo(() => {
     const doneCount = todos.filter((todo) => todo.done).length;
+    const progress = todos.length === 0 ? 0 : (doneCount / todos.length) * 100;
+    setProgress(progress);
+
     return `${doneCount} / ${todos.length}`;
-  }, [todos]);
+  }, [todos, setProgress]);
 
   const sortedTodos = useMemo(() => {
     return [...todos].sort((a, b) => a.done - b.done);

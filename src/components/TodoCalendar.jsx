@@ -2,8 +2,9 @@ import React from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 import "react-calendar/dist/Calendar.css";
+import ProgressBar from "./ProgressBar";
 
-const TodoCalendar = ({ setDate, setShowCalendar }) => {
+const TodoCalendar = ({ setDate, progress }) => {
   const handleDateChange = (selectedDate) => {
     const year = selectedDate.getFullYear();
     const month = selectedDate.getMonth() + 1;
@@ -12,7 +13,17 @@ const TodoCalendar = ({ setDate, setShowCalendar }) => {
     setDate(formattedDate);
   };
 
-  return <Calendar onChange={handleDateChange} />;
+  return (
+    <CalendarWrapper>
+      <Calendar onChange={handleDateChange} />
+      <ProgressBar progress={progress} />
+    </CalendarWrapper>
+  );
 };
 
 export default TodoCalendar;
+
+const CalendarWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
