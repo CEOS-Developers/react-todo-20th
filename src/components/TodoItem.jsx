@@ -1,12 +1,23 @@
 import styled from "styled-components";
 
-const TodoItem = () => {
+const TodoItem = ({ id, isDone, content, date, onUpdate, removeTodo }) => {
+  const onChangeCheckbox = () => {
+    onUpdate(id);
+  };
+
   return (
     <TodoItemContainer>
-      <Checkbox type="checkbox" />
-      <Content>todo</Content>
-      <DateText>date</DateText>
-      <DeleteButton>Delete</DeleteButton>
+      <Checkbox
+        type="checkbox"
+        id={id}
+        checked={isDone}
+        onChange={onChangeCheckbox}
+      />
+      <Content className={`content ${isDone ? "completed" : ""}`}>
+        {content}
+      </Content>
+      <DateText>{new Date(date).toLocaleDateString()}</DateText>
+      <DeleteButton onClick={() => removeTodo(id)}>삭제</DeleteButton>
     </TodoItemContainer>
   );
 };

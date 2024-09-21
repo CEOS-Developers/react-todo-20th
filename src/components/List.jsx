@@ -1,13 +1,47 @@
 import styled from "styled-components";
-import TodoItem from "./TodoItem.jsx";
+import TodoItem from "./TodoItem";
+import { useState } from "react";
 
-const List = () => {
+const List = ({ todos, onUpdate, setTodos, removeTodo }) => {
+  const [search, setSearch] = useState("");
+
+  const onChangeSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const getFilteredDate = () => {
+    if (search === "") {
+      return todos;
+    }
+    return todos.filter((todos) => {
+      return todos.content.toLowerCase().includes(search.toLowerCase());
+    });
+  };
+
+  const filteredTodos = getFilteredDate();
+
   return (
     <ListContainer>
-      <h4>💜TO DO LIST💜</h4>
-      <SearchInput placeholder="Search" />
+      <h4>Todo List 🌱</h4>
+      <SearchInput
+        type="text"
+        placeholder="검색어를 입력하세요"
+        value={search}
+        onChange={onChangeSearch}
+      />
       <TodoWrapper>
-        <TodoItem />
+        {filteredTodos.map((todos) => {
+          return (
+            <TodoItem
+              key={todos.id}
+              {...todos}
+              onUpdate={onUpdate}
+              todos={todos}
+              setTodos={setTodos}
+              removeTodo={removeTodo}
+            />
+          ); //spread, key
+        })}
       </TodoWrapper>
     </ListContainer>
   );

@@ -1,10 +1,41 @@
 import styled from "styled-components";
+import { useRef, useState } from "react";
 
-const Editor = () => {
+const Editor = ({ onCreate }) => {
+  const [content, setContent] = useState("");
+
+  const contentRef = useRef(); //
+
+  const onChangeContent = (e) => {
+    setContent(e.target.value);
+  };
+
+  const onkeydown = (e) => {
+    if (e.key === "Enter") {
+      onSubmit();
+    }
+  };
+
+  const onSubmit = () => {
+    if (content === "") {
+      contentRef.current.focus();
+      return;
+    }
+    onCreate(content);
+    setContent("");
+  };
+
   return (
     <EditorContainer>
-      <Input placeholder="Add Todo..." />
-      <Button>Add</Button>
+      <Input
+        ref={contentRef}
+        type="text"
+        placeholder="새로운 Todo..."
+        onChange={onChangeContent}
+        onKeyDown={onkeydown}
+        value={content}
+      />
+      <Button onClick={onSubmit}>추가</Button>
     </EditorContainer>
   );
 };
