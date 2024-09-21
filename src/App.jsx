@@ -90,12 +90,13 @@ const AppContainer = styled.div`
   padding: 30px;
   box-shadow: inset 0 0 20px #d6ddff;
   height: 80vh;
+  box-sizing: border-box;
 
   /* 모바일 반응형 */
   @media (max-width: 768px) {
     width: 360px;
+    height: 560px;
     padding: 20px;
-    height: 90vh;
   }
 `;
 
