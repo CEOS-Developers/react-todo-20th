@@ -56,7 +56,11 @@ const fadeOutScaleDown = keyframes`
   }
 `;
 
-const TodoItemContainer = styled.div`
+// prop이 DOM에 전달되지 않도록 함수형 props 필터링 적용
+const TodoItemContainer = styled.div.attrs((props) => ({
+  // 필터링할 props를 제외하고 styled-components에 전달
+  isRemoving: undefined,
+}))`
   display: flex;
   align-items: center;
   gap: 20px;
