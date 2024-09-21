@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { 
-  AppContainer, Header, Main, TodoContainer, 
-  TodoHeader, TodoList, TodoItem, TodoInput, 
+  AppContainer, Main, TodoContainer, MainText, Line,
+  TodoHeader, TodoList, TodoItem, TodoInput, TodoHeaderNew,
   Input, Button, RemoveButton 
 } from './styles';
 import { GlobalStyle } from './styles';
@@ -57,19 +57,19 @@ const App = () => {
     <>
       <GlobalStyle /> {/* 글로벌 스타일 적용 */}
       <AppContainer>
-        <Header>
-          <h1>✔ To Do</h1>
-        </Header>
+        <MainText>Better<p></p>than<p></p>Yesterday!</MainText>
+        <Line></Line>
         <Main>
           <TodoContainer>
             <TodoHeader>
-              <h2>오늘 할 일</h2>
               <p>{currentDate}</p> {/* 현재 날짜 출력 */}
               <div>
-                todo: {todos.length} {/* 투두 개수 */}
-              </div>
-              <div>
-                complete: {completedTodosCount} {/* 완료된 투두 개수 */}
+                <div>
+                  todo: {todos.length} {/* 투두 개수 */}
+                </div>
+                <div>
+                  complete: {completedTodosCount} {/* 완료된 투두 개수 */}
+                </div>
               </div>
             </TodoHeader>
 
