@@ -39,13 +39,13 @@ export const AppContainer = styled.div`
 `;
 
 export const Main = styled.main`
-  height: 300px;
-  width: 800px;
+  height: 400px;
+  width: 400px;
 `;
 
 
 export const TodoContainer = styled.section`
-  height: 300px;
+  height: 400px;
   border-color: black;
   border-radius: 10px;
   border-width: 2px;
@@ -60,7 +60,7 @@ export const TodoList = styled.ul`
 `;
 
 export const TodoItem = styled.li`
-  background-color: #c1cad6;
+  background-color: aliceblue;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -74,21 +74,38 @@ export const TodoInput = styled.div`
   border-radius: 10px;
   border-style: solid;
   border-width: 1px;
+  margin-bottom: 10px;
 `;
 
 export const Input = styled.input`
   flex-grow: 1;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 7px;
   border: none;
   margin-right: 10px;
   background-color: transparent;
   border-radius: 10px;
 `;
 
+export const TodosBody = styled.div`
+  height: 250px;
+  border-radius: 5px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.4);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+  }
+`
+
 export const Button = styled.button`
-  padding: 10px 20px;
-  background-color: #9899C2;
+  padding: 8px 8px;
+  background-color: skyblue;
   border: none;
   border-radius: 5px;
   cursor: pointer;

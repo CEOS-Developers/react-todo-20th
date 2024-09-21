@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { 
-  AppContainer, Main, TodoContainer, MainText, Line,
-  TodoHeader, TodoList, TodoItem, TodoInput, TodoHeaderNew,
+  AppContainer, Main, TodoContainer, MainText, Line, TodosBody,
+  TodoHeader, TodoList, TodoItem, TodoInput,
   Input, Button, RemoveButton 
 } from './styles';
 import { GlobalStyle } from './styles';
@@ -57,7 +57,11 @@ const App = () => {
     <>
       <GlobalStyle /> {/* 글로벌 스타일 적용 */}
       <AppContainer>
-        <MainText>Better<p></p>than<p></p>Yesterday!</MainText>
+        <MainText>
+          Better<p></p>
+          than<p></p>
+          Yesterday!
+        </MainText>
         <Line></Line>
         <Main>
           <TodoContainer>
@@ -73,22 +77,6 @@ const App = () => {
               </div>
             </TodoHeader>
 
-            <TodoList>
-              {todos.map((todo, index) => (
-                <TodoItem key={index}>
-                  <span 
-                    style={{ 
-                      textDecoration: todo.complete ? "line-through" : "none" 
-                    }}
-                  >
-                    {todo.text}
-                  </span>
-                  <Button onClick={() => completeTodo(index)}>완료</Button>
-                  <RemoveButton onClick={() => removeTodo(index)}>삭제</RemoveButton>
-                </TodoItem>
-              ))}
-            </TodoList>
-
             <TodoInput>
               <Input
                 type="text"
@@ -99,6 +87,25 @@ const App = () => {
               />
               <Button onClick={addTodo}>추가</Button>
             </TodoInput>
+
+            <TodosBody>
+              <TodoList>
+              {todos.map((todo, index) => (
+                <TodoItem key={index}>
+                  <Button onClick={() => completeTodo(index)}>완료</Button>
+                  <span 
+                    style={{ 
+                      textDecoration: todo.complete ? "line-through" : "none" 
+                    }}
+                  >
+                    {todo.text}
+                  </span>
+                  <RemoveButton onClick={() => removeTodo(index)}>삭제</RemoveButton>
+                </TodoItem>
+              ))}
+            </TodoList>
+            </TodosBody>
+            
           </TodoContainer>
         </Main>
       </AppContainer>
