@@ -1,17 +1,13 @@
-import { useMemo } from 'react';
 import styled from 'styled-components';
-
 import Clock from './Clock';
 
+// ProgressBar : 오늘 정보 + 할 일 진척도
 export default function ProgressBar({ todos }) {
   // 전체 할 일
   const totalTodo = todos.length;
 
   // 완료된 할 일의 개수
-  const completedCount = useMemo(
-    () => todos.filter((todo) => todo.isCompleted).length,
-    [todos]
-  );
+  const completedCount = todos.filter((todo) => todo.isCompleted).length;
 
   // 진행률 계산 (완료된 할 일의 수 / 전체 할 일 수)
   const progress = todos.length > 0 ? (completedCount / totalTodo) * 100 : 0;
@@ -70,7 +66,7 @@ const StyledProgress = styled.div`
     overflow: hidden;
     background-color: #3c3c3c;
 
-    //
+    // progressbar 내부 디자인
     &::-webkit-progress-bar {
       background-color: #3c3c3c;
       border-radius: 10px;

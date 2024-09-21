@@ -1,9 +1,10 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { TodoItem } from './TodoItem';
 import styled from 'styled-components';
 
+// 할 일 집합
 export default function TodoList({ title, todos, setTodos }) {
-  // 투두 토글 함수 :
+  // 할 일 토글 함수
   const toggleComplete = useCallback(
     (id) => {
       setTodos((prevTodos) =>
@@ -15,13 +16,14 @@ export default function TodoList({ title, todos, setTodos }) {
     [setTodos]
   );
 
-  // 투두 삭제
+  // 할 일 삭제
   const handleDelete = useCallback(
     (id) => {
       setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
     },
     [setTodos]
   );
+
   return (
     <div>
       <StyledListTitle>
@@ -32,7 +34,6 @@ export default function TodoList({ title, todos, setTodos }) {
         {todos.map((todo) => (
           <TodoItem
             {...todo}
-            // onEdit={() => handleEdit(todo.id)}
             onDelete={() => handleDelete(todo.id)}
             toggleComplete={() => toggleComplete(todo.id)}
           />
@@ -51,5 +52,11 @@ const StyledListTitle = styled.div`
   .count {
     font-size: 1.5rem;
     color: var(--main-color);
+  }
+  ul {
+    display: flex;
+    flex-direction: column-reverse;
+    list-style-type: none;
+    padding-inline-start: 0;
   }
 `;

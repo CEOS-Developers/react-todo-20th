@@ -41,6 +41,6 @@ export const IsCompletedButton = styled(MainButton)`
   font-size: 1.5em;
   ${(props) =>
     props.$isCompleted === 'true' &&
-    `padding: 0;
+    `padding: 0; /* 아이콘이 들어가려면 패딩 값이 없어야 함 */
       `}
 `;

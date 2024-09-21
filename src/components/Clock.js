@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
+// 날짜
 const days = [
   '일요일',
   '월요일',
@@ -10,14 +11,14 @@ const days = [
   '금요일',
   '토요일',
 ];
+const date = new Date();
+const month = date.getMonth() + 1;
+const day = date.getDate();
+const getDay = days[date.getDay()];
+
+// Clock : 날짜 + 시간
 export default function Clock() {
   const [time, setTime] = useState(() => new Date());
-
-  // 날짜 세팅하기
-  const date = new Date();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const getDay = days[date.getDay()];
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -40,7 +41,6 @@ const StyledClock = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-
   font-size: 0.7rem;
   color: rgb(220, 220, 220);
 `;
