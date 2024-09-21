@@ -70,6 +70,7 @@ const Button = styled.button`
   background-color: #788bff;
   color: white;
   border-radius: 10px;
+  font-size: 1rem;
 `;
 
 export default Editor;
