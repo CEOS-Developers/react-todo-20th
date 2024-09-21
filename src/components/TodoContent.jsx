@@ -13,7 +13,8 @@ const TodoContent = ({ todos, setTodos, date, setProgress }) => {
 
   const todoCount = useMemo(() => {
     const doneCount = todos.filter((todo) => todo.done).length;
-    const progress = todos.length === 0 ? 0 : (doneCount / todos.length) * 100;
+    const progress =
+      todos.length === 0 ? 0 : Math.round((doneCount / todos.length) * 100);
     setProgress(progress);
 
     return `${doneCount} / ${todos.length}`;

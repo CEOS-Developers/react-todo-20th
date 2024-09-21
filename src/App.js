@@ -15,8 +15,8 @@ function App() {
   useEffect(() => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = today.getMonth() + 1;
-    const day = today.getDate();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
     const formattedToday = `${year}-${month}-${day}`;
     setDate(formattedToday);
   }, []);
@@ -51,7 +51,9 @@ function App() {
           date={date}
           setProgress={setProgress}
         />
-        {showCalendar && <TodoCalendar setDate={setDate} progress={progress} />}
+        {showCalendar && (
+          <TodoCalendar setDate={setDate} progress={progress} todos={todos} />
+        )}
       </TodoContainer>
       <FloatingButton onClick={toggleCalendar}>📅</FloatingButton>
     </>
@@ -72,15 +74,14 @@ const TodoContainer = styled.div`
 
 const FloatingButton = styled.button`
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 40px;
+  bottom: 30px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #ff3898;
+  background-color: #ff3898af;
   color: white;
   font-size: 24px;
   border: none;
   cursor: pointer;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 `;
