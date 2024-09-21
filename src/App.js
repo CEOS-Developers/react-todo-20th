@@ -23,7 +23,8 @@ const App = () => {
   // 할 일 추가
   const addTodo = () => {
     if (newTodo.trim()) {
-      setTodos([...todos, newTodo]);
+      // 새로운 투두 객체를 생성 (complete 속성 추가)
+      setTodos([...todos, { text: newTodo, complete: false }]);
       setNewTodo(""); // 입력창 초기화
     }
   };
@@ -32,6 +33,14 @@ const App = () => {
   const removeTodo = (index) => {
     const updatedTodos = todos.filter((_, i) => i !== index);
     setTodos(updatedTodos);
+  };
+
+  // 할 일 완료
+  const completeTodo = (index) => {
+    const updatedTodos = todos.map((todo, i) =>
+      i === index ? { ...todo, complete: !todo.complete } : todo
+    );
+    setTodos(updatedTodos); // 상태 업데이트
   };
 
   // 엔터키로 할 일 추가
@@ -58,7 +67,14 @@ const App = () => {
             <TodoList>
               {todos.map((todo, index) => (
                 <TodoItem key={index}>
-                  <span>{todo}</span>
+                  <span 
+                    style={{ 
+                      textDecoration: todo.complete ? "line-through" : "none" 
+                    }}
+                  >
+                    {todo.text}
+                  </span>
+                  <Button onClick={() => completeTodo(index)}>완료</Button>
                   <RemoveButton onClick={() => removeTodo(index)}>삭제</RemoveButton>
                 </TodoItem>
               ))}
