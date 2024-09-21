@@ -1,6 +1,7 @@
 :root {
   --main-color: #788bff;
   --sub-color: #484644;
+  --bg-primary: #252525;
 }
 
 nav {
@@ -13,47 +14,10 @@ nav {
 }
 
 main {
-  width: 920px;
+  width: 860px;
   min-height: 100vh;
-
   margin: 0 auto;
   text-align: center;
   background-color: rgb(25, 25, 25);
   padding: 2rem;
-}
-
-form {
-  border: 16px;
-  margin-top: 12px;
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 14px;
-  min-height: 48px;
-  min-width: 320px;
-  padding: 0.5rem 1rem;
-  gap: 8px;
-  border-radius: 12px;
-  color: var(--main-color);
-  background-color: rgb(37, 37, 37);
-
-  input {
-    flex-grow: 1;
-    color: white;
-    margin-right: auto;
-    background-color: rgb(37, 37, 37);
-    border: none;
-    outline: none;
-    font-size: 16px;
-  }
-  input::placeholder {
-    color: var(--main-color);
-  }
-}
-
-ul {
-  /* background-color: aliceblue; */
-  display: flex;
-  flex-direction: column-reverse;
-  list-style-type: none;
-  padding-inline-start: 0;
 }
