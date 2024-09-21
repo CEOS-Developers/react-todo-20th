@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 const Editor = ({ onCreate }) => {
   const [content, setContent] = useState("");
 
-  const contentRef = useRef(); //
+  const contentRef = useRef();
 
   const onChangeContent = (e) => {
     setContent(e.target.value);
@@ -12,16 +12,17 @@ const Editor = ({ onCreate }) => {
 
   const onkeydown = (e) => {
     if (e.key === "Enter") {
+      e.preventDefault();
       onSubmit();
     }
   };
 
   const onSubmit = () => {
-    if (content === "") {
+    if (content.trim() === "") {
       contentRef.current.focus();
       return;
     }
-    onCreate(content);
+    onCreate(content.trim());
     setContent("");
   };
 

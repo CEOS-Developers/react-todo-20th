@@ -1,12 +1,22 @@
-import styled from "styled-components";
+import React, { useState } from "react";
+import styled, { keyframes } from "styled-components";
 
 const TodoItem = ({ id, isDone, content, date, onUpdate, removeTodo }) => {
+  const [isRemoving, setIsRemoving] = useState(false);
+
   const onChangeCheckbox = () => {
     onUpdate(id);
   };
 
+  const handleRemove = () => {
+    setIsRemoving(true);
+    setTimeout(() => {
+      removeTodo(id);
+    }, 300);
+  };
+
   return (
-    <TodoItemContainer>
+    <TodoItemContainer isRemoving={isRemoving}>
       <Checkbox
         type="checkbox"
         id={id}
@@ -17,10 +27,34 @@ const TodoItem = ({ id, isDone, content, date, onUpdate, removeTodo }) => {
         {content}
       </Content>
       <DateText>{new Date(date).toLocaleDateString()}</DateText>
-      <DeleteButton onClick={() => removeTodo(id)}>삭제</DeleteButton>
+      <DeleteButton onClick={handleRemove}>삭제</DeleteButton>
     </TodoItemContainer>
   );
 };
+
+// 할 일 추가 애니메이션
+const slideDownFadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+// 할 일 삭제 애니메이션
+const fadeOutScaleDown = keyframes`
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9) translateY(+10px);
+  }
+`;
 
 const TodoItemContainer = styled.div`
   display: flex;
@@ -28,6 +62,9 @@ const TodoItemContainer = styled.div`
   gap: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid rgb(240, 240, 240);
+  animation: ${({ isRemoving }) =>
+      isRemoving ? fadeOutScaleDown : slideDownFadeIn}
+    0.3s ease-out forwards;
 `;
 
 const Checkbox = styled.input`
