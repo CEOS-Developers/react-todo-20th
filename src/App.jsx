@@ -79,6 +79,13 @@ const AppContainer = styled.div`
   padding: 30px;
   box-shadow: inset 0 0 20px #d6ddff;
   height: 80vh;
+
+  /* 모바일 반응형 */
+  @media (max-width: 768px) {
+    width: 360px;
+    padding: 20px;
+    height: 90vh;
+  }
 `;
 
 const GlobalStyle = createGlobalStyle`
@@ -91,6 +98,12 @@ const GlobalStyle = createGlobalStyle`
     height:100vh;
     justify-content:center;
     align-items:center;
+
+    /* 모바일 반응형 */
+    @media (max-width: 768px) {
+       height:100vh;
+       width:100%;
+    }
   }
 `;
 
