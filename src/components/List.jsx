@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import TodoItem from "./TodoItem";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 const List = ({ todos, onUpdate, setTodos, removeTodo }) => {
   const [search, setSearch] = useState("");
@@ -20,9 +20,27 @@ const List = ({ todos, onUpdate, setTodos, removeTodo }) => {
 
   const filteredTodos = getFilteredDate();
 
+  const { doneCount, notDoneCount } = useMemo(() => {
+    const totalCount = todos.length;
+    const doneCount = todos.filter((todo) => todo.isDone).length;
+    const notDoneCount = totalCount - doneCount;
+
+    return {
+      totalCount,
+      doneCount,
+      notDoneCount,
+    };
+  }, [todos]);
+
   return (
     <ListContainer>
-      <h4>Todo List 🌱</h4>
+      <TopWrapper>
+        <h4>Todo List 🌱</h4>
+        <CountWrapper>
+          <span>todo : {notDoneCount}</span>
+          <span>done : {doneCount}</span>
+        </CountWrapper>
+      </TopWrapper>
       <SearchInput
         type="text"
         placeholder="검색어를 입력하세요"
@@ -54,10 +72,31 @@ const ListContainer = styled.div`
   margin-top: 40px;
   overflow-y: auto;
   scrollbar-width: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const TopWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 
   h4 {
     color: #788bff;
     margin: 0;
+  }
+`;
+
+const CountWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  span {
+    color: #8790ca;
+    font-size: 0.8rem;
   }
 `;
 
