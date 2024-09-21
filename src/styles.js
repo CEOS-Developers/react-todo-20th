@@ -89,12 +89,13 @@ export const Button = styled.button`
 `;
 
 export const RemoveButton = styled.button`
-  background-color: red;
+  background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   padding: 5px 10px;
+  margin-left: 10px; /* 완료 버튼과 10px 간격 설정 */
   &:hover {
     background-color: darkred;
   }
