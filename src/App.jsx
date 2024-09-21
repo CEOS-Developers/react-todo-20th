@@ -78,6 +78,7 @@ const AppContainer = styled.div`
   border-radius: 5px;
   padding: 30px;
   box-shadow: inset 0 0 20px #d6ddff;
+  height: 80vh;
 `;
 
 const GlobalStyle = createGlobalStyle`
@@ -86,6 +87,10 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
+    display:flex;
+    height:100vh;
+    justify-content:center;
+    align-items:center;
   }
 `;
 

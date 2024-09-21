@@ -52,6 +52,8 @@ const ListContainer = styled.div`
   flex-direction: column;
   gap: 10px;
   margin-top: 40px;
+  overflow-y: auto;
+  scrollbar-width: none;
 
   h4 {
     color: #788bff;
