@@ -37,6 +37,8 @@ const Checkbox = styled.input`
 const Content = styled.div`
   flex: 1;
   color: #788bff;
+  word-break: break-word;
+
   &.completed {
     text-decoration: line-through;
     color: gray;
@@ -46,9 +48,6 @@ const Content = styled.div`
 const DateText = styled.div`
   font-size: 14px;
   color: #8790ca;
-  word-break: break-word;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
 `;
 
 const DeleteButton = styled.button`
