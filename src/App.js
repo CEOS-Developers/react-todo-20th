@@ -50,6 +50,9 @@ const App = () => {
     }
   };
 
+  // 완료된 할 일 개수
+  const completedTodosCount = todos.filter(todo => todo.complete).length;
+
   return (
     <>
       <GlobalStyle /> {/* 글로벌 스타일 적용 */}
@@ -62,6 +65,12 @@ const App = () => {
             <TodoHeader>
               <h2>오늘 할 일</h2>
               <p>{currentDate}</p> {/* 현재 날짜 출력 */}
+              <div>
+                todo: {todos.length} {/* 투두 개수 */}
+              </div>
+              <div>
+                complete: {completedTodosCount} {/* 완료된 투두 개수 */}
+              </div>
             </TodoHeader>
 
             <TodoList>
