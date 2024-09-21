@@ -1,13 +1,13 @@
-import { DeleteButton, IsCompletedButton } from '../Button';
 import styled from 'styled-components';
-
+import { DeleteButton, IsCompletedButton } from '../Button';
 import { FaTrash } from 'react-icons/fa';
 import { IoCheckmarkCircle } from 'react-icons/io5';
+
+// 할 일 요소
 export function TodoItem({
   id,
   value,
   isCompleted = false,
-
   onDelete,
   toggleComplete,
 }) {
@@ -44,13 +44,11 @@ export function TodoItem({
 const StyledItem = styled.li`
   margin-top: 12px;
   display: flex;
-  // min-width: 0; /* 긴 텍스트로 인해 박스가 커지는 문제를 방지 */
-  // word-wrap: break-word; /* 텍스트가 넘치지 않도록 줄바꿈 */
   align-items: center;
   font-size: 14px;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 12px;
-  background-color: rgb(37, 37, 37);
+  background-color: var(--bg-primary);
   justify-content: space-between;
 
   .todo {

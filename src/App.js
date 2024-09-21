@@ -1,4 +1,3 @@
-import Clock from './components/Clock';
 import Todo from './components/todo/Todo';
 import { IoCheckmarkSharp } from 'react-icons/io5';
 
