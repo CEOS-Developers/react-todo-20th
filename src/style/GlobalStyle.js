@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
+// 전역 스타일 설정 (#root, 애니메이션, 스크롤바)
+
 const GlobalStyle = createGlobalStyle`
 
   @keyframes fadeInUp {
@@ -23,7 +25,6 @@ const GlobalStyle = createGlobalStyle`
       transform: translateY(0);
     }
   }
-
 
   #root {
     background-color: #0a0a0a;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+// 투두 입력 폼
 const TodoForm = ({ addTodo }) => {
   const [newTodo, setNewTodo] = useState("");
 

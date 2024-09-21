@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+// 투두 li
 const TodoItem = React.memo(({ todo, setTodos }) => {
   const [edit, setEdit] = useState(false);
   const [editedText, setEditedText] = useState(todo.text);
@@ -29,7 +30,7 @@ const TodoItem = React.memo(({ todo, setTodos }) => {
   return (
     <ListItem done={todo.done}>
       <DoneBtn done={todo.done} onClick={toggleTodo} />
-      {edit ? (
+      {edit ? ( // 클릭해서 내용 수정할 수 있도록 함 (span이다가 click -> (setEdit) -> input)
         <input
           value={editedText}
           onChange={(e) => setEditedText(e.target.value)}

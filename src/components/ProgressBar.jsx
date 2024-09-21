@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
+// 진행률 바 (0과 100일 때는 안 보이는 걸로 디자인)
 const ProgressBar = ({ progress }) => {
   return (
     <ProgressBarWrapper>
       <Progress style={{ width: `${progress}%` }}>
-        {progress > 0 && progress < 100 && <Tooltip>{`${progress}%`}</Tooltip>}
+        {progress > 0 && progress < 100 && <Tooltip>{`${progress}%`}</Tooltip>}{" "}
       </Progress>
     </ProgressBarWrapper>
   );

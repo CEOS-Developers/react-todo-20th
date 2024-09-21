@@ -5,11 +5,12 @@ import "react-calendar/dist/Calendar.css";
 import ProgressBar from "./ProgressBar";
 import moment from "moment";
 
+// 캘린더
 const TodoCalendar = ({ setDate, todos, progress }) => {
   const handleDateChange = (selectedDate) => {
     const year = selectedDate.getFullYear();
-    const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
-    const day = String(selectedDate.getDate()).padStart(2, "0");
+    const month = String(selectedDate.getMonth() + 1).padStart(2, "0"); // YYYY-MM-DD 형식과 일치시키기 위해 한 자리 수면 앞에 0 붙임
+    const day = String(selectedDate.getDate()).padStart(2, "0"); // YYYY-MM-DD 형식과 일치시키기 위해 한 자리 수면 앞에 0 붙임
     const formattedDate = `${year}-${month}-${day}`;
     setDate(formattedDate);
   };
@@ -21,10 +22,11 @@ const TodoCalendar = ({ setDate, todos, progress }) => {
         onChange={handleDateChange}
         next2Label={null}
         prev2Label={null}
-        formatDay={(locale, date) => moment(date).format("DD")}
+        formatDay={(locale, date) => moment(date).format("DD")} // ~일 빼기
         showNeighboringMonth={false}
         minDetail="year"
         tileContent={({ date }) => {
+          // 점 표시
           const existTodos = todos.some(
             (todo) => todo.date === moment(date).format("YYYY-MM-DD")
           );

@@ -15,11 +15,13 @@ function App() {
   useEffect(() => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
+    const month = String(today.getMonth() + 1).padStart(2, "0"); // YYYY-MM-DD 형식과 일치시키기 위해 한 자리 수면 앞에 0 붙임
+    const day = String(today.getDate()).padStart(2, "0"); // YYYY-MM-DD 형식과 일치시키기 위해 한 자리 수면 앞에 0 붙임
     const formattedToday = `${year}-${month}-${day}`;
     setDate(formattedToday);
   }, []);
+
+  // 투두 저장, 불러오기
 
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("todos")) || [];
@@ -35,6 +37,8 @@ function App() {
   const getTodosForDate = (todos, date) => {
     return todos.filter((todo) => todo.date === date);
   };
+
+  // 캘린더 열기 토글
 
   const toggleCalendar = () => {
     setShowCalendar(!showCalendar);

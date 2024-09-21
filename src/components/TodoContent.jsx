@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TodoForm from "./TodoForm";
 import TodoItem from "./TodoItem";
 
+// 전반적인 투두 내용 (입력 폼 + 각 li들)
 const TodoContent = ({ todos, setTodos, date, setProgress }) => {
   const addTodo = (text) => {
     setTodos((prevTodos) => [
@@ -14,7 +15,7 @@ const TodoContent = ({ todos, setTodos, date, setProgress }) => {
   const todoCount = useMemo(() => {
     const doneCount = todos.filter((todo) => todo.done).length;
     const progress =
-      todos.length === 0 ? 0 : Math.round((doneCount / todos.length) * 100);
+      todos.length === 0 ? 0 : Math.round((doneCount / todos.length) * 100); // 나중에 진행률 바에 표시할 때 너무 길어지면 안 되니까 반올림함
     setProgress(progress);
 
     return `${doneCount} / ${todos.length}`;

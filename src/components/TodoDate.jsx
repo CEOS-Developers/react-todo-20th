@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
+// 상단 날짜 타이틀
 const TodoDate = ({ date }) => {
   const [year, month, day] = date.split("-");
   const titleDate = `⊹ ⋆ ${year}. ${month}. ${day}. ⋆ ⊹`;
