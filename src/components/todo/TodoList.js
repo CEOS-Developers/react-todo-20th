@@ -25,11 +25,11 @@ export default function TodoList({ title, todos, setTodos }) {
   );
 
   return (
-    <div>
-      <StyledListTitle>
+    <StyledList>
+      <div className="statusTitle">
         <span>{title}</span>
         <span className="count">{todos.length}</span>
-      </StyledListTitle>
+      </div>
       <ul>
         {todos.map((todo) => (
           <TodoItem
@@ -39,19 +39,21 @@ export default function TodoList({ title, todos, setTodos }) {
           />
         ))}
       </ul>
-    </div>
+    </StyledList>
   );
 }
 
-const StyledListTitle = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-  padding: 1.5rem 1.5rem 0.5rem 1.5rem;
-  border-bottom: 1px solid var(--sub-color);
-  .count {
-    font-size: 1.5rem;
-    color: var(--main-color);
+const StyledList = styled.div`
+  .statusTitle {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+    border-bottom: 1px solid var(--sub-color);
+    .count {
+      font-size: 1.5rem;
+      color: var(--main-color);
+    }
   }
   ul {
     display: flex;
