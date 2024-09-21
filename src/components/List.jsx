@@ -58,7 +58,7 @@ const List = ({ todos, onUpdate, setTodos, removeTodo }) => {
               setTodos={setTodos}
               removeTodo={removeTodo}
             />
-          ); //spread, key
+          );
         })}
       </TodoWrapper>
     </ListContainer>
