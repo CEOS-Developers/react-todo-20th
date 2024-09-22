@@ -27,7 +27,7 @@ const TodoItem = ({ id, isDone, content, date, onUpdate, removeTodo }) => {
         {content}
       </Content>
       <DateText>{new Date(date).toLocaleDateString()}</DateText>
-      <DeleteButton onClick={handleRemove}>삭제</DeleteButton>
+      <DeleteButton onClick={handleRemove}>Del</DeleteButton>
     </TodoItemContainer>
   );
 };
@@ -90,7 +90,7 @@ const DateText = styled.div`
 const DeleteButton = styled.button`
   cursor: pointer;
   color: white;
-  font-size: 14px;
+  font-size: 0.7rem;
   border: none;
   border-radius: 5px;
   padding: 5px;

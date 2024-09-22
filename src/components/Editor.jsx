@@ -36,7 +36,7 @@ const Editor = ({ onCreate }) => {
         onKeyDown={onkeydown}
         value={content}
       />
-      <Button onClick={onSubmit}>추가</Button>
+      <Button onClick={onSubmit}>Add</Button>
     </EditorContainer>
   );
 };
