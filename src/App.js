@@ -69,7 +69,7 @@ const App = () => {
               <p>{currentDate}</p> {/* 현재 날짜 출력 */}
               <div>
                 <div>
-                  todo: {todos.length} {/* 투두 개수 */}
+                  todo: {todos.length - completedTodosCount} {/* 투두 개수 */}
                 </div>
                 <div>
                   complete: {completedTodosCount} {/* 완료된 투두 개수 */}

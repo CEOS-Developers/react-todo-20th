@@ -66,6 +66,7 @@ export const TodoItem = styled.li`
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
+  word-break: break-all;
 `;
 
 export const TodoInput = styled.div`
@@ -112,6 +113,7 @@ export const Button = styled.button`
   &:hover {
     background-color: #6c6ea0;
   }
+  white-space: nowrap;
 `;
 
 export const RemoveButton = styled.button`
