@@ -127,6 +127,7 @@ export const RemoveButton = styled.button`
   &:hover {
     background-color: darkred;
   }
+  white-space: nowrap;
 `;
 
 export const TodoHeader = styled.div`
