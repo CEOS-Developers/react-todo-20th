@@ -10,7 +10,7 @@ const Editor = ({ onCreate }) => {
     setContent(e.target.value);
   };
 
-  const onkeydown = (e) => {
+  const onkeyUp = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       onSubmit();
@@ -33,7 +33,7 @@ const Editor = ({ onCreate }) => {
         type="text"
         placeholder="새로운 Todo..."
         onChange={onChangeContent}
-        onKeyDown={onkeydown}
+        onKeyUp={onkeyUp}
         value={content}
       />
       <Button onClick={onSubmit}>Add</Button>
