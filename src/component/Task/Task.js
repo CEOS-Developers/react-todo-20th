@@ -44,6 +44,7 @@ function Task({ selectedDate, handleCloseModal }) {
         tasks.set(taskId, newTaskObj);
         setNewTask('');
         updateTasks(tasks);
+        setAddModal(false);
     };
 
     const handleDeleteTask = (taskId) => {        

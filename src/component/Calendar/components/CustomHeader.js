@@ -11,7 +11,7 @@ export default function CustomHeader({ date, setDate, month, handleMonthChange }
         </ColorBox>
         <Title>
             <h2>To Do Calendar</h2>
-            <span>({date.toISOString().split('T')[0]})</span>
+            <span>({new Date().toISOString().split('T')[0]})</span>
         </Title>
         <SelectMonth value={month} onChange={handleMonthChange}>
             {Array.from({ length: 12 }, (_, i) => (

@@ -94,6 +94,6 @@ const TodoProgress = styled.div`
   font-size: 0.75rem;
   color: #666;
   margin-top: 5px;
-
+  
 `;
 export default CalendarContainer;

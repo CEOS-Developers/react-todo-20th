@@ -99,34 +99,7 @@
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
     color: rgb(62, 76, 247);
-    /* box-shadow: inset 0 0 0 2px rgb(62, 76, 247); */
-    /* border: 2px solid #ff0000; */
 }
-
-.react-calendar__tile--active {
-    background-color: white; 
-}
-
-.react-calendar__tile--active:enabled:hover,
-.react-calendar__tile--active:enabled:focus {
-    background-color: white;
-}
-
-/* .react-calendar__tile--range {
-    background-color: #e0e7ff;
-} */
-
-/* 선택된 날짜 색상 */
-/* .react-calendar__tile--rangeStart,
-.react-calendar__tile--rangeEnd {
-    background-color: white;
-    color: white;
-} */
-
-/* .react-calendar__tile--rangeStart:enabled:hover,
-.react-calendar__tile--rangeEnd:enabled:hover {
-    background-color: #002f6c;
-} */
 
 .react-calendar__month-view__days__day--weekend {
     color: #ff0000; /* 주말 날짜 색상 */
