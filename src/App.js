@@ -1,7 +1,18 @@
+import Todo from './components/todo/Todo';
+import { IoCheckmarkSharp } from 'react-icons/io5';
+
+import './App.css';
+
 function App() {
   return (
     <div className="App">
-      <h1>🐶CEOS 20기 프론트엔드 최고🐶</h1>
+      <nav>
+        <IoCheckmarkSharp />
+        TO DO
+      </nav>
+      <main>
+        <Todo />
+      </main>
     </div>
   );
 }
